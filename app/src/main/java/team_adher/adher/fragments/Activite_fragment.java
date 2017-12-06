@@ -29,7 +29,6 @@ public class Activite_fragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
         myView = inflater.inflate(R.layout.activite_layout, container, false);
-        listView = (ListView) LayoutInflater.from(myView.getContext()).inflate(R.layout.activite_layout,null);
 
         /* On crée un objet prédéfini pour l'ajouter à la base */
         /* On peut laisser l'ID à 0 car il est AUTOINCREMENT*/

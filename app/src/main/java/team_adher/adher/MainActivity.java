@@ -1,6 +1,8 @@
 package team_adher.adher;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import android.support.design.widget.NavigationView;
@@ -11,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -47,6 +51,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view); /* cast en (NavigationView) */
         navigationView.setNavigationItemSelectedListener(this);
+
+        button_manage();
     }
 
     @Override
@@ -107,5 +113,40 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout); /* cast en (DrawerLayout) */
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    /* FONCTION DE REMI */
+    Button button_accueil_adherent;
+    Button button_accueil_client;
+    Button button_accueil_intervention;
+
+    private void button_manage()
+    {
+        button_accueil_adherent = findViewById(R.id.button_accueil_adherent);
+        Adherent_fragment af = new Adherent_fragment();
+        button_OnClickFragment(button_accueil_adherent, af);
+
+        button_accueil_client = findViewById(R.id.button_accueil_client);
+        Client_fragment cf = new Client_fragment();
+        button_OnClickFragment(button_accueil_client, cf);
+
+        button_accueil_intervention = findViewById(R.id.button_accueil_intervention);
+        Intervention_fragment inf = new Intervention_fragment();
+        button_OnClickFragment(button_accueil_intervention, inf);
+
+
+    }
+
+    public void button_OnClickFragment (Button button, final Fragment frag) {
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_frame, frag);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
     }
 }

@@ -6,11 +6,15 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import team_adher.adher.R;
 import team_adher.adher.bdd.SecteurDAO;
+import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Secteur;
 
 /**
@@ -24,9 +28,6 @@ public class Adherent_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.adherents_layout,container,false);
-
-        /*Set Custom Title*/
-        getActivity().setTitle(R.string.adherent);
 
 
         Secteur secteur = new Secteur(0, 23, "Creuse"); /* On crée un objet prédéfini */
@@ -42,6 +43,18 @@ public class Adherent_fragment extends Fragment {
         for(Secteur sect:listeSecteurs){ /* Pour chaque objet de la liste, on crée un objet Secteur nommé sect */
             System.out.println("Id: " + sect.getId() + " -- Nom: " + sect.getNom() + "\n");
         }
+
+
+        String[] listeAdherents = new String[] {"Joe","Patrick","Mario","Bobby","Christian Gomet"};
+        ListView listView = (ListView)myView.findViewById(R.id.list_adherent);
+        ArrayAdapter<Secteur> adapter = new ArrayAdapter<Secteur>(myView.getContext(),android.R.layout.simple_list_item_1 ,listeSecteurs);
+
+        listView.setAdapter(adapter); /* On affecte l'adaptateur à la liste view*/
+        /*Set Custom Title*/
+        getActivity().setTitle(R.string.adherent);
+
+
+
 
         return myView;
     }

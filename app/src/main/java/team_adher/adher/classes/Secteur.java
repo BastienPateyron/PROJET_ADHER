@@ -20,6 +20,11 @@ public class Secteur {
         this.nom = nom;
     }
 
+    @Override
+    public String toString(){
+        return nom; /* Retourne uniquement le nom du secteur */
+    }
+
     public int getId() {
         return id;
     }

@@ -4,7 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.team_adher.basti.ADHER.classes.Contrat;
+import team_adher.adher.classes.Contrat;
+
 
 /**
  * Created by basti on 12/4/2017.

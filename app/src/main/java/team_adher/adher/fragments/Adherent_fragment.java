@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.basti.test_menu.R;
-import com.team_adher.basti.ADHER.bdd.SecteurDAO;
-import com.team_adher.basti.ADHER.classes.Secteur;
-
 import java.util.ArrayList;
+
+import team_adher.adher.R;
+import team_adher.adher.bdd.SecteurDAO;
+import team_adher.adher.classes.Secteur;
 
 /**
  * Created by basti on 11/29/2017.

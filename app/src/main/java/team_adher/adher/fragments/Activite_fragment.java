@@ -9,11 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.basti.test_menu.R;
-import com.team_adher.basti.ADHER.bdd.ActiviteDAO;
-import com.team_adher.basti.ADHER.classes.Activite;
 
 import java.util.ArrayList;
+
+import team_adher.adher.R;
+import team_adher.adher.bdd.ActiviteDAO;
+import team_adher.adher.classes.Activite;
 
 /**
  * Created by basti on 12/5/2017.
@@ -43,7 +44,7 @@ public class Activite_fragment extends Fragment{
         for(Activite act:listeActivite){/* Pour chaque objet de la liste, on crée un objet Secteur nommé sect */
             System.out.println("Id: " + act.getId() + " -- Nom: " + act.getNom() + "\n");
         }
-        adapterActivite = new ArrayAdapter<Activite>(LayoutInflater.from(myView.getContext()).inflate(R.layout.support_simple_spinner_dropdown_item,null),listeActivite);
+       // adapterActivite = new ArrayAdapter<Activite>(LayoutInflater.from(myView.getContext()).inflate(R.layout.support_simple_spinner_dropdown_item,null),listeActivite);
 
         return myView;
     }

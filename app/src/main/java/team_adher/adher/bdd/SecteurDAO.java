@@ -5,9 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.team_adher.basti.ADHER.classes.Secteur;
 
 import java.util.ArrayList;
+
+import team_adher.adher.classes.Secteur;
 
 /**
  * Created by basti on 12/2/2017.

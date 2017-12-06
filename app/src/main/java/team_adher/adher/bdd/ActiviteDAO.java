@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.team_adher.basti.ADHER.classes.Activite;
-
 import java.util.ArrayList;
+
+import team_adher.adher.classes.Activite;
 
 /**
  * Created by basti on 12/5/2017.

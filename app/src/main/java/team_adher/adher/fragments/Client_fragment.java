@@ -7,7 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.basti.test_menu.R;
+import team_adher.adher.R;
+
 
 /**
  * Created by basti on 11/29/2017.

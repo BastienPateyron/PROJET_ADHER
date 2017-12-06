@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         button_manage();
+
+        String test = "Test";
     }
 
     @Override

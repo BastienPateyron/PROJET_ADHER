@@ -43,11 +43,19 @@ public class Adherent_fragment extends Fragment {
         for(Secteur sect:listeSecteurs){ /* Pour chaque objet de la liste, on crée un objet Secteur nommé sect */
             System.out.println("Id: " + sect.getId() + " -- Nom: " + sect.getNom() + "\n");
         }
+        // Construct the data source
+        ArrayList<Secteur> customListSecteur = new ArrayList<Secteur>();
 
+        customListSecteur = secteurDAO.getAllSecteur();
+        // Create the adapter to convert the array to views
+        SecteurAdapter adapter = new SecteurAdapter(getActivity(), customListSecteur);
+        // Attach the adapter to a ListView
+        ListView listView = (ListView) myView.findViewById(R.id.list_adherent);
+        listView.setAdapter(adapter);
 
-        String[] listeAdherents = new String[] {"Joe","Patrick","Mario","Bobby","Christian Gomet"};
-        ListView listView = (ListView)myView.findViewById(R.id.list_adherent);
-        ArrayAdapter<Secteur> adapter = new ArrayAdapter<Secteur>(myView.getContext(),android.R.layout.simple_list_item_1 ,listeSecteurs);
+//        String[] listeAdherents = new String[] {"Joe","Patrick","Mario","Bobby","Christian Gomet"};
+//        ListView listView = (ListView)myView.findViewById(R.id.list_adherent);
+//        ArrayAdapter<Secteur> adapter = new ArrayAdapter<Secteur>(myView.getContext(),android.R.layout.simple_list_item_1 ,listeSecteurs);
 
         listView.setAdapter(adapter); /* On affecte l'adaptateur à la liste view */
         /*Set Custom Title*/

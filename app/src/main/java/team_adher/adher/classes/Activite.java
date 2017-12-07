@@ -17,6 +17,11 @@ public class Activite {
         this.nom = nom;
     }
 
+    @Override
+    public String toString(){
+        return nom;
+    }
+
     public int getId() {
         return id;
     }

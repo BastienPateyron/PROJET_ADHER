@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import team_adher.adher.R;
 import team_adher.adher.bdd.ActiviteDAO;
@@ -23,8 +24,7 @@ import team_adher.adher.classes.Activite;
 public class Activite_fragment extends Fragment{
     View myView;
     private ArrayList<Activite> listeActivite = new ArrayList<>();
-    private ArrayAdapter<Activite> adapterActivite;
-    ListView listView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
@@ -39,11 +39,14 @@ public class Activite_fragment extends Fragment{
         /* TODO toast qui annonce l'ajout d'activité */
 
         /* Liste des Activités */
+        ListView listView = (ListView)myView.findViewById(R.id.list_activite);
         listeActivite = activiteDAO.getAllActivite();
-        for(Activite act:listeActivite){/* Pour chaque objet de la liste, on crée un objet Secteur nommé sect */
-            System.out.println("Id: " + act.getId() + " -- Nom: " + act.getNom() + "\n");
-        }
-       // adapterActivite = new ArrayAdapter<Activite>(LayoutInflater.from(myView.getContext()).inflate(R.layout.support_simple_spinner_dropdown_item,null),listeActivite);
+//        for(Activite act:listeActivite){/* Pour chaque objet de la liste, on crée un objet Secteur nommé sect */
+//            System.out.println("Id: " + act.getId() + " -- Nom: " + act.getNom() + "\n");
+//        }
+
+        ArrayAdapter<Activite> adapterActivite = new ArrayAdapter<Activite>(myView.getContext(),android.R.layout.simple_list_item_1,listeActivite);
+        listView.setAdapter(adapterActivite);
 
         return myView;
     }

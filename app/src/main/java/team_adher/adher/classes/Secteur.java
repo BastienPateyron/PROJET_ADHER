@@ -22,7 +22,7 @@ public class Secteur {
 
     @Override
     public String toString(){
-        return nom; /* Retourne uniquement le nom du secteur */
+        return (numero + " - " + nom); /* Retourne uniquement le nom du secteur */
     }
 
     public int getId() {

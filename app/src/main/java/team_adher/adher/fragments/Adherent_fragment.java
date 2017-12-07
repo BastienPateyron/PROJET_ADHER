@@ -49,7 +49,7 @@ public class Adherent_fragment extends Fragment {
         ListView listView = (ListView)myView.findViewById(R.id.list_adherent);
         ArrayAdapter<Secteur> adapter = new ArrayAdapter<Secteur>(myView.getContext(),android.R.layout.simple_list_item_1 ,listeSecteurs);
 
-        listView.setAdapter(adapter); /* On affecte l'adaptateur à la liste view*/
+        listView.setAdapter(adapter); /* On affecte l'adaptateur à la liste view */
         /*Set Custom Title*/
         getActivity().setTitle(R.string.adherent);
 

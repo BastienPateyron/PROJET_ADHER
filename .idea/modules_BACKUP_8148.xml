@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ADHER.iml" filepath="$PROJECT_DIR$/ADHER.iml" />
+<<<<<<< HEAD
+=======
+      <!--<module fileurl="file://C:\Users\basti\Travail\Android\ADHER\PROJET_ADHER.iml" filepath="C:\Users\basti\Travail\Android\ADHER\PROJET_ADHER.iml" />-->
+>>>>>>> activite
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+</project>
+
+<!-- Dur dur d'être un bébé -->

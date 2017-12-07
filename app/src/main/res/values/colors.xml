@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="color_btn_adherent">#3876d9</color>
-    <color name="color_btn_client">#8f6d38</color>
-    <color name="color_btn_intervention">#7045c6</color>
-    <color name="color_btn_add">#286B47</color>
+    <color name="color_btn_adherent">#2759a7</color>
+    <color name="color_btn_client">#76521a</color>
+    <color name="color_btn_intervention">#870730</color>
+    <color name="color_btn_add">#145833</color>
 </resources>

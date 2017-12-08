@@ -4,8 +4,13 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="color_btn_adherent">#2759a7</color>
-    <color name="color_btn_client">#76521a</color>
-    <color name="color_btn_intervention">#870730</color>
-    <color name="color_btn_add">#145833</color>
+    <color name="color_btn_adherent">#2D3047</color>
+    <color name="color_btn_client">#54442B</color>
+    <color name="color_btn_intervention">#A9714B</color>
+    <color name="color_btn_add">#286B47</color>
+    <color name="color_btn_trash">#69151b</color>
+
+    <color name="secteur_textview">#adb1bc</color>
+
+>>>>>>> customlist
 </resources>

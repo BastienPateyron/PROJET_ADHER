@@ -9,6 +9,7 @@
     <string name="adherent">Adhérents</string>
     <string name="client">Clients</string>
     <string name="intervention">Interventions</string>
+    <string name="activite">Activités</string>
 
     <string name="btn_add_adherent">Ajouter un nouvel adhérent</string>
 

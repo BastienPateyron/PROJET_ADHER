@@ -19,8 +19,9 @@ public class Intervention_fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.intervention_layout,container,false);
+//        myView = inflater.inflate(R.layout.intervention_layout,container,false);
 
+        myView = inflater.inflate(R.layout.adherent_form_layout,container,false);
         /*Set Custom Title*/
         getActivity().setTitle(R.string.intervention);
 

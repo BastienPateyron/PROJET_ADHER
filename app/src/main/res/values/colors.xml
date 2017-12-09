@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#151948</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#f1f0f0</color>
+    <color name="colorAccent">#ffffff</color>
 
     <color name="color_btn_adherent">#5db2da</color>
     <color name="color_btn_client">#9c5526</color>
@@ -12,5 +12,7 @@
 
     <color name="secteur_textview">#adb1bc</color>
     <color name="secteur_hint">#6d91d9</color>
+    <color name="datepicker_header">#595959</color>
+
 
 </resources>

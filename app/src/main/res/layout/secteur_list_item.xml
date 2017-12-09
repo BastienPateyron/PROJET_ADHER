@@ -28,7 +28,6 @@
         android:text="Secteur Name"
         android:textSize="18dp"
         android:textStyle="bold"
-        android:textColor="@color/secteur_textview"
         android:layout_toRightOf="@+id/secteur_item_number"/>
 
     <ImageButton

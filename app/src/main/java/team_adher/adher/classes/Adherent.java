@@ -10,6 +10,7 @@ public class Adherent {
     private int num_rue;
     private String nom_rue;
     private int cp;
+    private String ville;
     private String nom_responsable;
 
     public Adherent(){
@@ -24,6 +25,8 @@ public class Adherent {
         this.cp = cp;
         this.nom_responsable = nom_responsable;
     }
+
+
 
     public int getId() {
         return id;
@@ -63,6 +66,14 @@ public class Adherent {
 
     public void setCp(int cp) {
         this.cp = cp;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
     }
 
     public String getNom_responsable() {

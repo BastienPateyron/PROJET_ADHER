@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDBHelper extends SQLiteOpenHelper {
     protected static final String DATABASE_NAME = "ADHER";
-    private static final int DATABASE_VERSION = 5; /* A incrémenter quand on modifie la structure de la table */
+    private static final int DATABASE_VERSION = 6; /* A incrémenter quand on modifie la structure de la table */
 
     /* CREATE */
     private static final String CREATE_TABLE_SECTEUR = "CREATE TABLE SECTEUR" +
@@ -28,7 +28,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             "TELEPHONE_CLIENT TEXT NOT NULL," +
             "NUM_RUE_CLIENT TEXT NOT NULL," +
             "NOM_RUE_CLIENT TEXT NOT NULL," +
-            "CP_CLIENT TEXT NOT NULL" +
+            "CP_CLIENT TEXT NOT NULL," +
+            "VILLE_CLIENT TEXT NOT NULL" +
             ");";
 
     private static final String CREATE_TABLE_CONTRAT = "CREATE TABLE CONTRAT" +
@@ -56,6 +57,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             "NUM_RUE_ADHERENT INTEGER NOT NULL," +
             "NOM_RUE_ADHERENT TEXT NOT NULL," +
             "CP_ADHERENT INTEGER NOT NULL," +
+            "VILLE_ADHERENT TEXT NOT NULL," +
             "NOM_RESPONSABLE_ADHERENT TEXT," +
             "FOREIGN KEY(ID_CONTRAT) REFERENCES ADHESION(ID_CONTRAT)" +
             ");";

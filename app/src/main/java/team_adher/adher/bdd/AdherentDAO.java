@@ -19,6 +19,7 @@ public class AdherentDAO extends SQLiteDBHelper {
     private static final String COL_NUM_RUE = "NUM_RUE_ADHERENT";
     private static final String COL_NOM_RUE = "NOM_RUE_ADHERENT";
     private static final String COL_CP = "CP_ADHERENT";
+    private  static final String COL_VILLE = "VILLE_ADHERENT";
     private static final String COL_NOM_RESPONSABLE = "NOM_RESPONSABLE_ADHERENT";
 
     public AdherentDAO(Context context) {
@@ -36,6 +37,7 @@ public class AdherentDAO extends SQLiteDBHelper {
         values.put(COL_NUM_RUE, adherent.getNum_rue());
         values.put(COL_NOM_RUE, adherent.getNom_rue());
         values.put(COL_CP, adherent.getCp());
+        values.put(COL_VILLE,adherent.getVille());
         values.put(COL_NOM_RESPONSABLE, adherent.getNom_responsable());
 
         SQLiteDatabase db = this.getWritableDatabase();

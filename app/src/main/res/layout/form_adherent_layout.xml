@@ -56,9 +56,11 @@
 
         <EditText
             android:id="@+id/num_rue"
-            android:hint="Numéro"
+            android:hint=" N° "
+            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
         <EditText
             android:id="@+id/nom_rue"
             android:hint="Nom de la rue"
@@ -77,16 +79,18 @@
         <EditText
             android:id="@+id/cp"
             android:hint="Code-Postal"
-            android:layout_weight="10"
+            android:layout_weight="5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
         <EditText
             android:id="@+id/ville"
             android:layout_toRightOf="@+id/cp"
             android:hint="Ville"
-            android:layout_weight="90"
+            android:layout_weight="95"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -98,8 +102,8 @@
         <EditText
             android:id="@+id/date_fin_contrat"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            android:layout_height="wrap_content"
+            android:focusable="false"/>
 
     </android.support.design.widget.TextInputLayout>
 

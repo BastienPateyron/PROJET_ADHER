@@ -6,16 +6,26 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import team_adher.adher.R;
 
-
+// Changement  1
 /**
  * Created by basti on 11/29/2017.
  */
 
 public class Intervention_fragment extends Fragment {
     View myView;
+    EditText date_fin_contrat;
+    final Calendar myCalendar = Calendar.getInstance();
+
+// SUPER COMMENTAIRE
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -26,4 +36,15 @@ public class Intervention_fragment extends Fragment {
 
         return myView;
     }
+
+
+
+    private void updateLabel() {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        date_fin_contrat.setText(sdf.format(myCalendar.getTime()));
+    }
+
+
+
 }

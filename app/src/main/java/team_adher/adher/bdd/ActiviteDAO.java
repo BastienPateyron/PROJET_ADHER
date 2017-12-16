@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import team_adher.adher.classes.Activite;
+import team_adher.adher.classes.Adherent;
 
 /**
  * Created by basti on 12/5/2017.
@@ -72,5 +73,27 @@ public class ActiviteDAO extends SQLiteDBHelper {
         db.close();
         return activite;
     }
+
+    public void updateActivite(Activite activite){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_NOM,activite.getNom());
+//        System.out.println(adherent.getId());
+        db.update(TABLE_ACTIVITE, values, COL_ID + "="+ activite.getId(), null);
+        db.close();
+    }
+
+    public void deleteActivite(int id_activite)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_ACTIVITE, COL_ID + "=" + id_activite, null);
+
+        db.close();
+    }
+
+
+
 
 }

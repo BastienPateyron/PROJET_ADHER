@@ -28,8 +28,8 @@ import team_adher.adher.classes.Secteur;
 
 public class Adherent_fragment extends Fragment {
     View myView;
-    private ArrayList<String> list_raison_sociale;
-    private ArrayList<Adherent> list_adherent;
+    private ArrayList<String> list_raison_sociale = new ArrayList<String>();
+    private ArrayList<Adherent> list_adherent = new ArrayList<Adherent>();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -45,7 +45,6 @@ public class Adherent_fragment extends Fragment {
             public void onClick(View v) {
                 Adherent_fragment_ajout afa = new Adherent_fragment_ajout();
                 ((MainActivity)getActivity()).changeFragment(afa);
-
             }
         });
 //

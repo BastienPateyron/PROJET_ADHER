@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,6 +46,8 @@ public class Secteur_fragment extends Fragment {
         listSecteur = secteurDAO.getAllSecteur();
         SecteurAdapter adapter = new SecteurAdapter(getActivity(), listSecteur);
         listView.setAdapter(adapter);
+
+
         return myView;
     }
 }

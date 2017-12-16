@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import team_adher.adher.MainActivity;
 import team_adher.adher.R;
 import team_adher.adher.bdd.SecteurDAO;
 import team_adher.adher.classes.Secteur;
@@ -96,6 +99,19 @@ public class SecteurAdapter extends ArrayAdapter<Secteur>{
             }
         });
 
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v("ROW: ", "ROW PRESSED");
+                System.out.println(secteur.getId());
+                Bundle bundle = new Bundle();
+                bundle.putString("id_secteur",String.valueOf(secteur.getId()));
+                Secteur_fragment_modif sfm = new Secteur_fragment_modif();
+                sfm.setArguments(bundle);
+                ((MainActivity)getContext()).changeFragment(sfm);
+            }
+        });
         return convertView;
     }
 

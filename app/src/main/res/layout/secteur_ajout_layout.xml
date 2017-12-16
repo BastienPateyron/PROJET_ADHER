@@ -1,0 +1,55 @@
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/line_numero_secteur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
+        android:hint="Numéro du secteur">
+
+        <EditText
+            android:id="@+id/value_numero_secteur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/line_nom_secteur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
+        android:hint="Nom du secteur"
+        android:layout_below="@+id/line_numero_secteur">
+
+        <EditText
+            android:id="@+id/value_nom_secteur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/button_add_secteur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:padding="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/line_nom_secteur"
+        android:text="Ajouter un secteur"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimary"
+
+        />
+
+
+</RelativeLayout>

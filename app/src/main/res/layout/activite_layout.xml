@@ -8,6 +8,6 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/side_nav_bar" />
+        android:background="@color/colorSecondaire" />
 
 </RelativeLayout>

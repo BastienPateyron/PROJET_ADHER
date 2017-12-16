@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#151948</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#ffffff</color>
-
-    <color name="color_btn_adherent">#5db2da</color>
-    <color name="color_btn_client">#9c5526</color>
-    <color name="color_btn_intervention">#d16b4c</color>
-    <color name="color_btn_add">#399162</color>
-    <color name="color_btn_trash">#c20714</color>
+    <color name="colorPrimary">#653239</color>
+    <color name="colorSecondaire">#AF7A6D</color>
+    
+    <color name="add_button">#ca249648</color>
+    <color name="trash_button">#712b24</color>
 
     <color name="secteur_textview">#adb1bc</color>
     <color name="secteur_hint">#6d91d9</color>

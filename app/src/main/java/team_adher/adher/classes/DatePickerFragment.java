@@ -26,6 +26,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         // Use the current date as the default date in the date picker
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
+        System.out.println("Year : " + year);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 

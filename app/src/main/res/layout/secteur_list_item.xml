@@ -38,5 +38,5 @@
         android:layout_height="wrap_content"
         android:src="@drawable/delete"
         android:background="@android:color/transparent"
-        android:tint="@color/color_btn_trash"/>
+        android:tint="@color/trash_button"/>
 </RelativeLayout>

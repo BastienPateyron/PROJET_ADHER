@@ -77,4 +77,25 @@ public class SecteurDAO extends SQLiteDBHelper{
         db.close();
         return listeSecteurs;
     }
+
+    public void updateSecteur(Secteur secteur){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_NUM,secteur.getNumero());
+        values.put(COL_NOM,secteur.getNom());
+
+        System.out.println(secteur.getId());
+        db.update(TABLE_SECTEUR, values, COL_ID + "="+ secteur.getId(), null);
+        db.close();
+    }
+
+    public void deleteSecteur(int id_secteur)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_SECTEUR, COL_ID + "=" + id_secteur, null);
+
+        db.close();
+    }
 }

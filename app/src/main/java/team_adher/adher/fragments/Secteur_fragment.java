@@ -39,7 +39,7 @@ public class Secteur_fragment extends Fragment {
         });
 
         //Load data in listview
-        ListView listView = (ListView) myView.findViewById(R.id.list_adherent);
+        ListView listView = (ListView) myView.findViewById(R.id.list_generique);
 
         SecteurDAO secteurDAO = new SecteurDAO(myView.getContext());
         ArrayList<Secteur> listSecteur;

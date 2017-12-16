@@ -17,6 +17,7 @@ import java.util.List;
 
 import team_adher.adher.MainActivity;
 import team_adher.adher.R;
+import team_adher.adher.bdd.AdherentDAO;
 import team_adher.adher.bdd.SecteurDAO;
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Secteur;
@@ -27,11 +28,13 @@ import team_adher.adher.classes.Secteur;
 
 public class Adherent_fragment extends Fragment {
     View myView;
-
+    private ArrayList<String> list_raison_sociale;
+    private ArrayList<Adherent> list_adherent;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.general_layout_consultation,container,false);
+
 
         TextView add_part_textview = (TextView) myView.findViewById(R.id.add_part_textview);
         add_part_textview.setText("Ajout Adherent");
@@ -46,6 +49,18 @@ public class Adherent_fragment extends Fragment {
             }
         });
 //
+        /* Création d'une liste de raisons sociales */
+        AdherentDAO adherentDAO = new AdherentDAO(getContext());
+        list_adherent = adherentDAO.getAllAdherent();
+        for(Adherent adherent : list_adherent){
+           list_raison_sociale.add(adherent.getRaison_sociale());
+        }
+
+        /* Affichage de la liste */
+        ListView listView = (ListView) myView.findViewById(R.id.list_generique);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(myView.getContext(),android.R.layout.simple_list_item_1, list_raison_sociale);
+        listView.setAdapter(adapter);
+
 //        button_ajout_adherent = myView.findViewById(R.id.button_new_adherent);
 //        Adherent_fragment_ajout inf = new Adherent_fragment_ajout();
 //        MainActivity.button_OnClickFragment(button_ajout_adherent, inf, myView.getContext());

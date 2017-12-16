@@ -65,7 +65,7 @@ public class AdherentDAO extends SQLiteDBHelper {
         if (cursor != null) cursor.moveToFirst();
 
         /* On récupère chaque élément dans l'ordre de la table (Haut en bas) */
-        Adherent adherent = new Adherent(cursor.getInt(0),cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getInt(4), cursor.getString(5));
+        Adherent adherent = new Adherent(cursor.getInt(0),cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getInt(4), cursor.getString(5), cursor.getString(6));
         db.close();
         return adherent;
     }

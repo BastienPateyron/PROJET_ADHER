@@ -1,8 +1,8 @@
 package team_adher.adher.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +21,7 @@ import team_adher.adher.classes.Activite;
  * Created by basti on 12/5/2017.
  */
 
-public class Activite_fragment extends Fragment{
+public class Activite_fragment extends Fragment {
     View myView;
     private ArrayList<Activite> listeActivite = new ArrayList<>();
 

@@ -11,11 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import team_adher.adher.R;
+import team_adher.adher.bdd.SecteurDAO;
 import team_adher.adher.classes.Secteur;
 
 /**
@@ -24,6 +26,7 @@ import team_adher.adher.classes.Secteur;
 
 public class SecteurAdapter extends ArrayAdapter<Secteur>{
 
+    private ArrayList<Secteur> secteurs = new ArrayList<>();
     private static class SecteurHolder /* Objet qui contient les éléments affichés à l'écran */
     {
         TextView secteur_nom;
@@ -34,13 +37,14 @@ public class SecteurAdapter extends ArrayAdapter<Secteur>{
     public SecteurAdapter(Context context, ArrayList<Secteur> secteurs)
     {
         super(context,0, secteurs);
+        this.secteurs = secteurs;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
         //On recupere l'objet Secteur
-        Secteur secteur = getItem(position);
+        final Secteur secteur = getItem(position);
         SecteurHolder viewHolder;
 
         if (convertView == null)
@@ -76,7 +80,10 @@ public class SecteurAdapter extends ArrayAdapter<Secteur>{
                         .setMessage("Are you sure you want to delete this entry?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // continue with delete
+                                SecteurDAO secteurDAO = new SecteurDAO(getContext());
+                                secteurDAO.deleteSecteur(secteur.getId());
+                                secteurs.remove(position);
+                                notifyDataSetChanged();
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

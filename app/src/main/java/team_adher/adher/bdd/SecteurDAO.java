@@ -77,4 +77,11 @@ public class SecteurDAO extends SQLiteDBHelper{
         db.close();
         return listeSecteurs;
     }
+
+    public boolean deleteSecteur(int id_secteur)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        return db.delete(TABLE_SECTEUR, COL_ID + "=" + id_secteur, null) > 0;
+    }
 }

@@ -5,36 +5,38 @@
     >
 
     <LinearLayout
-        android:id="@+id/adherent_add_layout"
+        android:id="@+id/add_part"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:gravity="center"
         android:background="@color/add_button"
+        android:orientation="horizontal"
+        android:weightSum="10"
         >
         <TextView
+            android:id="@+id/add_part_textview"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-
-            android:text="@string/btn_add_adherent"
-            android:gravity="center|end"
-            android:paddingRight="5dp"
-            android:textSize="21sp"
+            android:background="@android:color/transparent"
+            android:text="Add new"
             android:textStyle="bold"
-            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:layout_weight="7"
+            android:gravity="center"
             />
-        <Button
-            android:id="@+id/button_new_adherent"
-            android:layout_width="50dp"
+
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_weight="3"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:text="+"
-            android:gravity="center"
-            android:textSize="35sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"/>
+            android:src="@drawable/ic_add_black_24dp"
+            android:text="Add new"
+            android:tint="@android:color/white" />
+
     </LinearLayout>
     <LinearLayout
-        android:layout_below="@+id/adherent_add_layout"
+        android:layout_below="@+id/add_part"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

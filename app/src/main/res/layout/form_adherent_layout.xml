@@ -96,7 +96,7 @@
         android:id="@+id/widget_input_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Date fin de contrat"
+        android:hint="Date fin de contratService"
         android:layout_below="@+id/line_ville">
 
         <EditText

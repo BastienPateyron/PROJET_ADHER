@@ -36,7 +36,6 @@ public class AdherentDAO extends SQLiteDBHelper {
     public boolean insertAdherent(Adherent adherent){
         ContentValues values = new ContentValues();
 
-        values.put(COL_ID, adherent.getId());
         values.put(COL_RAISON_SOCIALE, adherent.getRaison_sociale());
         values.put(COL_NUM_RUE, adherent.getNum_rue());
         values.put(COL_NOM_RUE, adherent.getNom_rue());

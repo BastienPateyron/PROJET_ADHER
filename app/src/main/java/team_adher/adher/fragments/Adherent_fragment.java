@@ -51,6 +51,7 @@ public class Adherent_fragment extends Fragment {
         /* Création d'une liste de raisons sociales */
         AdherentDAO adherentDAO = new AdherentDAO(getContext());
         list_adherent = adherentDAO.getAllAdherent();
+        list_raison_sociale.clear();
         for(Adherent adherent : list_adherent){
            list_raison_sociale.add(adherent.getRaison_sociale());
         }

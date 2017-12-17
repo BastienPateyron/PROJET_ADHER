@@ -57,7 +57,7 @@ public class Intervention_fragment extends Fragment {
         });
 
         /*Set Custom Title*/
-        getActivity().setTitle(R.string.intervention);
+        getActivity().setTitle(R.string.interventions);
 
         return myView;
     }

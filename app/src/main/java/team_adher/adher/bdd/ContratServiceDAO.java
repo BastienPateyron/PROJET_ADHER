@@ -28,23 +28,6 @@ public class ContratServiceDAO extends SQLiteDBHelper {
         super(context);
     }
 
-    public boolean insertContrat(ContratService contratService){
-        ContentValues values = new ContentValues();
-
-        values.put(COL_FK_SECTEUR, contratService.getSecteur().getId());
-        values.put(COL_FK_ADHERENT, contratService.getAdherent().getId());
-        values.put(COL_DATE_DEBUT, contratService.getDate_debut());
-        values.put(COL_DATE_FIN, contratService.getDate_fin());
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        boolean createSuccessful = db.insert(TABLE_CONTRAT_SERVICE,null,values) > 0;
-        db.close();
-
-        return createSuccessful;
-    }
-
-    /* TODO retrieve ContratService */
 
     /* Insert */
     public boolean insertContratService(ContratService adherent){
@@ -130,8 +113,6 @@ public class ContratServiceDAO extends SQLiteDBHelper {
         values.put(COL_DATE_DEBUT,contratService.getDate_debut());
         values.put(COL_DATE_FIN,contratService.getDate_fin());
 
-
-//        System.out.println(adherent.getId());
         db.update(TABLE_CONTRAT_SERVICE, values, COL_ID + "="+ contratService.getId(), null);
         db.close();
     }

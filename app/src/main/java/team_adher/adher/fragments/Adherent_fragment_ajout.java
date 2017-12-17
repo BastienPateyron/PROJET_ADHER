@@ -26,7 +26,7 @@ public class Adherent_fragment_ajout extends Fragment {
     boolean validate = true;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.form_adherent_layout_alternative, container, false);
+        myView = inflater.inflate(R.layout.adherents_layout_add, container, false);
 
         getActivity().setTitle("Nouvel Adhérent");
 

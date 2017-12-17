@@ -1,110 +1,112 @@
-<merge
-    android:id="@+id/form_adherent"
-    android:padding="15dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/colorSecondaire">
-
-    <RelativeLayout
-        android:id="@+id/line_raison_sociale"
-        android:layout_height="50dp"
-        android:layout_width="match_parent">
-
-        <TextView
-            android:id="@+id/label_raison_sociale"
-            android:text="Raison sociale :"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-
-        <EditText
-            android:id="@+id/edit_raison_sociale"
-            android:layout_toRightOf="@+id/label_raison_sociale"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/line_responsable"
-        android:layout_below="@+id/line_raison_sociale"
-        android:layout_height="50dp"
-        android:layout_width="match_parent">
-
-        <TextView
-            android:id="@+id/label_responsable"
-            android:text="Nom responsable :"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-
-        <EditText
-            android:id="@+id/edit_responsable"
-            android:layout_toRightOf="@+id/label_responsable"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/line_rue"
-        android:layout_below="@+id/line_responsable"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/num_rue"
-            android:hint=" N° "
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"/>
-        <EditText
-            android:id="@+id/nom_rue"
-            android:hint="Nom de la rue"
-            android:layout_toRightOf="@+id/num_rue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/line_ville"
-        android:layout_below="@+id/line_rue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="100">
-
-        <EditText
-            android:id="@+id/cp"
-            android:hint="Code-Postal"
-            android:layout_weight="5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"/>
-        <EditText
-            android:id="@+id/ville"
-            android:layout_toRightOf="@+id/cp"
-            android:hint="Ville"
-            android:layout_weight="95"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/widget_input_date"
+        android:id="@+id/line_raison_sociale"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Date fin de contratService"
-        android:layout_below="@+id/line_ville">
+        android:hint="Raison Sociale"
+        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
 
         <EditText
-            android:id="@+id/date_fin_contrat"
+            android:id="@+id/value_raison_sociale"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"/>
+            android:layout_height="wrap_content" />
 
     </android.support.design.widget.TextInputLayout>
 
-</merge>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/line_responsable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line_raison_sociale"
+        android:hint="Responsable"
+        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+        <EditText
+            android:id="@+id/value_responsable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/line_adresse1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line_responsable">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/line_numero_rue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".2"
+            android:hint="N°"
+            app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+            <EditText
+                android:id="@+id/value_numero_rue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/line_nom_rue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".9"
+            android:hint="Adresse"
+            app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+            <EditText
+                android:id="@+id/value_nom_rue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line_adresse2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line_adresse1">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/line_ville"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".6"
+            android:hint="Ville"
+            app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+            <EditText
+                android:id="@+id/value_ville"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/line_cp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".4"
+            android:hint="Code postal"
+            app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+            <EditText
+                android:id="@+id/value_cp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

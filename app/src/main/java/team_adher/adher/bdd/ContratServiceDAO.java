@@ -144,8 +144,4 @@ public class ContratServiceDAO extends SQLiteDBHelper {
 
         db.close();
     }
-    /* TODO getAllContrat */
-
-    /* TODO update ContratService */
-
 }

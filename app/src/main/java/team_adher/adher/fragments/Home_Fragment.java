@@ -31,24 +31,41 @@ public class Home_Fragment extends Fragment{
         return myView;
     }
     /* FONCTION DE REMI */
-    Button button_accueil_adherent;
-    Button button_accueil_client;
-    Button button_accueil_intervention;
+    Button button_accueil_contrats_adherents;
+    Button button_accueil_appels;
+    Button button_accueil_interventions;
 
     private void button_manage() {
-//    {
-//        button_accueil_adherent = myView.findViewById(R.id.button_accueil_adherent);
-//        Fragment af = new Adherent_fragment();
-//        MainActivity.button_OnClickFragment(button_accueil_adherent, af,myView.getContext());
-//
-//        button_accueil_client = myView.findViewById(R.id.button_accueil_client);
-//        Client_fragment cf = new Client_fragment();
-//        MainActivity.button_OnClickFragment(button_accueil_client, cf,myView.getContext());
-//
-//        button_accueil_intervention = myView.findViewById(R.id.button_accueil_intervention);
-//        Intervention_fragment inf = new Intervention_fragment();
-//        MainActivity.button_OnClickFragment(button_accueil_intervention, inf, myView.getContext());
-//
+
+        button_accueil_contrats_adherents = myView.findViewById(R.id.button_accueil_contrats_adherents);
+        button_accueil_contrats_adherents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Adherent_fragment af = new Adherent_fragment();
+                ((MainActivity) getActivity()).changeFragment(af);
+            }
+        });
+
+
+
+
+        button_accueil_appels = myView.findViewById(R.id.button_accueil_appels);
+        button_accueil_appels.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Create fragment appels
+            }
+        });
+
+
+        button_accueil_interventions = myView.findViewById(R.id.button_accueil_interventions);
+        button_accueil_interventions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Create Interventions
+
+            }
+        });
 
     }
 

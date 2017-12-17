@@ -15,12 +15,12 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/button_accueil_adherent"
+                android:id="@+id/button_accueil_contrats_adherents"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/button_accueil_background"
                 android:textColor="@android:color/white"
-                android:text="@string/adherent"
+                android:text="@string/contrats_adherents"
                 android:textSize="25sp"
                 android:textAllCaps="false"
                 />
@@ -30,12 +30,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <Button
-                android:id="@+id/button_accueil_client"
+                android:id="@+id/button_accueil_appels"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/button_accueil_background"
                 android:textColor="@android:color/white"
-                android:text="@string/client"
+                android:text="@string/appels"
                 android:textSize="25sp"
                 android:textAllCaps="false"
                 />
@@ -46,12 +46,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <Button
-                android:id="@+id/button_accueil_intervention"
+                android:id="@+id/button_accueil_interventions"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/button_accueil_background"
                 android:textColor="@android:color/white"
-                android:text="@string/intervention"
+                android:text="@string/interventions"
                 android:textSize="25sp"
                 android:textAllCaps="false"
                 />

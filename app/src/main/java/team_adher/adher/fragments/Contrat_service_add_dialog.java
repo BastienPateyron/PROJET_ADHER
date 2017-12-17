@@ -42,7 +42,6 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  */
 public class Contrat_service_add_dialog extends DialogFragment {
 
-    private final String LOG_TAG = MyDialogFragment.class.getSimpleName();
     private List<String> arrayList_secteur = new ArrayList<>();
     private List<String> arrayList_activite = new ArrayList<>();
     private EditText date_debut_contrat;
@@ -86,7 +85,7 @@ public class Contrat_service_add_dialog extends DialogFragment {
         array_act = activiteDAO.getAllActivite();
 
         final ArrayAdapter<Activite> adapter_activite = new ArrayAdapter<Activite>(getActivity(), android.R.layout.simple_spinner_item, array_act);
-        
+
         adapter_activite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_activite_cs.setAdapter(adapter_activite);
 

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/remove_adherent"
+            android:id="@+id/remove"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_alignParentLeft="true"
@@ -24,7 +24,7 @@
             android:layout_centerInParent="true"
             />
         <Button
-            android:id="@+id/modify_adherent"
+            android:id="@+id/modify"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_alignParentRight="true"
@@ -50,24 +50,16 @@
 
 
         <TextView
-            android:id="@+id/title_list"
+            android:id="@+id/text"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:padding="5dp"
             android:gravity="center"
-            android:textStyle="bold"
             android:background="@color/colorPrimary"
-            android:text="Liste des contrats"/>
-        <Button
-            android:layout_alignRight="@+id/title_list"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:text="Add new"
-            android:background="@color/add_button"
-            />
+            android:text="Liste des Interventions"/>
         <ListView
             android:id="@+id/list_interventions"
-            android:layout_below="@+id/title_list"
+            android:layout_below="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </RelativeLayout>

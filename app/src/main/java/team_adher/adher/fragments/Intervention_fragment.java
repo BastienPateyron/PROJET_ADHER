@@ -32,8 +32,8 @@ public class Intervention_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 //        myView = inflater.inflate(R.layout.intervention_layout,container,false);
 
-        myView = inflater.inflate(R.layout.info_adherent_layout,container,false);
-        date_fin_contrat = (EditText) myView.findViewById(R.id.date_fin_contrat);
+        myView = inflater.inflate(R.layout.adherents_layout_info,container,false);
+//        date_fin_contrat = (EditText) myView.findViewById(R.id.date_fin_contrat);
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override

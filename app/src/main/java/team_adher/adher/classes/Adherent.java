@@ -82,4 +82,9 @@ public class Adherent {
     public void setNom_responsable(String nom_responsable) {
         this.nom_responsable = nom_responsable;
     }
+
+    @Override
+    public String toString(){
+        return raison_sociale; /* Retourne uniquement le nom du secteur */
+    }
 }

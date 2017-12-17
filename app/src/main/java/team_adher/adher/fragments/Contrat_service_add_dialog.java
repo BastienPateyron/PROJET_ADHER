@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Locale;
 
 import team_adher.adher.MainActivity;
-import team_adher.adher.MyDialogFragment;
 import team_adher.adher.R;
 import team_adher.adher.bdd.ActiviteDAO;
 import team_adher.adher.bdd.SecteurDAO;
@@ -86,11 +85,8 @@ public class Contrat_service_add_dialog extends DialogFragment {
         ActiviteDAO activiteDAO = new ActiviteDAO(getContext());
         array_act = activiteDAO.getAllActivite();
 
-//        for (Activite activite : activiteDAO.getAllActivite()) {
-//            String activite_item = activite.getNom();
-//            arrayList_activite.add(activite_item);
-//        }
         final ArrayAdapter<Activite> adapter_activite = new ArrayAdapter<Activite>(getActivity(), android.R.layout.simple_spinner_item, array_act);
+        
         adapter_activite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_activite_cs.setAdapter(adapter_activite);
 

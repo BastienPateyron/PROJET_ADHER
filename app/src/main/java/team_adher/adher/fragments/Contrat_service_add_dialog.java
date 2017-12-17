@@ -218,7 +218,6 @@ public class Contrat_service_add_dialog extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.v(LOG_TAG, "onResume");
         if (getShowsDialog()) {
             // Set the width of the dialog to the width of the screen in portrait mode
             DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
@@ -232,14 +231,14 @@ public class Contrat_service_add_dialog extends DialogFragment {
     // If dialog is cancelled: onCancel --> onDismiss
     @Override
     public void onCancel(DialogInterface dialog) {
-        Log.v(LOG_TAG, "onCancel");
+        
     }
 
     // If dialog is cancelled: onCancel --> onDismiss
     // If dialog is dismissed: onDismiss
     @Override
     public void onDismiss(DialogInterface dialog) {
-        Log.v(LOG_TAG, "onDismiss");
+
     }
 
     private void updateLabel() {

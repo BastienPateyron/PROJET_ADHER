@@ -110,12 +110,14 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_adherents) {
             changeFragment(new Adherent_fragment());
-        } else if (id == R.id.nav_clients) {
-            changeFragment(new Secteur_fragment());
+        } else if (id == R.id.nav_appels) {
+
         } else if (id == R.id.nav_interventions){
             changeFragment(new Intervention_fragment());
-        } else if (id == R.id.nav_activite){
+        } else if (id == R.id.nav_activites){
             changeFragment(new Activite_fragment());
+        } else if (id == R.id.nav_secteurs){
+            changeFragment(new Secteur_fragment());
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout); /* cast en (DrawerLayout) */
         drawer.closeDrawer(GravityCompat.START);

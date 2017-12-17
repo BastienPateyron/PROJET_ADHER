@@ -3,25 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/group_main">
         <item
             android:id="@+id/nav_adherents"
             android:icon="@drawable/ic_menu_send"
-            android:title="Adhérents" />
+            android:title="Contrats Adherents" />
         <item
-            android:id="@+id/nav_clients"
+            android:id="@+id/nav_appels"
             android:icon="@drawable/ic_menu_send"
-            android:title="Clients" />
+            android:title="Appels" />
         <item
             android:id="@+id/nav_interventions"
             android:icon="@drawable/ic_menu_send"
             android:title="Interventions" />
-        <item
-            android:id="@+id/nav_activite"
-            android:icon="@drawable/ic_menu_send"
-            android:title="Activité"
-            />
+
     </group>
+
+    <group android:id="@+id/group_secondary">
+        <item
+            android:id="@+id/nav_activites"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Activités" />
+        <item
+            android:id="@+id/nav_secteurs"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Secteurs" />
+
+    </group>
+
 
 
     <!--<item android:title="Communicate">-->

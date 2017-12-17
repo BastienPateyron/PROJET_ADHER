@@ -2,14 +2,19 @@ package team_adher.adher.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import team_adher.adher.MainActivity;
+import team_adher.adher.MyDialogFragment;
 import team_adher.adher.R;
 import team_adher.adher.bdd.AdherentDAO;
 import team_adher.adher.bdd.SecteurDAO;
@@ -24,13 +29,14 @@ public class Adherent_fragment_modif extends Fragment {
 
     View myView;
     private int id_adherent;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         myView = inflater.inflate(R.layout.adherents_layout_info, container, false);
 
         Bundle bundle = this.getArguments();
 
-        if(bundle != null){
+        if (bundle != null) {
             id_adherent = Integer.valueOf(bundle.get("id_adherent").toString());
         }
         System.out.println(id_adherent);
@@ -53,14 +59,13 @@ public class Adherent_fragment_modif extends Fragment {
         value_cp.setText("" + adherent.getCp());
 
 
-
         Button button_remove_adherent = (Button) myView.findViewById(R.id.remove_adherent);
 
         button_remove_adherent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 adherentDAO.deleteAdherent(adherent.getId());
-                ((MainActivity)getActivity()).changeFragment(new Adherent_fragment());
+                ((MainActivity) getActivity()).changeFragment(new Adherent_fragment());
             }
         });
         Button button_modify_adherent = (Button) myView.findViewById(R.id.modify_adherent);
@@ -79,10 +84,32 @@ public class Adherent_fragment_modif extends Fragment {
                 adherent_modify.setCp(Integer.valueOf(value_cp.getText().toString()));
 
                 adherentDAO.updateAdherent(adherent_modify);
-                MainActivity.closekeyboard(getContext(),myView);
-                ((MainActivity)getActivity()).changeFragment(new Adherent_fragment());            }
+                MainActivity.closekeyboard(getContext(), myView);
+                ((MainActivity) getActivity()).changeFragment(new Adherent_fragment());
+            }
         });
+
+        Button button_add_contrat = (Button) myView.findViewById(R.id.button_add_contrat);
+
+        button_add_contrat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Contrat_service_add_dialog dialogFrag = new Contrat_service_add_dialog();
+                FragmentManager fm = getFragmentManager();
+                dialogFrag.show(fm,"gr");
+            }
+        });
+
+
+
         return myView;
     }
+
+
+    private void showEditDialog() {
+
+    }
+
+
 
 }

@@ -59,6 +59,7 @@
             android:background="@color/colorPrimary"
             android:text="Liste des contrats"/>
         <Button
+            android:id="@+id/button_add_contrat"
             android:layout_alignRight="@+id/title_list"
             android:layout_width="wrap_content"
             android:layout_height="35dp"

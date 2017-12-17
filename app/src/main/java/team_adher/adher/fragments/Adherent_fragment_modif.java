@@ -2,24 +2,18 @@ package team_adher.adher.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import team_adher.adher.MainActivity;
-import team_adher.adher.MyDialogFragment;
 import team_adher.adher.R;
 import team_adher.adher.bdd.AdherentDAO;
-import team_adher.adher.bdd.SecteurDAO;
 import team_adher.adher.classes.Adherent;
-import team_adher.adher.classes.Secteur;
 
 /**
  * Created by R on 17/12/2017.

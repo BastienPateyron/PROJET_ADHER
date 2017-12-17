@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Locale;
 
 import team_adher.adher.MainActivity;
-import team_adher.adher.MyDialogFragment;
 import team_adher.adher.R;
 import team_adher.adher.bdd.ActiviteDAO;
 import team_adher.adher.bdd.SecteurDAO;
@@ -43,7 +42,6 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  */
 public class Contrat_service_add_dialog extends DialogFragment {
 
-    private final String LOG_TAG = MyDialogFragment.class.getSimpleName();
     private List<String> arrayList_secteur = new ArrayList<>();
     private List<String> arrayList_activite = new ArrayList<>();
     private EditText date_debut_contrat;
@@ -86,11 +84,8 @@ public class Contrat_service_add_dialog extends DialogFragment {
         ActiviteDAO activiteDAO = new ActiviteDAO(getContext());
         array_act = activiteDAO.getAllActivite();
 
-//        for (Activite activite : activiteDAO.getAllActivite()) {
-//            String activite_item = activite.getNom();
-//            arrayList_activite.add(activite_item);
-//        }
         final ArrayAdapter<Activite> adapter_activite = new ArrayAdapter<Activite>(getActivity(), android.R.layout.simple_spinner_item, array_act);
+
         adapter_activite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_activite_cs.setAdapter(adapter_activite);
 
@@ -223,7 +218,6 @@ public class Contrat_service_add_dialog extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.v(LOG_TAG, "onResume");
         if (getShowsDialog()) {
             // Set the width of the dialog to the width of the screen in portrait mode
             DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
@@ -237,14 +231,14 @@ public class Contrat_service_add_dialog extends DialogFragment {
     // If dialog is cancelled: onCancel --> onDismiss
     @Override
     public void onCancel(DialogInterface dialog) {
-        Log.v(LOG_TAG, "onCancel");
+        
     }
 
     // If dialog is cancelled: onCancel --> onDismiss
     // If dialog is dismissed: onDismiss
     @Override
     public void onDismiss(DialogInterface dialog) {
-        Log.v(LOG_TAG, "onDismiss");
+
     }
 
     private void updateLabel() {

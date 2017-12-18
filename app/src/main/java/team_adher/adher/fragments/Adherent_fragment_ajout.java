@@ -87,7 +87,8 @@ public class Adherent_fragment_ajout extends Fragment {
                                     nom_rue,
                                     Integer.parseInt(cp),
                                     ville,
-                                    responsable
+                                    responsable,
+                                    0102030405 //
                             );
 
                     adherentDAO.insertAdherent(adherent);

@@ -25,6 +25,7 @@ public class AdherentDAO extends SQLiteDBHelper {
     private static final String COL_CP = "CP_ADHERENT";
     private  static final String COL_VILLE = "VILLE_ADHERENT";
     private static final String COL_NOM_RESPONSABLE = "NOM_RESPONSABLE_ADHERENT";
+    private static final String COL_NUM_TELEPHONE = "NUM_TELEPHONE";
 
     public AdherentDAO(Context context) {
         super(context);
@@ -42,6 +43,7 @@ public class AdherentDAO extends SQLiteDBHelper {
         values.put(COL_CP, adherent.getCp());
         values.put(COL_VILLE,adherent.getVille());
         values.put(COL_NOM_RESPONSABLE, adherent.getNom_responsable());
+        values.put(COL_NUM_TELEPHONE, adherent.getTelephone());
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -57,14 +59,14 @@ public class AdherentDAO extends SQLiteDBHelper {
 
         /* Requete */
         Cursor cursor = db.query(TABLE_ADHERENT, // Nom table
-                new String[] { COL_ID, COL_RAISON_SOCIALE, COL_NUM_RUE, COL_NOM_RUE, COL_CP, COL_VILLE, COL_NOM_RESPONSABLE }, // Liste des colonnes
+                new String[] { COL_ID, COL_RAISON_SOCIALE, COL_NUM_RUE, COL_NOM_RUE, COL_CP, COL_VILLE, COL_NOM_RESPONSABLE, COL_NUM_TELEPHONE }, // Liste des colonnes
                 COL_ID + "=?",  // Colonne cible du WHERE
                 new String[] { String.valueOf(id) }, // Valeure cible du WHERE
                 null, null, null, null); // Options
         if (cursor != null) cursor.moveToFirst();
 
         /* On récupère chaque élément dans l'ordre de la table (Haut en bas) */
-        Adherent adherent = new Adherent(cursor.getInt(0),cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getInt(4), cursor.getString(5), cursor.getString(6));
+        Adherent adherent = new Adherent(cursor.getInt(0),cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7));
         db.close();
         return adherent;
     }
@@ -87,6 +89,8 @@ public class AdherentDAO extends SQLiteDBHelper {
                 adherent.setCp(cursor.getInt(4));
                 adherent.setVille(cursor.getString(5));
                 adherent.setNom_responsable(cursor.getString(6));
+                adherent.setTelephone(cursor.getInt(7));
+
                 listeAdherents.add(adherent);
             }while(cursor.moveToNext()); /* Tant que l'élément suivant existe */
         }
@@ -104,6 +108,7 @@ public class AdherentDAO extends SQLiteDBHelper {
         values.put(COL_CP,adherent.getCp());
         values.put(COL_VILLE,adherent.getVille());
         values.put(COL_NOM_RESPONSABLE,adherent.getNom_responsable());
+        values.put(COL_NUM_TELEPHONE,adherent.getTelephone());
 
 //        System.out.println(adherent.getId());
         db.update(TABLE_ADHERENT, values, COL_ID + "="+ adherent.getId(), null);

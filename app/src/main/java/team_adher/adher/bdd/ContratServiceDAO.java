@@ -21,6 +21,7 @@ public class ContratServiceDAO extends SQLiteDBHelper {
     public static final String COL_ID = "ID_CONTRAT_SERVICE";
     public static final String COL_DATE_DEBUT = "DATE_DEBUT_CONTRAT_SERVICE";
     public static final String COL_DATE_FIN = "DATE_FIN_CONTRAT_SERVICE";
+    public static final String COL_TARIF_HT = "TARIF_HT";
     public static final String COL_FK_SECTEUR = "ID_SECTEUR";
     public static final String COL_FK_ADHERENT = "ID_ADHERENT";
 
@@ -28,6 +29,19 @@ public class ContratServiceDAO extends SQLiteDBHelper {
         super(context);
     }
 
+    /* Retrieve ID last insert */
+    public int retrieveLastContratServiceID(Context context){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        /* Requete */
+        String query = "SELECT " + COL_ID + " FROM " + TABLE_CONTRAT_SERVICE + " ORDER BY " + COL_ID + " DESC LIMIT 1;";
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor != null) cursor.moveToFirst();
+        db.close();
+
+        return cursor.getInt(0);
+
+    }
 
     /* Insert */
     public boolean insertContratService(ContratService adherent){
@@ -37,6 +51,7 @@ public class ContratServiceDAO extends SQLiteDBHelper {
         values.put(COL_FK_ADHERENT, adherent.getAdherent().getId());
         values.put(COL_DATE_DEBUT, adherent.getDate_debut());
         values.put(COL_DATE_FIN, adherent.getDate_fin());
+        values.put(COL_TARIF_HT, 0);
 
 
         SQLiteDatabase db = this.getWritableDatabase();

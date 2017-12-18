@@ -33,7 +33,7 @@ public class Adherent_fragment_modif extends Fragment {
         if (bundle != null) {
             id_adherent = Integer.valueOf(bundle.get("id_adherent").toString());
         }
-        System.out.println(id_adherent);
+        System.out.println("Id Adherent: " + id_adherent);
 
         final EditText value_raison_sociale = (EditText) myView.findViewById(R.id.value_raison_sociale);
         final EditText value_responsable = (EditText) myView.findViewById(R.id.value_responsable);
@@ -41,6 +41,7 @@ public class Adherent_fragment_modif extends Fragment {
         final EditText value_nom_rue = (EditText) myView.findViewById(R.id.value_nom_rue);
         final EditText value_ville = (EditText) myView.findViewById(R.id.value_ville);
         final EditText value_cp = (EditText) myView.findViewById(R.id.value_cp);
+        // TODO ajouter Num Telephone
 
         final AdherentDAO adherentDAO = new AdherentDAO(getContext());
         final Adherent adherent = adherentDAO.retrieveAdherent(id_adherent);
@@ -88,9 +89,14 @@ public class Adherent_fragment_modif extends Fragment {
         button_add_contrat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Contrat_service_add_dialog dialogFrag = new Contrat_service_add_dialog();
+
+                Bundle arg = new Bundle(); // On crée un nouveau bundle pour passer l'ID adhérent
+                arg.putString("id_adherent",String.valueOf(id_adherent)); // On lui donne la valeur de l'id ds id_adherent
+                Contrat_service_add_dialog dialogFrag = new Contrat_service_add_dialog(); // On crée un nouveau dialog
+                dialogFrag.setArguments(arg); // On définit les arguments du dialog avec notre bundle
                 FragmentManager fm = getFragmentManager();
-                dialogFrag.show(fm,"gr");
+
+                dialogFrag.show(fm,"gr"); // On ouvre le dialogue
             }
         });
 

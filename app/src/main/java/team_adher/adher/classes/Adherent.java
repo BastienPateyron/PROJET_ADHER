@@ -12,12 +12,13 @@ public class Adherent {
     private int cp;
     private String ville;
     private String nom_responsable;
+    private int telephone;
 
     public Adherent(){
 
     }
 
-    public Adherent(int id, String raison_sociale, int num_rue, String nom_rue, int cp, String ville, String nom_responsable) {
+    public Adherent(int id, String raison_sociale, int num_rue, String nom_rue, int cp, String ville, String nom_responsable, int telephone) {
         this.id = id;
         this.raison_sociale = raison_sociale;
         this.num_rue = num_rue;
@@ -25,6 +26,7 @@ public class Adherent {
         this.cp = cp;
         this.ville = ville;
         this.nom_responsable = nom_responsable;
+        this.telephone = telephone;
     }
 
     public int getId() {
@@ -81,6 +83,14 @@ public class Adherent {
 
     public void setNom_responsable(String nom_responsable) {
         this.nom_responsable = nom_responsable;
+    }
+
+    public int getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(int telephone) {
+        this.telephone = telephone;
     }
 
     @Override

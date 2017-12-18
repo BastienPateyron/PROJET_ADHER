@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDBHelper extends SQLiteOpenHelper {
     protected static final String DATABASE_NAME = "ADHER";
-    private static final int DATABASE_VERSION = 7; /* A incrémenter quand on modifie la structure de la table */
+    private static final int DATABASE_VERSION = 8; /* A incrémenter quand on modifie la structure de la table */
 
     // TODO Penser à incrémenter la version de la base après les changements
 
@@ -41,9 +41,10 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             "NOM_RUE_ADHERENT TEXT NOT NULL  ," +
             "CP_ADHERENT INTEGER NOT NULL  ," +
             "VILLE_ADHERENT TEXT NOT NULL ," +
-            "NOM_RESPONSABLE_ADHERENT TEXT" +
+            "NOM_RESPONSABLE_ADHERENT TEXT ," +
+            "NUM_TELEPHONE INTEGER NOT NULL" +
             ");";
-// TODO, ajouter un numéro de téléphone
+
 
     private static final String CREATE_TABLE_CONTRAT_SERVICE = "CREATE TABLE CONTRAT_SERVICE (" +
             "ID_CONTRAT_SERVICE INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL  ," +
@@ -51,10 +52,11 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             "ID_ADHERENT INTEGER NOT NULL ," +
             "DATE_DEBUT_CONTRAT_SERVICE TEXT NOT NULL  ," +
             "DATE_FIN_CONTRAT_SERVICE TEXT NOT NULL ," +
+            "TARIF_HT INTEGER NOT NULL ," +
             "FOREIGN KEY (ID_SECTEUR) REFERENCES SECTEUR (ID_SECTEUR) ," +
             "FOREIGN KEY (ID_ADHERENT) REFERENCES ADHERENT (ID_ADHERENT)" +
             ");";
-// TODO ajouter l'attribut tarif HT
+
 
     private static final String CREATE_TABLE_ACTIVITE = "CREATE TABLE ACTIVITE" +
             "(" +
@@ -80,13 +82,12 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             "ID_CLIENT INTEGER NOT NULL  ," +
             "DATE_DEBUT_CONTRAT_INTERVENTION TEXT NOT NULL  ," +
             "DATE_FIN_CONTRAT_INTERVENTION TEXT NOT NULL   ," +
-            "TARIF_INTERVENTION REAL NOT NULL  ," +
             "FOREIGN KEY (ID_SECTEUR) REFERENCES SECTEUR (ID_SECTEUR) ," +
             "FOREIGN KEY (ID_ACTIVITE) REFERENCES ACTIVITE (ID_ACTIVITE) ," +
             "FOREIGN KEY (ID_ADHERENT) REFERENCES ADHERENT (ID_ADHERENT) ," +
             "FOREIGN KEY (ID_CLIENT) REFERENCES CLIENT (ID_CLIENT)" +
             ");";
-// TODO, supprimer l'attribut TARIF_inftervention
+
 
 
     /* INSERTS  → Si on veut mettre des valeurs par défaut */

@@ -25,8 +25,10 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import team_adher.adher.MainActivity;
 import team_adher.adher.R;
@@ -79,65 +81,72 @@ public class Contrat_service_add_dialog extends DialogFragment {
         spinner_secteur_cs.setAdapter(adapter_secteur);
 
         //ACTIVITE SPINNER
-        Spinner spinner_activite_cs = (Spinner) dialogView.findViewById(R.id.spinner_activite_cs);
+
+        /*Get data*/
+        final Spinner spinner_activite_cs = (Spinner) dialogView.findViewById(R.id.spinner_activite_cs);
         ArrayList<Activite> array_act = new ArrayList<>();
         ActiviteDAO activiteDAO = new ActiviteDAO(getContext());
         array_act = activiteDAO.getAllActivite();
+        /*Define adapter for spinner*/
+        final ActivitéSpinnerCustom activiteActivitéSpinnerCustom = new ActivitéSpinnerCustom(getActivity(), android.R.layout.simple_spinner_item);
+        activiteActivitéSpinnerCustom.addAll(array_act);
+        Activite act_hint = new Activite(-1, "Selectionner une activité");
+        activiteActivitéSpinnerCustom.add(act_hint);
+        activiteActivitéSpinnerCustom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_activite_cs.setAdapter(activiteActivitéSpinnerCustom);
+        spinner_activite_cs.setSelection(activiteActivitéSpinnerCustom.getCount());
 
-        final ArrayAdapter<Activite> adapter_activite = new ArrayAdapter<Activite>(getActivity(), android.R.layout.simple_spinner_item, array_act);
-
-        adapter_activite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_activite_cs.setAdapter(adapter_activite);
-
+        /*Add value on textview the selected item*/
         final TextView value_act1 = (TextView) dialogView.findViewById(R.id.value_act1);
         final TextView value_act2 = (TextView) dialogView.findViewById(R.id.value_act2);
         final TextView value_act3 = (TextView) dialogView.findViewById(R.id.value_act3);
 
+        final HashMap<Integer, Integer> id_activite = new HashMap<Integer, Integer>(); //Retiens les id des activites deja ajoutés
 
-        spinner_activite_cs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-                if (state_for_spinner)
-                {
-
-                if (TextUtils.isEmpty(value_act1.getText().toString()))
-                {
-                    value_act1.setText(adapter_activite.getItem(position).getNom());
-
-                } else if (TextUtils.isEmpty(value_act2.getText().toString()))
-                {
-                    value_act2.setText(adapter_activite.getItem(position).getNom());
-
-                } else if (TextUtils.isEmpty(value_act3.getText().toString()))
-                {
-                    value_act3.setText(adapter_activite.getItem(position).getNom());
+        spinner_activite_cs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (activiteActivitéSpinnerCustom.getItem(position).getId() == -1) {
 
                 } else {
-                    Toast.makeText(getActivity(), "Nombres d'activités maximales atteintes", Toast.LENGTH_LONG).show();
+                    boolean already_add = false; //Variable pour eviter les doublons
 
+                    /*On parcoure le tableau des id pour verifier si l'activité selectionné n'est pas deja selectionné*/
+                    for (Integer key : id_activite.keySet()) {
+                        if (activiteActivitéSpinnerCustom.getItem(position).getId() == id_activite.get(key)) {
+                            already_add = true;
+                        }
+                    }
+
+                    if (TextUtils.isEmpty(value_act1.getText().toString()) && !already_add) {
+                        value_act1.setText(activiteActivitéSpinnerCustom.getItem(position).getNom());
+                        id_activite.put(1, activiteActivitéSpinnerCustom.getItem(position).getId());
+
+                    } else if (TextUtils.isEmpty(value_act2.getText().toString()) && !already_add) {
+                        value_act2.setText(activiteActivitéSpinnerCustom.getItem(position).getNom());
+                        id_activite.put(2, activiteActivitéSpinnerCustom.getItem(position).getId());
+
+                    } else if (TextUtils.isEmpty(value_act3.getText().toString()) && !already_add) {
+
+                        value_act3.setText(activiteActivitéSpinnerCustom.getItem(position).getNom());
+                        id_activite.put(3, activiteActivitéSpinnerCustom.getItem(position).getId());
+
+                    } else {
+                        if (already_add) {
+                            Toast.makeText(getActivity(), "Cette activité est deja ajouté", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity(), "Nombres d'activités maximales atteintes", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
                 }
 
-                } else {
-                    state_for_spinner = true;
-                }
             } // to close the onItemSelected
-            public void onNothingSelected(AdapterView<?> parent)
-            {
+
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-        //ADD ACTIVITE BUTTON
-        Button button_activite_add = (Button) dialogView.findViewById(R.id.button_activite_cs_add);
 
-        button_activite_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-                ((MainActivity) getActivity()).changeFragment(new Activite_fragment_ajout());
-
-            }
-        });
         //DATE PICKER SETTINGS
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -183,14 +192,8 @@ public class Contrat_service_add_dialog extends DialogFragment {
                 /*
                 * CREER un contrat dans la table contrat service
                 * avec l'id du secteur, id de l'adherent (A faire passer depuis le fragment adher_modif...), date_debut + fin (Rajouter un attribut tarif et enveler tarif intervention ?)
-                *
-                 *  CREER DES ACTIVITES AVEC LES CHAMP RECUP, (bien verifier que les champs ne sont pas vides + verif que l'activité existe pas deja
-                 *
-                 *  Lier activites et contrats avec la table concerner
-                *
-                * IDCONTRAT = 1
-                *
-                *
+                * +
+                * Lier activites et contrats avec la table concerner
                 * */
 
 
@@ -227,11 +230,10 @@ public class Contrat_service_add_dialog extends DialogFragment {
     }
 
 
-
     // If dialog is cancelled: onCancel --> onDismiss
     @Override
     public void onCancel(DialogInterface dialog) {
-        
+
     }
 
     // If dialog is cancelled: onCancel --> onDismiss
@@ -253,4 +255,6 @@ public class Contrat_service_add_dialog extends DialogFragment {
 
         }
     }
+
+
 }

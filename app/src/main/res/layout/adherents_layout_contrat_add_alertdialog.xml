@@ -54,23 +54,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:orientation="horizontal">
             <Spinner
                 android:id="@+id/spinner_activite_cs"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_weight="7"
                 />
 
-            <Button
-                android:id="@+id/button_activite_cs_add"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:text="AJOUT"
-                android:background="@color/add_button"
-                android:layout_weight="3"
-                />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/line_activite1"
@@ -83,6 +73,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 android:background="@drawable/button_accueil_background"
 
                 />
@@ -91,6 +85,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
+
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 android:background="@drawable/button_accueil_background"
 
                 />
@@ -106,6 +105,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 android:background="@drawable/button_accueil_background"
                 />
 
@@ -168,7 +171,7 @@
                 android:id="@+id/value_tarif_ht_cs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:inputType="number"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -187,7 +190,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:text="@string/neg_button"
+            android:text="ANNULER"
             />
 
         <Button
@@ -196,7 +199,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:background="@color/add_button"
-            android:text="@string/pos_button"
+            android:text="AJOUTER"
             />
 
     </LinearLayout>

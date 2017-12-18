@@ -33,8 +33,10 @@ import java.util.Map;
 import team_adher.adher.MainActivity;
 import team_adher.adher.R;
 import team_adher.adher.bdd.ActiviteDAO;
+import team_adher.adher.bdd.ContratServiceDAO;
 import team_adher.adher.bdd.SecteurDAO;
 import team_adher.adher.classes.Activite;
+import team_adher.adher.classes.ContratService;
 import team_adher.adher.classes.Secteur;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -61,24 +63,23 @@ public class Contrat_service_add_dialog extends DialogFragment {
         return contrat_service_add_dialog;
     }
 
-    // onCreate --> (onCreateDialog) --> onCreateView --> onActivityCreated
+    // onCreate --> (onCreateDialog) --> onCreateView --> onActivityCreated)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View dialogView = inflater.inflate(R.layout.adherents_layout_contrat_add_alertdialog, container, false);
 
+        // SECTEUR SPINNER 2
+        final Spinner spinner_secteur_cs = dialogView.findViewById(R.id.spinner_secteur_cs); // Création du spinner
+        ArrayList<Secteur> array_secteur; // Création de la liste de secteurs
+        SecteurDAO secteurDAO = new SecteurDAO(getContext()); // Creation de l'object secteur DAO
+        array_secteur =  secteurDAO.getAllSecteur(); // Remplissage de la liste des secteurs
 
-        //SECTEUR SPINNER
-        Spinner spinner_secteur_cs = (Spinner) dialogView.findViewById(R.id.spinner_secteur_cs);
+        ArrayAdapter<Secteur> adapter_secteur = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, array_secteur); // Création de l'adapter
+        adapter_secteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Définition du style de l'adapter
+        spinner_secteur_cs.setAdapter(adapter_secteur); // Affectation de l'adapter au spinner
 
-        SecteurDAO secteurDAO = new SecteurDAO(getContext());
-        for (Secteur secteur : secteurDAO.getAllSecteur()) {
-            String secteur_item = secteur.getNumero() + " - " + secteur.getNom();
-            arrayList_secteur.add(secteur_item);
-        }
-        ArrayAdapter<String> adapter_secteur = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arrayList_secteur);
-        adapter_secteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_secteur_cs.setAdapter(adapter_secteur);
+    // TODO ++ TU DOIT OVERRIDE LA METHODE TO STRING DANS LA CLASSE SECTEUR REGARDE ACTVITE OU ADHERENT JE CROIS
 
         //ACTIVITE SPINNER
 
@@ -110,7 +111,7 @@ public class Contrat_service_add_dialog extends DialogFragment {
                 } else {
                     boolean already_add = false; //Variable pour eviter les doublons
 
-                    /*On parcoure le tableau des id pour verifier si l'activité selectionné n'est pas deja selectionné*/
+                    /*On parcours le tableau des id pour verifier si l'activité selectionné n'est pas deja selectionnée */
                     for (Integer key : id_activite.keySet()) {
                         if (activiteActivitéSpinnerCustom.getItem(position).getId() == id_activite.get(key)) {
                             already_add = true;
@@ -132,14 +133,12 @@ public class Contrat_service_add_dialog extends DialogFragment {
 
                     } else {
                         if (already_add) {
-                            Toast.makeText(getActivity(), "Cette activité est deja ajouté", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Cette activité est déja ajoutée", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getActivity(), "Nombres d'activités maximales atteintes", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Nombre d'activités maximales atteintes", Toast.LENGTH_LONG).show();
                         }
-
                     }
                 }
-
             } // to close the onItemSelected
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -188,13 +187,32 @@ public class Contrat_service_add_dialog extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-                //A FAIRE:
+                // TODO  - CREATION DU  CONTRAT_SERVICE -
                 /*
-                * CREER un contrat dans la table contrat service
-                * avec l'id du secteur, id de l'adherent (A faire passer depuis le fragment adher_modif...), date_debut + fin (Rajouter un attribut tarif et enveler tarif intervention ?)
+                * CREER un contrat dans la table contrat_service
+                * avec l'id du secteur, id de l'adherent (A faire passer depuis le fragment adher_modif...)
+                * date_debut + fin (Rajouter un attribut tarif et enveler tarif interventions ?)
                 * +
                 * Lier activites et contrats avec la table concerner
                 * */
+
+                // TODO Récupérer l'ID Secteur
+
+//                int idSecteur = (int) spinner_secteur_cs.getSelectedItemId();
+//                Toast.makeText(getActivity(), "idSecteur = " + idSecteur, Toast.LENGTH_LONG).show();
+
+                // TODO Récupérer l'ID adhérent depuis le fragment adherent_fragment_modif
+
+
+                // TODO Créer un élément Contrat_service + Contrat_serviceDAO
+                ContratService contratService = new ContratService(/* TODO COMPLETER */);
+                ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
+
+
+
+                // TODO Valoriser l'objet contratService
+
+                // TODO Appeler la méthode contratServiceDao.create(contratService)
 
 
                 dismiss();
@@ -244,15 +262,13 @@ public class Contrat_service_add_dialog extends DialogFragment {
     }
 
     private void updateLabel() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
         if (editext_state.equals("DEBUT_CONTRAT")) {
             date_debut_contrat.setText(sdf.format(myCalendar.getTime()));
-
         }
         if (editext_state.equals("FIN_CONTRAT")) {
             date_fin_contrat.setText(sdf.format(myCalendar.getTime()));
-
         }
     }
 

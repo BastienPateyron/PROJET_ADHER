@@ -12,6 +12,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     protected static final String DATABASE_NAME = "ADHER";
     private static final int DATABASE_VERSION = 7; /* A incrémenter quand on modifie la structure de la table */
 
+    // TODO Penser à incrémenter la version de la base après les changements
+
     /* CREATE */
     private static final String CREATE_TABLE_SECTEUR = "CREATE TABLE SECTEUR" +
             "(" +
@@ -41,6 +43,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             "VILLE_ADHERENT TEXT NOT NULL ," +
             "NOM_RESPONSABLE_ADHERENT TEXT" +
             ");";
+// TODO, ajouter un numéro de téléphone
 
     private static final String CREATE_TABLE_CONTRAT_SERVICE = "CREATE TABLE CONTRAT_SERVICE (" +
             "ID_CONTRAT_SERVICE INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL  ," +
@@ -51,6 +54,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             "FOREIGN KEY (ID_SECTEUR) REFERENCES SECTEUR (ID_SECTEUR) ," +
             "FOREIGN KEY (ID_ADHERENT) REFERENCES ADHERENT (ID_ADHERENT)" +
             ");";
+// TODO ajouter l'attribut tarif HT
 
     private static final String CREATE_TABLE_ACTIVITE = "CREATE TABLE ACTIVITE" +
             "(" +
@@ -82,7 +86,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             "FOREIGN KEY (ID_ADHERENT) REFERENCES ADHERENT (ID_ADHERENT) ," +
             "FOREIGN KEY (ID_CLIENT) REFERENCES CLIENT (ID_CLIENT)" +
             ");";
-
+// TODO, supprimer l'attribut TARIF_inftervention
 
 
     /* INSERTS  → Si on veut mettre des valeurs par défaut */

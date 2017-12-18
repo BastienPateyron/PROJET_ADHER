@@ -14,7 +14,6 @@
     <string name="appels">Appels</string>
     <string name="btn_add_adherent">Ajouter un nouvel adhérent</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="git_branch">Git branch 2_onCreateDialog_dialog</string>
     <string name="button_text">Click me</string>

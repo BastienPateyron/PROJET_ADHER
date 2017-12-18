@@ -69,20 +69,6 @@ public class Contrat_service_add_dialog extends DialogFragment {
 
         View dialogView = inflater.inflate(R.layout.adherents_layout_contrat_add_alertdialog, container, false);
 
-
-        //SECTEUR SPINNER
-//        final Spinner spinner_secteur_cs = (Spinner) dialogView.findViewById(R.id.spinner_secteur_cs);
-//
-//        SecteurDAO secteurDAO = new SecteurDAO(getContext());
-//        for (Secteur secteur : secteurDAO.getAllSecteur()) {
-//            String secteur_item = secteur.getNumero() + " - " + secteur.getNom();
-//            arrayList_secteur.add(secteur_item);
-//        }
-//        final ArrayAdapter<String> adapter_secteur = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arrayList_secteur);
-//        adapter_secteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner_secteur_cs.setAdapter(adapter_secteur);
-
-
         // SECTEUR SPINNER 2
         final Spinner spinner_secteur_cs = dialogView.findViewById(R.id.spinner_secteur_cs); // Création du spinner
         ArrayList<Secteur> array_secteur; // Création de la liste de secteurs

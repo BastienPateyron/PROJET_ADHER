@@ -91,4 +91,21 @@ public class ClientDAO extends SQLiteDBHelper {
         db.close();
         return client;
     }
+
+    /* updateClient */
+    public void updateActivite(Client client){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_NOM,client.getNom());
+        values.put(COL_PRENOM,client.getPrenom());
+        values.put(COL_TELEPHONE,client.getPhone());
+        values.put(COL_NUM_RUE,client.getNum_rue());
+        values.put(COL_NOM_RUE,client.getNom_rue());
+        values.put(COL_CP,client.getCodepostal());
+        values.put(COL_VILLE,client.getVille());
+//        System.out.println(adherent.getId());
+        db.update(TABLE_CLIENT, values, COL_ID + "="+ client.getId(), null);
+        db.close();
+    }
 }

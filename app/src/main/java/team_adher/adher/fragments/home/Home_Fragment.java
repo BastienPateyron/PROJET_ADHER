@@ -1,4 +1,4 @@
-package team_adher.adher.fragments;
+package team_adher.adher.fragments.home;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.util.ArrayList;
-
 import team_adher.adher.MainActivity;
 import team_adher.adher.R;
-import team_adher.adher.classes.Secteur;
+import team_adher.adher.fragments.adherent.Adherent_fragment;
 
 /**
  * Created by R on 10/12/2017.

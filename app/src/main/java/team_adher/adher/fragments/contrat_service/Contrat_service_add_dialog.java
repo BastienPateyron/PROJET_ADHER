@@ -1,4 +1,4 @@
-package team_adher.adher.fragments;
+package team_adher.adher.fragments.contrat_service;
 
 
 import android.app.DatePickerDialog;
@@ -9,7 +9,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +25,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-import team_adher.adher.MainActivity;
 import team_adher.adher.R;
 import team_adher.adher.bdd.ActiviteDAO;
 import team_adher.adher.bdd.AdherentDAO;
@@ -43,6 +39,7 @@ import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Concerner;
 import team_adher.adher.classes.ContratService;
 import team_adher.adher.classes.Secteur;
+import team_adher.adher.fragments.activité.ActivitéSpinnerCustom;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 

@@ -1,4 +1,4 @@
-package team_adher.adher.fragments;
+package team_adher.adher.fragments.activité;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;

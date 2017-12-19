@@ -1,4 +1,4 @@
-package team_adher.adher.fragments;
+package team_adher.adher.fragments.intervention;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;

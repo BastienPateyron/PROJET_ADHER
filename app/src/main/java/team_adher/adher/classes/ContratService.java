@@ -62,4 +62,6 @@ public class ContratService {
     public void setDate_fin(String date_fin) {
         this.date_fin = date_fin;
     }
+
+
 }

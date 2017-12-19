@@ -21,11 +21,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 
-import team_adher.adher.fragments.Activite_fragment;
-import team_adher.adher.fragments.Adherent_fragment;
-import team_adher.adher.fragments.Home_Fragment;
-import team_adher.adher.fragments.Intervention_fragment;
-import team_adher.adher.fragments.Secteur_fragment;
+import team_adher.adher.fragments.activité.Activite_fragment;
+import team_adher.adher.fragments.adherent.Adherent_fragment;
+import team_adher.adher.fragments.home.Home_Fragment;
+import team_adher.adher.fragments.intervention.Intervention_fragment;
+import team_adher.adher.fragments.secteur.Secteur_fragment;
 
 
 public class MainActivity extends AppCompatActivity

@@ -1,4 +1,4 @@
-package team_adher.adher.fragments;
+package team_adher.adher.fragments.adherent;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

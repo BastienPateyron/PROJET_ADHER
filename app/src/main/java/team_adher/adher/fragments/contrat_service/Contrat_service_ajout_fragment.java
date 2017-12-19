@@ -1,4 +1,4 @@
-package team_adher.adher.fragments;
+package team_adher.adher.fragments.contrat_service;
 
 /**
  * Created by basti on 12/16/2017.

@@ -74,4 +74,21 @@ public class ClientDAO extends SQLiteDBHelper {
         db.close();
         return listeClient;
     }
+
+    /* retrieveClient */
+    public Client retrieveActivite(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        /* Requete */
+        Cursor cursor = db.query(TABLE_CLIENT, // Nom de table
+                new String[] {COL_ID, COL_NOM, COL_PRENOM, COL_TELEPHONE, COL_NUM_RUE, COL_NOM_RUE, COL_CP, COL_VILLE}, // Liste des Colonnes
+                COL_ID + "=?", // Colonne cible du WHERE
+                new String[] {String.valueOf(id)}, // Valeur cherchée par le WHERE
+                null, null, null, null); // Options
+        if(cursor != null) cursor.moveToFirst(); /* Si le curseur est pas null, on le place au début de la liste */
+        Client client = new Client (cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getString(5), cursor.getInt(6), cursor.getString(7)); /* Création d'un Client vide pour le remplir */
+        /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
+        db.close();
+        return client;
+    }
 }

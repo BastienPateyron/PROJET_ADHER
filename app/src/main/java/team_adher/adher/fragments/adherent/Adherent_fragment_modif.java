@@ -1,4 +1,4 @@
-package team_adher.adher.fragments;
+package team_adher.adher.fragments.adherent;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +14,7 @@ import team_adher.adher.MainActivity;
 import team_adher.adher.R;
 import team_adher.adher.bdd.AdherentDAO;
 import team_adher.adher.classes.Adherent;
+import team_adher.adher.fragments.contrat_service.Contrat_service_add_dialog;
 
 /**
  * Created by R on 17/12/2017.
@@ -100,6 +101,35 @@ public class Adherent_fragment_modif extends Fragment {
             }
         });
 
+
+        //Afficher listview contrats
+        /*
+        * GetAllContrats
+        * Create Adapter
+        * setAdapter on listview
+        * Override la methode to string dans ContratService OU Creer un apdater Custom
+        *   EX:
+        *
+        *    @Override
+            public String toString(){
+                return secteur.getNumero() + " " + date_debut + " - " + date_fin;
+            }
+        * Set event on click item
+        * Creer un nouveau dialog avec le meme layout
+        *   Open dialog fragment en passant l'id contrat ou obj contrat
+        *   Set Edittext avec les valeurs recupd
+        *   Changer le text du button pour Modifier
+        *
+        * Ajouter un button Supprimer un contrat (dans le dialog en bas a gauche ?)
+        *
+        *
+        * AFAIRE:
+        * Add editext Telephone dans l'ajout et la modif
+        *
+        * Tjs crash si setString in champ number (activite, adherent, secteur..) + set inputtype=number dans les layouts
+        * Suppr activite impossible
+        *
+        * */
 
 
         return myView;

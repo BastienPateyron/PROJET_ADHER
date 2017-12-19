@@ -1,4 +1,4 @@
-package team_adher.adher.fragments;
+package team_adher.adher.fragments.activité;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +20,7 @@ import team_adher.adher.MainActivity;
 import team_adher.adher.R;
 import team_adher.adher.bdd.ActiviteDAO;
 import team_adher.adher.classes.Activite;
+import team_adher.adher.fragments.adherent.Adherent_fragment_modif;
 
 /**
  * Created by basti on 12/5/2017.

@@ -1,4 +1,4 @@
-package team_adher.adher.fragments;
+package team_adher.adher.fragments.contrat_service;
 
 import android.support.v4.app.Fragment;
 

@@ -62,8 +62,11 @@ public class ClientDAO extends SQLiteDBHelper {
                 client.setId(cursor.getInt(0));
                 client.setNom(cursor.getString(1));
                 client.setPrenom(cursor.getString(2));
-                client.setPhone(cursor.getString(3));
-                client.setNum_rue(cursor.getString(4));
+                client.setPhone(cursor.getInt(3));
+                client.setNum_rue(cursor.getInt(4));
+                client.setNom_rue(cursor.getString(5));
+                client.setCodepostal(cursor.getInt(6));
+                client.setVille(cursor.getString(7));
 
                 listeClient.add(client); /* Ajout du Client valorisé dans la liste */
             } while(cursor.moveToNext()); /* Tant qu'il reste des éléments à traiter */

@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Adher.iml" filepath="$PROJECT_DIR$/.idea/Adher.iml" />
+      <module fileurl="file://C:\Users\watson\Documents\GitHub\PROJET_ADHER\ADHER.iml" filepath="C:\Users\watson\Documents\GitHub\PROJET_ADHER\ADHER.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PROJET_ADHER.iml" filepath="$PROJECT_DIR$/PROJET_ADHER.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

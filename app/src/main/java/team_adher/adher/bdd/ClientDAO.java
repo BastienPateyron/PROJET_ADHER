@@ -57,7 +57,7 @@ public class ClientDAO extends SQLiteDBHelper {
 
         if (cursor.moveToFirst()){ /* Si le curseur est pas null, on le place au début de la liste */
             do {
-                Client client = new Client(); /* Création d'un Client vide pour la remplir */
+                Client client = new Client (cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getString(5), cursor.getInt(6), cursor.getString(7)); /* Création d'un Client vide pour le remplir */
                 /* Colonne numéro ??? (0 = id, 1 = numero, 2 = nom) */
                 client.setId(cursor.getInt(0));
                 client.setNom(cursor.getString(1));
@@ -108,4 +108,15 @@ public class ClientDAO extends SQLiteDBHelper {
         db.update(TABLE_CLIENT, values, COL_ID + "="+ client.getId(), null);
         db.close();
     }
+
+    /*DELETE Client*/
+    public void deleteActivite(int id_client)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_CLIENT, COL_ID + "=" + id_client, null);
+
+        db.close();
+    }
+
 }

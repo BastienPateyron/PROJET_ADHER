@@ -23,7 +23,7 @@ public class AdherentDAO extends SQLiteDBHelper {
     private static final String COL_NUM_RUE = "NUM_RUE_ADHERENT";
     private static final String COL_NOM_RUE = "NOM_RUE_ADHERENT";
     private static final String COL_CP = "CP_ADHERENT";
-    private  static final String COL_VILLE = "VILLE_ADHERENT";
+    private static final String COL_VILLE = "VILLE_ADHERENT";
     private static final String COL_NOM_RESPONSABLE = "NOM_RESPONSABLE_ADHERENT";
     private static final String COL_NUM_TELEPHONE = "NUM_TELEPHONE";
 

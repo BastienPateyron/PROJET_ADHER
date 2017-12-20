@@ -13,6 +13,10 @@ public class Intervention {
     private String date_debut;
     private String date_fin;
 
+    public Intervention (){
+
+    }
+
     public Intervention(int id, Secteur secteur, Activite activite, Adherent adherent, Client client, String date_debut, String date_fin) {
         this.id = id;
         this.secteur = secteur;

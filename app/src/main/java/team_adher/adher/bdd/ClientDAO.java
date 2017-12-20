@@ -30,7 +30,7 @@ public class ClientDAO extends SQLiteDBHelper {
     }
 
     /*insertClient*/
-    public boolean insertActivite(Client client){
+    public boolean insertClient(Client client){
         ContentValues values = new ContentValues();
 
         values.put(COL_NOM,client.getNom());
@@ -76,7 +76,7 @@ public class ClientDAO extends SQLiteDBHelper {
     }
 
     /* retrieveClient */
-    public Client retrieveActivite(int id){
+    public Client retrieveClient(int id){
         SQLiteDatabase db = this.getReadableDatabase();
 
         /* Requete */
@@ -93,7 +93,7 @@ public class ClientDAO extends SQLiteDBHelper {
     }
 
     /* updateClient */
-    public void updateActivite(Client client){
+    public void updateClient(Client client){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -109,7 +109,7 @@ public class ClientDAO extends SQLiteDBHelper {
     }
 
     /*DELETE Client*/
-    public void deleteActivite(int id_client)
+    public void deleteClient(int id_client)
     {
         SQLiteDatabase db = this.getWritableDatabase();
 

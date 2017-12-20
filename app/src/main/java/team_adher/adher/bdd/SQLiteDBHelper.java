@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDBHelper extends SQLiteOpenHelper {
     protected static final String DATABASE_NAME = "ADHER";
-    private static final int DATABASE_VERSION = 8; /* A incrémenter quand on modifie la structure de la table */
+    private static final int DATABASE_VERSION = 26; /* A incrémenter quand on modifie la structure de la table */
 
     // TODO Penser à incrémenter la version de la base après les changements
 
@@ -91,6 +91,29 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
 
     /* INSERTS  → Si on veut mettre des valeurs par défaut */
+    /*private static final String INSERT_TABLE_ADHERANT */
+    private static final String INSERT_PUYDEDOME = "INSERT INTO SECTEUR VALUES (0, 63, 'PUY DE DOME');";
+    private static final String INSERT_ALLIER = "INSERT INTO SECTEUR VALUES (1, 09, 'ALLIER');";
+    private static final String INSERT_ADHERANT = "INSERT INTO ADHERENT VALUES " +
+            "(0, 'SARL', 15, 'rue_du_marteau', 63000, 'clermont_ferrand', 'Joe',0455855);";
+    private static final String INSERT_CLIENT = "INSERT INTO CLIENT VALUES" +
+            "(0, 'Bob', 'noBricolee', 0601020301,33, 'rue du ravallement',63000,'CLermont Ferrand');";
+    private static final String INSERT_PLOMBIER = "INSERT INTO ACTIVITE VALUES " +
+            "(0, 'Plombier');";
+    private static final String INSERT_PEINTRE = "INSERT INTO ACTIVITE VALUES " +
+            "(1, 'Peintre');";
+    private static final String INSERT_MACON = "INSERT INTO ACTIVITE VALUES " +
+            "(2, 'Maçon');";
+    private static final String INSERT_ELECTRICIEN = "INSERT INTO ACTIVITE VALUES " +
+            "(3, 'Electricien');";
+    private static final String INSERT_CONTRAT_SERVICE ="INSERT INTO CONTRAT_SERVICE VALUES" +
+            "(0, 0, 0, '20/12/2017', '30/12/2017' , 25);";
+    private static final String INSERT_CONTRAT_INTERVENTION = "INSERT INTO CONTRAT_INTERVENTION VALUES" +
+            "(0, 0, 0, 0, 0, '21/12/2017', '24/12/2017' );";
+    private static final String INSERT_CONCERNER = "INSERT INTO CONCERNER VALUES" +
+            "(0, 0);";
+    //private static final String INSERT_CLIENT = "INSERT INTO CLIENT VALUES (0,"
+
 
 
     /* Constructeur */
@@ -108,7 +131,17 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_CONCERNER);
         db.execSQL(CREATE_TABLE_CONTRAT_INTERVENTION);
 
-        // db.execSQL(INSERT_TABLE_TYPE); // #LES INSTERT C KOM SA
+        db.execSQL(INSERT_PUYDEDOME); // #LES INSTERT C KOM SA
+        db.execSQL(INSERT_ALLIER);
+        db.execSQL(INSERT_ADHERANT);
+        db.execSQL(INSERT_PLOMBIER);
+        db.execSQL(INSERT_ELECTRICIEN);
+        db.execSQL(INSERT_PEINTRE);
+        db.execSQL(INSERT_MACON);
+        db.execSQL(INSERT_CLIENT);
+        db.execSQL(INSERT_CONTRAT_SERVICE);
+        db.execSQL(INSERT_CONTRAT_INTERVENTION);
+        db.execSQL(INSERT_CONCERNER);
 
     }
 
@@ -123,5 +156,6 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + "SECTEUR");
         onCreate(db);
     }
+
 
 }

@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
+import android.provider.SyncStateContract;
 
 import java.util.ArrayList;
 
@@ -149,7 +151,22 @@ public class AdherentDAO extends SQLiteDBHelper {
         System.out.println("Adhérent supprimé");
         db.close();
     }
+    /*
+    public void addAdherent(Adherent adherent)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues valuesA = new ContentValues();
+    valuesA.put(AdherentDAO.COL_RAISON_SOCIALE, "SARL");
+    valuesA.put(AdherentDAO.COL_NOM_RESPONSABLE, "Bob Bricole");
+    valuesA.put(AdherentDAO.COL_NUM_RUE, 1);
+    valuesA.put(AdherentDAO.COL_NOM_RUE,"Rue du Marteau");
+    valuesA.put(AdherentDAO.COL_CP, 63000);
+    valuesA.put(AdherentDAO.COL_VILLE, "Clermont Ferrand");
 
+    db.insert(AdherentDAO.TABLE_ADHERENT,null,valuesA);
+
+
+    }*/
     /* Curseur propre
 
      Cursor cursor = db.query(

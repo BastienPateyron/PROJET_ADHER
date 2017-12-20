@@ -63,7 +63,7 @@ public class Intervention_fragment extends Fragment {
     }
 
     private void updateLabel() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
         date_fin_contrat.setText(sdf.format(myCalendar.getTime()));
     }

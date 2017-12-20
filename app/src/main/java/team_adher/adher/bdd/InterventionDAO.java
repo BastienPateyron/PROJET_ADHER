@@ -19,14 +19,14 @@ import team_adher.adher.classes.Secteur;
  */
 
 public class InterventionDAO extends SQLiteDBHelper {
-    public static final String TABLE_INTERVENTION = "INTERVENTION";
-    public static final String COL_ID = "ID_INTERVENTION";
+    public static final String TABLE_INTERVENTION = "CONTRAT_INTERVENTION";
+    public static final String COL_ID = "ID_CONTRAT_INTERVENTION";
     public static final String COL_FK_SECTEUR = "ID_SECTEUR";
     public static final String COL_FK_ACTIVITE = "ID_ACTIVITE";
     public static final String COL_FK_ADHERENT = "ID_ADHERENT";
-    public static final String COL_CLIENT = "CLIENT";
-    public static final String COL_DATE_DEBUT = "DATE_DEBUT_INTERVENTION";
-    public static final String COL_DATE_FIN = "DATE_FIN_INTERVENTION";
+    public static final String COL_FK_CLIENT = "ID_CLIENT";
+    public static final String COL_DATE_DEBUT = "DATE_DEBUT_CONTRAT_INTERVENTION";
+    public static final String COL_DATE_FIN = "DATE_FIN_CONTRAT_INTERVENTION";
 
 
 
@@ -58,7 +58,7 @@ public class InterventionDAO extends SQLiteDBHelper {
         values.put(COL_FK_SECTEUR, intervention.getSecteur().getId());
         values.put(COL_FK_ACTIVITE, intervention.getActivite().getId());
         values.put(COL_FK_ADHERENT, intervention.getAdherent().getId());
-        values.put(COL_CLIENT, intervention.getClient().getId());
+        values.put(COL_FK_CLIENT, intervention.getClient().getId());
         values.put(COL_DATE_DEBUT, intervention.getDate_debut());
         values.put(COL_DATE_FIN, intervention.getDate_fin());
 
@@ -77,7 +77,7 @@ public class InterventionDAO extends SQLiteDBHelper {
 
         /* Requete */
         Cursor cursor = db.query(TABLE_INTERVENTION, // Nom table
-                new String[] { COL_ID,  COL_FK_SECTEUR, COL_FK_ACTIVITE, COL_FK_ADHERENT, COL_CLIENT, COL_DATE_DEBUT, COL_DATE_FIN}, // Liste des colonnes
+                new String[] { COL_ID,  COL_FK_SECTEUR, COL_FK_ACTIVITE, COL_FK_ADHERENT, COL_FK_CLIENT, COL_DATE_DEBUT, COL_DATE_FIN}, // Liste des colonnes
                 COL_ID + "=?",  // Colonne cible du WHERE
                 new String[] { String.valueOf(id) }, // Valeure cible du WHERE
                 null, null, null, null); // Options
@@ -113,7 +113,7 @@ public class InterventionDAO extends SQLiteDBHelper {
         AdherentDAO adherentDAO = new AdherentDAO(context);
         ClientDAO clientDAO = new ClientDAO (context);
 
-        ArrayList<Intervention> listeIntervention = new ArrayList<Intervention>();
+        ArrayList<Intervention> listeIntervention = new ArrayList<>();
         String query = "SELECT * FROM INTERVENTION;";
         Cursor cursor = db.rawQuery(query, null);
 
@@ -150,7 +150,7 @@ public class InterventionDAO extends SQLiteDBHelper {
         values.put(COL_FK_SECTEUR,intervention.getSecteur().getId());
         values.put(COL_FK_ACTIVITE,intervention.getActivite().getId());
         values.put(COL_FK_ADHERENT,intervention.getAdherent().getId());
-        values.put(COL_CLIENT,intervention.getClient().getId());
+        values.put(COL_FK_CLIENT,intervention.getClient().getId());
         values.put(COL_DATE_DEBUT,intervention.getDate_debut());
         values.put(COL_DATE_FIN,intervention.getDate_fin());
 

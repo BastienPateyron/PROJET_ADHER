@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Adherent;
+import team_adher.adher.classes.ContratService;
 
 
 /**
@@ -56,17 +57,27 @@ public class AdherentDAO extends SQLiteDBHelper {
 
     public Adherent retrieveAdherent(int id){
         SQLiteDatabase db = this.getReadableDatabase();
-
+        Adherent adherent = new Adherent();
         /* Requete */
         Cursor cursor = db.query(TABLE_ADHERENT, // Nom table
                 new String[] { COL_ID, COL_RAISON_SOCIALE, COL_NUM_RUE, COL_NOM_RUE, COL_CP, COL_VILLE, COL_NOM_RESPONSABLE, COL_NUM_TELEPHONE }, // Liste des colonnes
                 COL_ID + "=?",  // Colonne cible du WHERE
                 new String[] { String.valueOf(id) }, // Valeure cible du WHERE
                 null, null, null, null); // Options
-        if (cursor != null) cursor.moveToFirst();
+        if (cursor != null){
+            cursor.moveToFirst();
+//            System.out.println("retrieve_adherent(): Cursor = " + cursor.getPosition());
+            /* On récupère chaque élément dans l'ordre de la table (Haut en bas) */
+            adherent.setId(cursor.getInt(0));
+            adherent.setRaison_sociale(cursor.getString(1));
+            adherent.setNum_rue(cursor.getInt(2));
+            adherent.setNom_rue(cursor.getString(3));
+            adherent.setCp(cursor.getInt(4));
+            adherent.setVille(cursor.getString(5));
+            adherent.setNom_responsable(cursor.getString(6));
+            adherent.setTelephone(cursor.getInt(7));
+        }else
 
-        /* On récupère chaque élément dans l'ordre de la table (Haut en bas) */
-        Adherent adherent = new Adherent(cursor.getInt(0),cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7));
         db.close();
         return adherent;
     }
@@ -80,16 +91,16 @@ public class AdherentDAO extends SQLiteDBHelper {
 
         if(cursor.moveToFirst()){ /* Si le curseur est pas null, on le place au début de la liste */
             do{
-                Adherent adherent = new Adherent(); /* Création d'un adherent vide pour le remplir */
-                /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
-                adherent.setId(cursor.getInt(0)); // Colonne numéro ??? (0 = id, 1 = numero, 2 = nom)
-                adherent.setRaison_sociale(cursor.getString(1));
-                adherent.setNum_rue(cursor.getInt(2));
-                adherent.setNom_rue(cursor.getString(3));
-                adherent.setCp(cursor.getInt(4));
-                adherent.setVille(cursor.getString(5));
-                adherent.setNom_responsable(cursor.getString(6));
-                adherent.setTelephone(cursor.getInt(7));
+                Adherent adherent = new Adherent(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2),
+                        cursor.getString(3),
+                        cursor.getInt(4),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        cursor.getInt(7)
+                );
 
                 listeAdherents.add(adherent);
             }while(cursor.moveToNext()); /* Tant que l'élément suivant existe */
@@ -115,12 +126,23 @@ public class AdherentDAO extends SQLiteDBHelper {
         db.close();
     }
 
-    public void deleteAdherent(int id_adherent)
+    public void deleteAdherent(Context context, int id_adherent)
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.delete(TABLE_ADHERENT, COL_ID + "=" + id_adherent, null);
+        // Supprimer les ContratsService avec cet ID adhérent
+        ContratServiceDAO contratServiceDAO = new ContratServiceDAO(context);
+        ArrayList<ContratService> list_contratServices = contratServiceDAO.getAllContratServiceOfAdherent(context, id_adherent);
 
+        for(ContratService cs: list_contratServices) contratServiceDAO.deleteContratService(context, cs.getId());
+
+
+        // TODO Supprimer les ContratsIntervention avec cet ID adhérent
+
+
+        // Supprimer l'adhérent
+        db.delete(TABLE_ADHERENT, COL_ID + "=" + id_adherent, null);
+        System.out.println("Adhérent supprimé");
         db.close();
     }
 

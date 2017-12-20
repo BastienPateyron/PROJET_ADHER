@@ -57,7 +57,7 @@ public class ActiviteDAO extends SQLiteDBHelper {
         return listeActivite;
     }
 
-    /* TODO retrieveActivite */
+    /* retrieveActivite */
     public Activite retrieveActivite(int id){
         SQLiteDatabase db = this.getReadableDatabase();
 

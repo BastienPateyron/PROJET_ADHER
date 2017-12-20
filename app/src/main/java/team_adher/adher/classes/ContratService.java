@@ -10,6 +10,7 @@ public class ContratService {
     private Adherent adherent;
     private String date_debut;
     private String date_fin;
+    // TODO ajouter tarif_HT
 
     public  ContratService(){
 
@@ -21,6 +22,12 @@ public class ContratService {
         this.adherent = adherent;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
+    }
+
+    @Override
+    public String toString(){
+        String str = secteur.getNumero() + " - " + date_debut + " - " + date_fin;
+        return str;
     }
 
     public int getId() {

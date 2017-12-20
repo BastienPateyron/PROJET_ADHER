@@ -213,14 +213,7 @@ public class Contrat_service_add_dialog extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-                // TODO  - CREATION DU  CONTRAT_SERVICE -
-                /*
-                * CREER un contrat dans la table contrat_service
-                * avec l'id du secteur, id de l'adherent (A faire passer depuis le fragment adher_modif...)
-                * date_debut + fin (Rajouter un attribut tarif et enveler tarif interventions ?)
-                * +
-                * Lier activites et contrats avec la table concerner
-                * */
+                // -- CREATION DU  CONTRAT_SERVICE --
 
                 //Récupérer Secteur
                 System.out.println("Id Secteur = " + idSecteur);
@@ -248,7 +241,7 @@ public class Contrat_service_add_dialog extends DialogFragment {
                 ConcernerDAO concernerDAO = new ConcernerDAO(getContext());
                 Concerner concerner = new Concerner();
 
-                for (Integer i : id_activite.keySet()) { // On va liste la liste des clés "id_activite.keySet()"
+                for (Integer i : id_activite.keySet()) { // On va lister la liste des clés "id_activite.keySet()"
                     System.out.println("idActivite ajoutée " + i + ": " +id_activite.get(i));
 
                     concerner.setContratService(contratService);
@@ -258,7 +251,6 @@ public class Contrat_service_add_dialog extends DialogFragment {
 
                     concernerDAO.insertConcerner(concerner);
                 }
-
                 // TODO Tarif
 
                 dismiss();

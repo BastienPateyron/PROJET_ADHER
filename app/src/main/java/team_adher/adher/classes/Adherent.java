@@ -95,6 +95,6 @@ public class Adherent {
 
     @Override
     public String toString(){
-        return raison_sociale; /* Retourne uniquement le nom du secteur */
-    }
+        return Integer.valueOf(id).toString() + " - " + raison_sociale; /* Retourne uniquement le nom du secteur */
+    } // TODO virer l'id
 }

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import team_adher.adher.classes.Adherent;
+import team_adher.adher.classes.Concerner;
 import team_adher.adher.classes.ContratService;
 import team_adher.adher.classes.Secteur;
 
@@ -99,11 +100,50 @@ public class ContratServiceDAO extends SQLiteDBHelper {
 
         if(cursor.moveToFirst()){ /* Si le curseur est pas null, on le place au début de la liste */
             do{
-                ContratService contratService = new ContratService(); /* Création d'un adherent vide pour le remplir */
+                ContratService contratService = new ContratService(); /* Création d'un contratService vide pour le remplir */
 
-
+                System.out.println("Retreive_secteur( " + cursor.getInt(1) + " )");
                 Secteur secteur = secteurDAO.retrieveSecteur(cursor.getInt(1));
+
+
+                System.out.println("Retrieve_adherent( " + cursor.getInt(2) + " )");
                 Adherent adherent = adherentDAO.retrieveAdherent(cursor.getInt(2));
+
+
+                /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
+                contratService.setId(cursor.getInt(0)); // Colonne numéro ??? (0 = id, 1 = numero, 2 = nom)
+                contratService.setSecteur(secteur);
+                contratService.setAdherent(adherent);
+                contratService.setDate_debut(cursor.getString(3));
+                contratService.setDate_fin(cursor.getString(4));
+
+                listeContratServices.add(contratService);
+            }while(cursor.moveToNext()); /* Tant que l'élément suivant existe */
+        }
+        db.close();
+        return listeContratServices;
+    }
+
+    // TODO Liste ContratServiceIdAdherent
+    public ArrayList<ContratService> getAllContratServiceOfAdherent(Context context, int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        SecteurDAO secteurDAO = new SecteurDAO(context);
+        AdherentDAO adherentDAO = new AdherentDAO(context);
+
+        ArrayList<ContratService> listeContratServices = new ArrayList<ContratService>();
+        String query = "SELECT * FROM CONTRAT_SERVICE WHERE ID_ADHERENT = " + id + ";";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){ /* Si le curseur est pas null, on le place au début de la liste */
+            do{
+                ContratService contratService = new ContratService(); /* Création d'un contratService vide pour le remplir */
+
+                System.out.println("Retreive_secteur( " + cursor.getInt(1) + " )");
+                Secteur secteur = secteurDAO.retrieveSecteur(cursor.getInt(1));
+
+
+                System.out.println("Retrieve_adherent( " + id + " )");
+                Adherent adherent = adherentDAO.retrieveAdherent(id);
 
                 /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
                 contratService.setId(cursor.getInt(0)); // Colonne numéro ??? (0 = id, 1 = numero, 2 = nom)
@@ -132,12 +172,17 @@ public class ContratServiceDAO extends SQLiteDBHelper {
         db.close();
     }
 
-    public void deleteContratService(int id_contrat_service)
+    public void deleteContratService(Context context, int id_contrat_service)
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.delete(TABLE_CONTRAT_SERVICE, COL_ID + "=" + id_contrat_service, null);
+        // Récupérer les occurences de Concerner et les supprimer
+        ConcernerDAO concernerDAO = new ConcernerDAO(context);
+        ArrayList<Concerner> concernerArrayList = concernerDAO.getAllConcernerOfContratService(context, id_contrat_service);
+        for(Concerner concerner:concernerArrayList) concernerDAO.deleteConcerner(concerner.getContratService().getId(), concerner.getActivite().getId());
 
+        db.delete(TABLE_CONTRAT_SERVICE, COL_ID + "=" + id_contrat_service, null);
+        System.out.println("Contrat de Service Supprimé");
         db.close();
     }
 }

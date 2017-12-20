@@ -7,13 +7,20 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import team_adher.adher.MainActivity;
 import team_adher.adher.R;
 import team_adher.adher.bdd.AdherentDAO;
+import team_adher.adher.bdd.ContratServiceDAO;
 import team_adher.adher.classes.Adherent;
+import team_adher.adher.classes.ContratService;
 import team_adher.adher.fragments.contrat_service.Contrat_service_add_dialog;
 
 /**
@@ -60,7 +67,7 @@ public class Adherent_fragment_modif extends Fragment {
         button_remove_adherent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adherentDAO.deleteAdherent(adherent.getId());
+                adherentDAO.deleteAdherent(getContext(), adherent.getId());
                 ((MainActivity) getActivity()).changeFragment(new Adherent_fragment());
             }
         });
@@ -102,7 +109,18 @@ public class Adherent_fragment_modif extends Fragment {
         });
 
 
-        //Afficher listview contrats
+
+
+        // Get all contrats
+        ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
+        ArrayList<ContratService> list_contratService = contratServiceDAO.getAllContratService(getContext());
+
+        final ArrayAdapter<ContratService> adapter = new ArrayAdapter<ContratService>(myView.getContext(),android.R.layout.simple_list_item_1, list_contratService);
+
+        ListView listView = myView.findViewById(R.id.list_interventions);
+        listView.setAdapter(adapter);
+
+
         /*
         * GetAllContrats
         * Create Adapter
@@ -114,7 +132,8 @@ public class Adherent_fragment_modif extends Fragment {
             public String toString(){
                 return secteur.getNumero() + " " + date_debut + " - " + date_fin;
             }
-        * Set event on click item
+
+        * TODO Set event on click item
         * Creer un nouveau dialog avec le meme layout
         *   Open dialog fragment en passant l'id contrat ou obj contrat
         *   Set Edittext avec les valeurs recupd
@@ -123,8 +142,7 @@ public class Adherent_fragment_modif extends Fragment {
         * Ajouter un button Supprimer un contrat (dans le dialog en bas a gauche ?)
         *
         *
-        * AFAIRE:
-        * Add editext Telephone dans l'ajout et la modif
+        * TODO Add editext Telephone dans l'ajout et la modif
         *
         * Tjs crash si setString in champ number (activite, adherent, secteur..) + set inputtype=number dans les layouts
         * Suppr activite impossible

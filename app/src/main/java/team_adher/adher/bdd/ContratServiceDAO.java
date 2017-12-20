@@ -69,7 +69,7 @@ public class ContratServiceDAO extends SQLiteDBHelper {
 
         /* Requete */
         Cursor cursor = db.query(TABLE_CONTRAT_SERVICE, // Nom table
-                new String[] { COL_ID,  COL_FK_SECTEUR, COL_FK_ADHERENT, COL_DATE_DEBUT, COL_DATE_FIN}, // Liste des colonnes
+                new String[] { COL_ID,  COL_FK_SECTEUR, COL_FK_ADHERENT, COL_DATE_DEBUT, COL_DATE_FIN}, // Liste des colonnes, ajout de la colonne tarif?
                 COL_ID + "=?",  // Colonne cible du WHERE
                 new String[] { String.valueOf(id) }, // Valeure cible du WHERE
                 null, null, null, null); // Options

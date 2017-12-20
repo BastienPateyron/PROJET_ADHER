@@ -99,11 +99,11 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static final String INSERT_PLOMBIER = "INSERT INTO ACTIVITE VALUES " +
             "(1, 'Plombier');";
     private static final String INSERT_PEINTRE = "INSERT INTO ACTIVITE VALUES " +
-            "(1, 'Peintre');";
+            "(2, 'Peintre');";
     private static final String INSERT_MACON = "INSERT INTO ACTIVITE VALUES " +
-            "(2, 'Maçon');";
+            "(3, 'Maçon');";
     private static final String INSERT_ELECTRICIEN = "INSERT INTO ACTIVITE VALUES " +
-            "(3, 'Electricien');";
+            "(4, 'Electricien');";
     private static final String INSERT_CONTRAT_SERVICE ="INSERT INTO CONTRAT_SERVICE VALUES" +
             "(1, 1, 1, '20/12/2017', '30/12/2017' , 25.00);";
     private static final String INSERT_CONTRAT_INTERVENTION = "INSERT INTO CONTRAT_INTERVENTION VALUES" +
@@ -132,12 +132,12 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         /* Inserts  Jeu d'essai*/
         db.execSQL(INSERT_PUYDEDOME);
         db.execSQL(INSERT_ALLIER);
-        db.execSQL(INSERT_ADHERANT);
         db.execSQL(INSERT_PLOMBIER);
         db.execSQL(INSERT_ELECTRICIEN);
         db.execSQL(INSERT_PEINTRE);
         db.execSQL(INSERT_MACON);
         db.execSQL(INSERT_CLIENT);
+        db.execSQL(INSERT_ADHERANT);
         db.execSQL(INSERT_CONTRAT_SERVICE);
         db.execSQL(INSERT_CONTRAT_INTERVENTION);
         db.execSQL(INSERT_CONCERNER);

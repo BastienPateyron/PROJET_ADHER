@@ -15,7 +15,7 @@ import team_adher.adher.classes.ContratService;
 /**
  * Created by basti on 12/3/2017.
  */
-    /* TODO Mettre a jour avec la nouvelle base */
+    /*  Mettre a jour avec la nouvelle base */
 
 public class AdherentDAO extends SQLiteDBHelper {
     private static final String TABLE_ADHERENT = "ADHERENT";
@@ -137,7 +137,7 @@ public class AdherentDAO extends SQLiteDBHelper {
         for(ContratService cs: list_contratServices) contratServiceDAO.deleteContratService(context, cs.getId());
 
 
-        // TODO Supprimer les ContratsIntervention avec cet ID adhérent
+        // Supprimer les ContratsIntervention avec cet ID adhérent
         // TODO Décommenter et faire la méthode getAllInterventionOfAdherent + deleteIntervention
 //        InterventionDAO interventionDAO = new InterventionDAO(context);
 //        ArrayList<Intervention> interventionArrayList = interventionDAO.getAllInterventionOfAdherent(context, id_adherent);

@@ -251,7 +251,7 @@ public class Contrat_service_add_dialog extends DialogFragment {
 
                     concernerDAO.insertConcerner(concerner);
                 }
-                // TODO Tarif
+                // TODO Ajouter Tarif
 
                 dismiss();
                 Toast.makeText(getActivity(), "Contrat ajouté", Toast.LENGTH_SHORT).show();

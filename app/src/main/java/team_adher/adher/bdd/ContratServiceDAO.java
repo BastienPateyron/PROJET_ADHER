@@ -124,7 +124,7 @@ public class ContratServiceDAO extends SQLiteDBHelper {
         return listeContratServices;
     }
 
-    // TODO Liste ContratServiceIdAdherent
+    //  Lister les  ContratServiceIdAdherent
     public ArrayList<ContratService> getAllContratServiceOfAdherent(Context context, int id){
         SQLiteDatabase db = this.getReadableDatabase();
         SecteurDAO secteurDAO = new SecteurDAO(context);

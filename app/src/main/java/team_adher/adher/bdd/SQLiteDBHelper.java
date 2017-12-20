@@ -12,7 +12,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     protected static final String DATABASE_NAME = "ADHER";
     private static final int DATABASE_VERSION = 9; /* A incrémenter quand on modifie la structure de la table */
 
-    // TODO Penser à incrémenter la version de la base après les changements
+    // Penser à incrémenter la version de la base après les changements
 
     /* CREATE */
     private static final String CREATE_TABLE_SECTEUR = "CREATE TABLE SECTEUR" +
@@ -52,7 +52,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             "ID_ADHERENT INTEGER NOT NULL ," +
             "DATE_DEBUT_CONTRAT_SERVICE TEXT NOT NULL  ," +
             "DATE_FIN_CONTRAT_SERVICE TEXT NOT NULL ," +
-            "TARIF_HT INTEGER NOT NULL ," + // TODO Mettre en REAL CHECK (nom_du_champ_3 > 0)
+            "TARIF_HT REAL DEFAULT 0.00 NOT NULL CHECK (TARIF_HT > 0)," +
             "FOREIGN KEY (ID_SECTEUR) REFERENCES SECTEUR (ID_SECTEUR) ," +
             "FOREIGN KEY (ID_ADHERENT) REFERENCES ADHERENT (ID_ADHERENT)" +
             ");";

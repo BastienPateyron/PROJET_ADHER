@@ -120,19 +120,7 @@ public class Adherent_fragment_modif extends Fragment {
         ListView listView = myView.findViewById(R.id.list_interventions);
         listView.setAdapter(adapter);
 
-
         /*
-        * GetAllContrats
-        * Create Adapter
-        * setAdapter on listview
-        * Override la methode to string dans ContratService OU Creer un apdater Custom
-        *   EX:
-        *
-        *    @Override
-            public String toString(){
-                return secteur.getNumero() + " " + date_debut + " - " + date_fin;
-            }
-
         * TODO Set event on click item
         * Creer un nouveau dialog avec le meme layout
         *   Open dialog fragment en passant l'id contrat ou obj contrat

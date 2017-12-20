@@ -138,6 +138,10 @@ public class AdherentDAO extends SQLiteDBHelper {
 
 
         // TODO Supprimer les ContratsIntervention avec cet ID adhérent
+        // TODO Décommenter et faire la méthode getAllInterventionOfAdherent + deleteIntervention
+//        InterventionDAO interventionDAO = new InterventionDAO(context);
+//        ArrayList<Intervention> interventionArrayList = interventionDAO.getAllInterventionOfAdherent(context, id_adherent);
+//        for(Intervention intervention : interventionArrayList) interventionDAO.deleteIntervention(context, intervention.getId());
 
 
         // Supprimer l'adhérent

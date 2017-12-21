@@ -93,9 +93,9 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static final String INSERT_PUYDEDOME = "INSERT INTO SECTEUR VALUES (0, 63, 'PUY DE DOME');";
     private static final String INSERT_ALLIER = "INSERT INTO SECTEUR VALUES (1, 09, 'ALLIER');";
     private static final String INSERT_ADHERANT = "INSERT INTO ADHERENT VALUES " +
-            "(1, 'SARL', 15, 'rue_du_marteau', 63000, 'Clermont Ferrand', 'Joe',0455855365);";
+            "(1, 'SARL', 15, 'Rue du marteau', 63000, 'Clermont Ferrand', 'Joe',0455855365);";
     private static final String INSERT_CLIENT = "INSERT INTO CLIENT VALUES" +
-            "(1, 'Bob', 'noBricolee', 0601020301,33, 'rue du ravallement',63000,'Clermont Ferrand');";
+            "(1, 'Bob', 'noBricolee', 0601020301, 33, 'rue du ravallement',63000,'Clermont Ferrand');";
     private static final String INSERT_PLOMBIER = "INSERT INTO ACTIVITE VALUES " +
             "(1, 'Plombier');";
     private static final String INSERT_PEINTRE = "INSERT INTO ACTIVITE VALUES " +

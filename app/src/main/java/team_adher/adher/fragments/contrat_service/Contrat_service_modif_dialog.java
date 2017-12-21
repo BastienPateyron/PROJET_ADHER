@@ -42,14 +42,15 @@ import team_adher.adher.classes.Secteur;
 import team_adher.adher.fragments.activité.ActivitéSpinnerCustom;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+import static java.lang.String.valueOf;
 
 /**
  * Created by R on 17/12/2017.
  */
-public class Contrat_service_add_dialog extends DialogFragment {
+public class Contrat_service_modif_dialog extends DialogFragment {
 
     private List<String> arrayList_secteur = new ArrayList<>();
-    private List<String> arrayList_activite = new ArrayList<>();
+    ArrayList<Activite> activiteArrayList;
     private EditText date_debut_contrat;
     private EditText date_fin_contrat;
     private EditText tarif_ht;
@@ -58,13 +59,15 @@ public class Contrat_service_add_dialog extends DialogFragment {
     private static Context mContext;
     private static FragmentManager fragmentManager;
     private boolean state_for_spinner = false;
+    private ContratService contratService;
 
     // Elements pour l'instanciation du contrat
     private int idSecteur;
     private int idAdherent;
+    private int idContrat = 0;
 
-    public static Contrat_service_add_dialog newInstance(Context context, FragmentManager fragmentManager1) {
-        Contrat_service_add_dialog contrat_service_add_dialog = new Contrat_service_add_dialog();
+    public static Contrat_service_modif_dialog newInstance(Context context, FragmentManager fragmentManager1) {
+        Contrat_service_modif_dialog contrat_service_add_dialog = new Contrat_service_modif_dialog();
         mContext = context;
         fragmentManager = fragmentManager1;
         return contrat_service_add_dialog;
@@ -75,14 +78,34 @@ public class Contrat_service_add_dialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View dialogView = inflater.inflate(R.layout.adherents_layout_contrat_add_alertdialog, container, false);
+        // getActivity().setTitle("Infos Contrat Service");
 
-        // Récupération de l'ID Adherent
+        // Récupération de l'ID Adherent et de l'ID Contrat
         Bundle bundle = this.getArguments();
 
         if (bundle != null) {
-            idAdherent = Integer.valueOf(bundle.get("id_adherent").toString());
-        }
+            if(!(bundle.getString("id_adherent") == null)){
+                idAdherent = Integer.valueOf(bundle.get("id_adherent").toString());
+            }
+            // Si on récupère un id contrat
+            if(!(bundle.getString("id_contrat") == null)) {
+                // On instancie un Contrat
+                idContrat = Integer.valueOf(bundle.get("id_contrat").toString());
+                ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
+                contratService = contratServiceDAO.retrieveContratService(idContrat, getContext());
 
+                // On récupère la liste des activités qui le concerne
+                ConcernerDAO concernerDAO = new ConcernerDAO(getContext());
+                ArrayList<Concerner> concernerArrayList = concernerDAO.getAllConcernerOfContratService(getContext(), idContrat);
+                ActiviteDAO activiteDAO = new ActiviteDAO(getContext());
+                activiteArrayList = activiteDAO.getAllActiviteOfCS(idContrat);
+
+                // Modification nom dialog:
+                TextView dialogTitle = (TextView) dialogView.findViewById(R.id.contrat_service_add_title);
+                dialogTitle.setText("Infos Contrat de Service");
+
+            }
+        }
 
 
         // SECTEUR SPINNER 2
@@ -94,6 +117,10 @@ public class Contrat_service_add_dialog extends DialogFragment {
         final ArrayAdapter<Secteur> adapter_secteur = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, array_secteur); // Création de l'adapter
         adapter_secteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Définition du style de l'adapter
         spinner_secteur_cs.setAdapter(adapter_secteur); // Affectation de l'adapter au spinner
+
+        // Définition de l'item si on a retrieve le contrat et que son secteur n'est pas null
+        if(! contratService.getSecteur().getNom().toString().equals(null)) spinner_secteur_cs.setSelection(getIndex(spinner_secteur_cs, contratService.getSecteur().toString()));
+
 
         // Récupération de l'ID secteur sélectionné
         spinner_secteur_cs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -130,6 +157,17 @@ public class Contrat_service_add_dialog extends DialogFragment {
         final TextView value_act3 = (TextView) dialogView.findViewById(R.id.value_act3);
 
         final HashMap<Integer, Integer> id_activite = new HashMap<Integer, Integer>(); //Retiens les id des activites deja ajoutés
+
+        // Valorisation en fonction du nombre d'activités récupérées
+        if (activiteArrayList.size() == 1) value_act1.setText(activiteArrayList.get(0).getNom());
+        else if (activiteArrayList.size() == 2){
+            value_act1.setText(activiteArrayList.get(0).getNom());
+            value_act2.setText(activiteArrayList.get(1).getNom());
+        } else if(activiteArrayList.size() == 3){
+            value_act1.setText(activiteArrayList.get(0).getNom());
+            value_act2.setText(activiteArrayList.get(1).getNom());
+            value_act3.setText(activiteArrayList.get(2).getNom());
+        }
 
         spinner_activite_cs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -188,6 +226,7 @@ public class Contrat_service_add_dialog extends DialogFragment {
 
 
         date_debut_contrat = (EditText) dialogView.findViewById(R.id.value_date_debut_cs);
+        date_debut_contrat.setText(contratService.getDate_debut());
         final DatePickerDialog datePicker_debut_ct = new DatePickerDialog(getActivity(), R.style.DatePicker, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         date_debut_contrat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,6 +238,7 @@ public class Contrat_service_add_dialog extends DialogFragment {
 
         //DATE FIN CONTRAT
         date_fin_contrat = (EditText) dialogView.findViewById(R.id.value_date_fin_cs);
+        date_fin_contrat.setText(contratService.getDate_fin());
         final DatePickerDialog datePicker_fin_ct = new DatePickerDialog(getActivity(), R.style.DatePicker, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         date_fin_contrat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +250,8 @@ public class Contrat_service_add_dialog extends DialogFragment {
 
         // TARIF_HT
         tarif_ht = (EditText) dialogView.findViewById(R.id.value_tarif_ht_cs);
-        tarif_ht.setText("0.00");
+        System.out.println(contratService.getTarif_ht()); // TODO tarif pas bien valorisé
+        tarif_ht.setText(String.valueOf(contratService.getTarif_ht()));
 
         //BUTTON
         Button buttonPos = (Button) dialogView.findViewById(R.id.pos_button);
@@ -307,6 +348,18 @@ public class Contrat_service_add_dialog extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
 
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+        int index = 0;
+
+        for(int i = 0; i < spinner.getCount(); i++){
+            if(spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
     private boolean champsRemplis(ContratService contratService){

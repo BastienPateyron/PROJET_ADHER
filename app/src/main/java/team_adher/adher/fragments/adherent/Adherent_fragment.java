@@ -32,7 +32,7 @@ public class Adherent_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.general_layout_consultation,container,false);
-
+        getActivity().setTitle("Adhérents");
 
         TextView add_part_textview = (TextView) myView.findViewById(R.id.add_part_textview);
         add_part_textview.setText("Ajout Adherent");

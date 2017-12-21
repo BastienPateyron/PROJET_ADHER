@@ -30,9 +30,9 @@ public class Activite_fragment_ajout extends Fragment {
 
         getActivity().setTitle("Nouvelle Activité");
 
-        Button button_add_adherent = (Button) myView.findViewById(R.id.button_add_adherent);
+        Button button_add_activite = (Button) myView.findViewById(R.id.button_add_activite);
 
-        button_add_adherent.setOnClickListener(new View.OnClickListener() {
+        button_add_activite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText value_nom_activite = (EditText) myView.findViewById(R.id.value_activite_nom);

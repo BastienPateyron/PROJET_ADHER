@@ -57,6 +57,29 @@ public class ActiviteDAO extends SQLiteDBHelper {
         return listeActivite;
     }
 
+    public ArrayList<Activite> getAllActiviteOfCS(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Activite> listeActivite= new ArrayList<>();
+        String query =
+                "SELECT * FROM ACTIVITE, CONCERNER" +
+                " WHERE CONCERNER.ID_CONTRAT = " + id +
+                " AND CONCERNER.ID_ACTIVITE = ACTIVITE.ID_ACTIVITE;";
+
+        Cursor cursor = db.rawQuery(query,null);
+
+        if (cursor.moveToFirst()){ /* Si le curseur est pas null, on le place au début de la liste */
+            do {
+                Activite activite = new Activite(); /* Création d'une Activité vide pour la remplir */
+                /* Colonne numéro ??? (0 = id, 1 = numero, 2 = nom) */
+                activite.setId(cursor.getInt(0));
+                activite.setNom(cursor.getString(1));
+
+                listeActivite.add(activite); /* Ajout de l'Activité valorisée dans la liste */
+            } while(cursor.moveToNext()); /* Tant qu'il reste des éléments à traiter */
+        }
+        db.close();
+        return listeActivite;
+    }
     /* retrieveActivite */
     public Activite retrieveActivite(int id){
         SQLiteDatabase db = this.getReadableDatabase();

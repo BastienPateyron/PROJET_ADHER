@@ -60,13 +60,13 @@ public class Activite_fragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("ID ADHERENT :", String.valueOf(adapter.getItem(position).getId()));
+                Log.i("ID ACTIVITE :", String.valueOf(adapter.getItem(position).getId()));
 
                 Bundle bundle = new Bundle();
-                bundle.putString("id_adherent",String.valueOf(adapter.getItem(position).getId()));
-                Adherent_fragment_modif afm = new Adherent_fragment_modif();
-                afm.setArguments(bundle);
-                ((MainActivity)getContext()).changeFragment(afm);
+                bundle.putString("id_activite",String.valueOf(adapter.getItem(position).getId()));
+                Activite_fragment_ajout acfm = new Activite_fragment_ajout();
+                acfm.setArguments(bundle);
+                ((MainActivity)getContext()).changeFragment(acfm);
             }
         });
         return myView;

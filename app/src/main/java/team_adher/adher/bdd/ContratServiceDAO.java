@@ -52,7 +52,7 @@ public class ContratServiceDAO extends SQLiteDBHelper {
         values.put(COL_FK_ADHERENT, adherent.getAdherent().getId());
         values.put(COL_DATE_DEBUT, adherent.getDate_debut());
         values.put(COL_DATE_FIN, adherent.getDate_fin());
-        values.put(COL_TARIF_HT, 0);
+        values.put(COL_TARIF_HT, adherent.getTarif_ht());
 
 
         SQLiteDatabase db = this.getWritableDatabase();

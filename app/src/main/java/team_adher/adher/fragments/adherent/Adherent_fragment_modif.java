@@ -4,16 +4,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import team_adher.adher.MainActivity;
 import team_adher.adher.R;
@@ -21,7 +22,8 @@ import team_adher.adher.bdd.AdherentDAO;
 import team_adher.adher.bdd.ContratServiceDAO;
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.ContratService;
-import team_adher.adher.fragments.contrat_service.Contrat_service_add_dialog;
+import team_adher.adher.fragments.contrat_service.Contrat_service_ajout_fragment;
+import team_adher.adher.fragments.contrat_service.Contrat_service_modif_dialog;
 
 /**
  * Created by R on 17/12/2017.
@@ -100,7 +102,7 @@ public class Adherent_fragment_modif extends Fragment {
 
                 Bundle arg = new Bundle(); // On crée un nouveau bundle pour passer l'ID adhérent
                 arg.putString("id_adherent",String.valueOf(id_adherent)); // On lui donne la valeur de l'id ds id_adherent
-                Contrat_service_add_dialog dialogFrag = new Contrat_service_add_dialog(); // On crée un nouveau dialog
+                Contrat_service_ajout_fragment dialogFrag = new Contrat_service_ajout_fragment(); // On crée un nouveau dialog
                 dialogFrag.setArguments(arg); // On définit les arguments du dialog avec notre bundle
                 FragmentManager fm = getFragmentManager();
 
@@ -120,8 +122,26 @@ public class Adherent_fragment_modif extends Fragment {
         ListView listView = myView.findViewById(R.id.list_interventions);
         listView.setAdapter(adapter);
 
+//        TODO Set event on click item
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("ID Adhérent :", String.valueOf(id_adherent));
+                Log.i("ID Contrat :", String.valueOf(adapter.getItem(position).getId()));
+
+                Bundle bundle = new Bundle();
+                bundle.putString("id_adherent",String.valueOf(id_adherent));
+                bundle.putString("id_contrat",String.valueOf(adapter.getItem(position).getId()));
+
+
+                Contrat_service_modif_dialog csfm = new Contrat_service_modif_dialog();
+                csfm.setArguments(bundle);
+                FragmentManager fm = getFragmentManager();
+                csfm.show(fm,"gr"); // On ouvre le dialogue
+            }
+        });
         /*
-        * TODO Set event on click item
+        *
         * Creer un nouveau dialog avec le meme layout
         *   Open dialog fragment en passant l'id contrat ou obj contrat
         *   Set Edittext avec les valeurs recupd

@@ -172,7 +172,6 @@ public class Contrat_service_modif_dialog extends DialogFragment {
         spinner_activite_cs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (activiteActivitéSpinnerCustom.getItem(position).getId() == -1) {
-
                 } else {
                     boolean already_add = false; //Variable pour eviter les doublons
 

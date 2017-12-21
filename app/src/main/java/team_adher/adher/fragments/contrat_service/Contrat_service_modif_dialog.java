@@ -104,6 +104,7 @@ public class Contrat_service_modif_dialog extends DialogFragment {
                 TextView dialogTitle = (TextView) dialogView.findViewById(R.id.contrat_service_add_title);
                 dialogTitle.setText("Infos Contrat de Service");
 
+
             }
         }
 
@@ -254,11 +255,12 @@ public class Contrat_service_modif_dialog extends DialogFragment {
 
         //BUTTON
         Button buttonPos = (Button) dialogView.findViewById(R.id.pos_button);
+        buttonPos.setText("Valider");
         buttonPos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // -- CREATION DU  CONTRAT_SERVICE --
+                // -- Mise à jour du CONTRAT_SERVICE --
 
                 //Récupérer Secteur
                 System.out.println("Id Secteur = " + idSecteur);
@@ -276,32 +278,21 @@ public class Contrat_service_modif_dialog extends DialogFragment {
 
                 if(tarif_ht.getText().toString().equals("")) tarif_ht.setText("0.00");
                 // Insert un nouveau contrat
-                ContratService contratService = new ContratService(0, secteur, adherent, date_debut_contrat.getText().toString(), date_fin_contrat.getText().toString(), Double.valueOf(tarif_ht.getText().toString()));
 
                 System.out.println("Tarif HT: " + tarif_ht.getText().toString());
-                if(champsRemplis(contratService)){ // Si tout les champs sont bien remplis on réalise l'insertion
+                if(champsRemplis(contratService)){ // Si tout les champs sont bien remplis on récupère les champs
+                    contratService.setSecteur(secteur);
+                    contratService.setAdherent(adherent);
+                    contratService.setDate_debut(date_debut_contrat.getText().toString());
+                    contratService.setDate_fin(date_fin_contrat.getText().toString());
+                    contratService.setTarif_ht(Double.valueOf(tarif_ht.getText().toString()));
+
+                    // On lance l'UPDATE
                     ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
-                    contratServiceDAO.insertContratService(contratService);
+                    contratServiceDAO.updateContratService(contratService);
 
-                    // Récupérer l'ID du contrat ajouté
-                    int idContratService = contratServiceDAO.retrieveLastContratServiceID(getContext());
-                    contratService = contratServiceDAO.retrieveContratService(idContratService, getContext());
-
-                    // Faire une boucle qui Insert les activites dans la table avec cet IDContratService
-                    ConcernerDAO concernerDAO = new ConcernerDAO(getContext());
-                    Concerner concerner = new Concerner();
-
-                    for (Integer i : id_activite.keySet()) { // On va lister la liste des clés "id_activite.keySet()"
-                        System.out.println("idActivite ajoutée " + i + ": " +id_activite.get(i));
-
-                        concerner.setContratService(contratService);
-
-                        Activite activite = activiteDAO.retrieveActivite(id_activite.get(i));
-                        concerner.setActivite(activite);
-
-                        concernerDAO.insertConcerner(concerner);
-                    }
-                    Toast.makeText(getActivity(), "Contrat ajouté", Toast.LENGTH_SHORT).show();
+                    // On gère plus les activités durant la mise à jour
+                    Toast.makeText(getActivity(), "Contrat mis à jour", Toast.LENGTH_SHORT).show();
                     dismiss();
                 }
             }

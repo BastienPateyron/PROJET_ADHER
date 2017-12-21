@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.ContactsContract;
 import android.provider.SyncStateContract;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -78,10 +79,15 @@ public class AdherentDAO extends SQLiteDBHelper {
             adherent.setVille(cursor.getString(5));
             adherent.setNom_responsable(cursor.getString(6));
             adherent.setTelephone(cursor.getInt(7));
-        }else
 
-        db.close();
-        return adherent;
+            db.close();
+            return adherent;
+
+        }else{ // Si le curseur == null alors le retrieve a échoué donc l'adhérent n'est pas la. Donc on retourne null
+            System.out.println("L'Adhérent " + id + " n'existe plus !");
+            db.close();
+            return null;
+        }
     }
 
     public ArrayList<Adherent> getAllAdherent(){
@@ -148,7 +154,7 @@ public class AdherentDAO extends SQLiteDBHelper {
 
         // Supprimer l'adhérent
         db.delete(TABLE_ADHERENT, COL_ID + "=" + id_adherent, null);
-        System.out.println("Adhérent supprimé");
+        System.out.println("Adhérent Id " + id_adherent + " supprimé");
         db.close();
     }
     /*

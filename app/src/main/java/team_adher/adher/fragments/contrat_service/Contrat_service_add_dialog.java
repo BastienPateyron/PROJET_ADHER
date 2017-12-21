@@ -238,6 +238,7 @@ public class Contrat_service_add_dialog extends DialogFragment {
                 // Insert un nouveau contrat
                 ContratService contratService = new ContratService(0, secteur, adherent, date_debut_contrat.getText().toString(), date_fin_contrat.getText().toString(), Double.valueOf(tarif_ht.getText().toString()));
 
+                System.out.println("Tarif HT: " + tarif_ht.getText().toString());
                 if(champsRemplis(contratService)){ // Si tout les champs sont bien remplis on réalise l'insertion
                     ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
                     contratServiceDAO.insertContratService(contratService);

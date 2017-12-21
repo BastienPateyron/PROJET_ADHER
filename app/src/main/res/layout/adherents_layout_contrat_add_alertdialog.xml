@@ -171,7 +171,7 @@
                 android:id="@+id/value_tarif_ht_cs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 />
         </LinearLayout>
     </LinearLayout>

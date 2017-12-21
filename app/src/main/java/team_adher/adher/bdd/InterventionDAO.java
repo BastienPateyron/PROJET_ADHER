@@ -94,7 +94,11 @@ public class InterventionDAO extends SQLiteDBHelper {
         /* On récupère l'objet adherent à partir de l'ID présent dans la table Intervention */
         AdherentDAO adherentDAO = new AdherentDAO(context);
         Adherent adherent = adherentDAO.retrieveAdherent(cursor.getInt(3));
-
+        if(adherent == null){ // Si l'adhérent n'existe plus, on lui met un nom #Suppr# pour l'afficher ainsi dans la liste
+            System.out.println("L'Adhérent récupéré n'existe plus !");
+            adherent = new Adherent();
+            adherent.setRaison_sociale("#Suppr#");
+        }
         /* On récupère l'objet client à partir de l'ID présent dans la table Intervention */
         ClientDAO clientDAO = new ClientDAO(context);
         Client client = clientDAO.retrieveClient(cursor.getInt(4));

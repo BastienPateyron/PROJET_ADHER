@@ -20,11 +20,11 @@ import team_adher.adher.classes.Secteur;
 public class ContratServiceDAO extends SQLiteDBHelper {
     public static final String TABLE_CONTRAT_SERVICE = "CONTRAT_SERVICE";
     public static final String COL_ID = "ID_CONTRAT_SERVICE";
+    public static final String COL_FK_SECTEUR = "ID_SECTEUR";
+    public static final String COL_FK_ADHERENT = "ID_ADHERENT";
     public static final String COL_DATE_DEBUT = "DATE_DEBUT_CONTRAT_SERVICE";
     public static final String COL_DATE_FIN = "DATE_FIN_CONTRAT_SERVICE";
     public static final String COL_TARIF_HT = "TARIF_HT";
-    public static final String COL_FK_SECTEUR = "ID_SECTEUR";
-    public static final String COL_FK_ADHERENT = "ID_ADHERENT";
 
     public ContratServiceDAO(Context context) {
         super(context);
@@ -69,7 +69,7 @@ public class ContratServiceDAO extends SQLiteDBHelper {
 
         /* Requete */
         Cursor cursor = db.query(TABLE_CONTRAT_SERVICE, // Nom table
-                new String[] { COL_ID,  COL_FK_SECTEUR, COL_FK_ADHERENT, COL_DATE_DEBUT, COL_DATE_FIN}, // Liste des colonnes, ajout de la colonne tarif?
+                new String[] { COL_ID,  COL_FK_SECTEUR, COL_FK_ADHERENT, COL_DATE_DEBUT, COL_DATE_FIN, COL_TARIF_HT}, // Liste des colonnes, ajout de la colonne tarif?
                 COL_ID + "=?",  // Colonne cible du WHERE
                 new String[] { String.valueOf(id) }, // Valeure cible du WHERE
                 null, null, null, null); // Options
@@ -84,7 +84,7 @@ public class ContratServiceDAO extends SQLiteDBHelper {
         Adherent adherent = adherentDAO.retrieveAdherent(cursor.getInt(2));
 
         /* On récupère chaque élément dans l'ordre de la table (Haut en bas) */
-        ContratService contratService = new ContratService(cursor.getInt(0),secteur, adherent, cursor.getString(3), cursor.getString(4));
+        ContratService contratService = new ContratService(cursor.getInt(0),secteur, adherent, cursor.getString(3), cursor.getString(4), cursor.getDouble(5));
         db.close();
         return contratService;
     }
@@ -116,6 +116,7 @@ public class ContratServiceDAO extends SQLiteDBHelper {
                 contratService.setAdherent(adherent);
                 contratService.setDate_debut(cursor.getString(3));
                 contratService.setDate_fin(cursor.getString(4));
+                contratService.setTarif_ht(cursor.getDouble(5));
 
                 listeContratServices.add(contratService);
             }while(cursor.moveToNext()); /* Tant que l'élément suivant existe */
@@ -151,6 +152,7 @@ public class ContratServiceDAO extends SQLiteDBHelper {
                 contratService.setAdherent(adherent);
                 contratService.setDate_debut(cursor.getString(3));
                 contratService.setDate_fin(cursor.getString(4));
+                contratService.setTarif_ht(cursor.getDouble(5));
 
                 listeContratServices.add(contratService);
             }while(cursor.moveToNext()); /* Tant que l'élément suivant existe */
@@ -167,6 +169,7 @@ public class ContratServiceDAO extends SQLiteDBHelper {
         values.put(COL_FK_ADHERENT,contratService.getAdherent().getId());
         values.put(COL_DATE_DEBUT,contratService.getDate_debut());
         values.put(COL_DATE_FIN,contratService.getDate_fin());
+        values.put(COL_TARIF_HT,contratService.getTarif_ht());
 
         db.update(TABLE_CONTRAT_SERVICE, values, COL_ID + "="+ contratService.getId(), null);
         db.close();

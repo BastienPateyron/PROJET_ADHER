@@ -10,19 +10,21 @@ public class ContratService {
     private Adherent adherent;
     private String date_debut;
     private String date_fin;
-    // TODO ajouter tarif_HT
+    private double tarif_ht;
 
     public  ContratService(){
 
     }
 
-    public ContratService(int id, Secteur secteur, Adherent adherent, String date_debut, String date_fin) {
+    public ContratService(int id, Secteur secteur, Adherent adherent, String date_debut, String date_fin, double tarif_ht) {
         this.id = id;
         this.secteur = secteur;
         this.adherent = adherent;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
+        this.tarif_ht = tarif_ht;
     }
+
 
     @Override
     public String toString(){
@@ -70,5 +72,11 @@ public class ContratService {
         this.date_fin = date_fin;
     }
 
+    public double getTarif_ht() {
+        return tarif_ht;
+    }
 
+    public void setTarif_ht(double tarif_ht) {
+        this.tarif_ht = tarif_ht;
+    }
 }

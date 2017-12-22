@@ -291,6 +291,21 @@ public class Contrat_service_modif_dialog extends DialogFragment {
                     ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
                     contratServiceDAO.updateContratService(contratService);
 
+                    // Faire une boucle qui Update les activites dans la table avec cet IDContratService
+                    ConcernerDAO concernerDAO = new ConcernerDAO(getContext());
+                    ArrayList<Concerner> list_concernerOld = new ArrayList<>();
+
+                    // Récupération de la liste des acivités de ce contrat
+                    list_concernerOld = concernerDAO.getAllConcernerOfContratService(getContext(), idContrat);
+                    System.out.println("Current list size = " + id_activite.size());
+                    for (Integer act : id_activite.keySet()) { // On va lister la liste des clés "id_activite.keySet()"
+                        System.out.println("idActivite ajoutée " + act + ": " +id_activite.get(act));
+                        Activite activite = activiteDAO.retrieveActivite(id_activite.get(act));
+                        Concerner concerner = new Concerner(contratService, activite);
+
+                        concernerDAO.insertConcerner(concerner);
+                    }
+
                     // On gère plus les activités durant la mise à jour
                     Toast.makeText(getActivity(), "Contrat mis à jour", Toast.LENGTH_SHORT).show();
                     dismiss();

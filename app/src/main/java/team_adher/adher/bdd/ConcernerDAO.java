@@ -46,7 +46,7 @@ public class ConcernerDAO extends SQLiteDBHelper {
     /*RETRIEVE CONCERNER*/
     public Concerner retrieveConcernerByContrat(int id, Context context){
         SQLiteDatabase db = this.getReadableDatabase();
-
+// TODO COmprendre comme ça marche ici
 
         Cursor cursor = db.query(TABLE_CONCERNER,
                 new String[] { COL_ID_ACTIVITE,  COL_ID_CONTRAT},

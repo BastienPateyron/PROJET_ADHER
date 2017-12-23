@@ -115,7 +115,7 @@ public class Adherent_fragment_modif extends Fragment {
 
         // Get all contrats
         ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
-        ArrayList<ContratService> list_contratService = contratServiceDAO.getAllContratService(getContext());
+        ArrayList<ContratService> list_contratService = contratServiceDAO.getAllContratServiceOfAdherent(getContext(), id_adherent);
 
         final ArrayAdapter<ContratService> adapter = new ArrayAdapter<ContratService>(myView.getContext(),android.R.layout.simple_list_item_1, list_contratService);
 

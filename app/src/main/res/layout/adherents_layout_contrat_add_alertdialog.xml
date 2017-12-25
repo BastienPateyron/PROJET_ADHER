@@ -18,14 +18,33 @@
         android:paddingRight="24dp"
         >
 
-        <TextView
-            android:id="@+id/contrat_service_add_title"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="Nouveau contrat"
-            />
+            android:weightSum="100">
+
+            <TextView
+                android:id="@+id/contrat_service_add_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_weight="80"
+                android:text="Nouveau contrat"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/delete"
+                android:background="@android:color/transparent"
+                android:tint="@color/trash_button"
+                android:layout_weight="20"/>
+
+        </LinearLayout>
+
 
         <TextView
         android:layout_width="match_parent"

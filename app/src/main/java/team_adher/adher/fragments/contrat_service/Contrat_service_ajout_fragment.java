@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
 
     private List<String> arrayList_secteur = new ArrayList<>();
     private List<String> arrayList_activite = new ArrayList<>();
+    private ImageButton btn_delete;
     private EditText date_debut_contrat;
     private EditText date_fin_contrat;
     private EditText tarif_ht;
@@ -77,6 +79,8 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
 
         View dialogView = inflater.inflate(R.layout.adherents_layout_contrat_add_alertdialog, container, false);
 //        getActivity().setTitle("Ajout Contrat Service");
+        btn_delete = dialogView.findViewById(R.id.btn_delete);
+        btn_delete.setVisibility(View.INVISIBLE);
 
         // Récupération de l'ID Adherent et de l'ID Contrat
         Bundle bundle = this.getArguments();

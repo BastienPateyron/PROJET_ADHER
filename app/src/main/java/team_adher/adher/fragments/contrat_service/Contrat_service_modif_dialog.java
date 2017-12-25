@@ -1,9 +1,11 @@
 package team_adher.adher.fragments.contrat_service;
 
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +54,7 @@ public class Contrat_service_modif_dialog extends DialogFragment {
 
     private List<String> arrayList_secteur = new ArrayList<>();
     ArrayList<Activite> activiteArrayList;
+    private ImageButton btn_delete;
     private EditText date_debut_contrat;
     private EditText date_fin_contrat;
     private EditText tarif_ht;
@@ -79,6 +83,8 @@ public class Contrat_service_modif_dialog extends DialogFragment {
 
         View dialogView = inflater.inflate(R.layout.adherents_layout_contrat_add_alertdialog, container, false);
         // getActivity().setTitle("Infos Contrat Service");
+        btn_delete = dialogView.findViewById(R.id.btn_delete);
+        btn_delete.setVisibility(View.VISIBLE);
 
         // Récupération de l'ID Adherent et de l'ID Contrat
         Bundle bundle = this.getArguments();
@@ -108,6 +114,36 @@ public class Contrat_service_modif_dialog extends DialogFragment {
             }
         }
 
+        // Delete button
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(getContext());
+                }
+                builder.setTitle("Supprimer Contrat")
+                        .setMessage("Voulez-vous supprimer ce contrat de service de manière définitive ?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
+                                contratServiceDAO.deleteContratService(getContext(), idContrat);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+                if (getShowsDialog()) getDialog().cancel();
+                else dismiss();
+            }
+        });
 
         // SECTEUR SPINNER 2
         final Spinner spinner_secteur_cs = dialogView.findViewById(R.id.spinner_secteur_cs); // Création du spinner

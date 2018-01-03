@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import team_adher.adher.fragments.activité.Activite_fragment;
 import team_adher.adher.fragments.adherent.Adherent_fragment;
+import team_adher.adher.fragments.client.Client_fragment;
 import team_adher.adher.fragments.home.Home_Fragment;
 import team_adher.adher.fragments.intervention.Intervention_fragment;
 import team_adher.adher.fragments.secteur.Secteur_fragment;
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_adherents) {
             changeFragment(new Adherent_fragment());
         } else if (id == R.id.nav_appels) {
-
+            changeFragment(new Client_fragment());
         } else if (id == R.id.nav_interventions){
             changeFragment(new Intervention_fragment());
         } else if (id == R.id.nav_activites){

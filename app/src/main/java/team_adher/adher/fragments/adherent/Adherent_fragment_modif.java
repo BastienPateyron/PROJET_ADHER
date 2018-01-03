@@ -76,7 +76,7 @@ public class Adherent_fragment_modif extends Fragment {
         button_modify_adherent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Adherent adherent_modify = new Adherent();
+                Adherent adherent_modify = new Adherent ();
 
                 adherent_modify.setId(id_adherent);
                 adherent_modify.setRaison_sociale(value_raison_sociale.getText().toString());

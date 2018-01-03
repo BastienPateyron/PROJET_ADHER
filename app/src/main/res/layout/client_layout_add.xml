@@ -1,0 +1,33 @@
+<RelativeLayout android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/form_part"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/client_layout_form"/>
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/button_add_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:padding="20dp"
+
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/form_part"
+
+        android:text="Ajouter un client"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimary"
+
+        />
+
+
+</RelativeLayout>

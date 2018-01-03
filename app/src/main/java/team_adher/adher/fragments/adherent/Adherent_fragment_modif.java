@@ -52,7 +52,7 @@ public class Adherent_fragment_modif extends Fragment {
         final EditText value_nom_rue = (EditText) myView.findViewById(R.id.value_nom_rue);
         final EditText value_ville = (EditText) myView.findViewById(R.id.value_ville);
         final EditText value_cp = (EditText) myView.findViewById(R.id.value_cp);
-        // TODO ajouter Num Telephone
+        final EditText value_tel = (EditText) myView.findViewById(R.id.value_telephone);
 
         final AdherentDAO adherentDAO = new AdherentDAO(getContext());
         final Adherent adherent = adherentDAO.retrieveAdherent(id_adherent);
@@ -63,6 +63,7 @@ public class Adherent_fragment_modif extends Fragment {
         value_nom_rue.setText(adherent.getNom_rue());
         value_ville.setText(adherent.getVille());
         value_cp.setText("" + adherent.getCp());
+        value_tel.setText("" + adherent.getTelephone());
 
 
         Button button_remove_adherent = (Button) myView.findViewById(R.id.remove_adherent);
@@ -88,6 +89,7 @@ public class Adherent_fragment_modif extends Fragment {
                 adherent_modify.setNom_rue(value_nom_rue.getText().toString());
                 adherent_modify.setVille(value_ville.getText().toString());
                 adherent_modify.setCp(Integer.valueOf(value_cp.getText().toString()));
+                adherent_modify.setTelephone(Integer.valueOf(value_tel.getText().toString()));
 
                 adherentDAO.updateAdherent(adherent_modify);
                 MainActivity.closekeyboard(getContext(), myView);
@@ -158,10 +160,8 @@ public class Adherent_fragment_modif extends Fragment {
             }
         });
         /*
-        * TODO Add editext Telephone dans l'ajout et la modif
         *
         * Tjs crash si setString in champ number (activite, adherent, secteur..) + set inputtype=number dans les layouts
-        * Suppr activite impossible
         *
         * */
 

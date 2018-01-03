@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/line_nom"
-        android:hint="Prènom"
+        android:hint="Prénom"
         app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
 
         <EditText
@@ -43,7 +43,8 @@
         <EditText
             android:id="@+id/value_phone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -57,14 +58,15 @@
             android:id="@+id/line_numero_rue1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".2"
-            android:hint="N°"
+            android:layout_weight=".1"
+            android:hint="N° "
             app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
 
             <EditText
                 android:id="@+id/value_num_rue1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:gravity="" />
 
         </android.support.design.widget.TextInputLayout>
@@ -119,7 +121,8 @@
             <EditText
                 android:id="@+id/value_cp1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
 
         </android.support.design.widget.TextInputLayout>
 

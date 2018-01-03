@@ -41,6 +41,7 @@ public class Adherent_fragment_ajout extends Fragment {
                 EditText value_nom_rue = (EditText) myView.findViewById(R.id.value_nom_rue);
                 EditText value_ville = (EditText) myView.findViewById(R.id.value_ville);
                 EditText value_cp = (EditText) myView.findViewById(R.id.value_cp);
+                EditText value_tel = (EditText) myView.findViewById(R.id.value_telephone);
 
                 String raison_sociale = value_raison_sociale.getText().toString();
                 String responsable = value_responsable.getText().toString();
@@ -48,6 +49,7 @@ public class Adherent_fragment_ajout extends Fragment {
                 String nom_rue = value_nom_rue.getText().toString();
                 String ville = value_ville.getText().toString();
                 String cp = value_cp.getText().toString();
+                String tel = value_tel.getText().toString();
 
                 if ( TextUtils.isEmpty(raison_sociale)) {
                     Toast.makeText(getContext(), "Raison sociale manquante", Toast.LENGTH_SHORT).show();
@@ -55,6 +57,10 @@ public class Adherent_fragment_ajout extends Fragment {
                 }
                 if (TextUtils.isEmpty(responsable)) {
                     Toast.makeText(getContext(), "Nom responsable manquant", Toast.LENGTH_SHORT).show();
+                    validate = false;
+                }
+                if (TextUtils.isEmpty(tel)) {
+                    Toast.makeText(getContext(), "Numéro de téléphone manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
                 }
                 if (TextUtils.isEmpty(num_rue)) {
@@ -74,6 +80,7 @@ public class Adherent_fragment_ajout extends Fragment {
                     validate = false;
                 }
 
+
                 if (validate)
                 {
                     System.out.println("Insert");
@@ -88,7 +95,7 @@ public class Adherent_fragment_ajout extends Fragment {
                                     Integer.parseInt(cp),
                                     ville,
                                     responsable,
-                                    0102030405 //
+                                    Integer.parseInt(tel) //
                             );
 
                     adherentDAO.insertAdherent(adherent);

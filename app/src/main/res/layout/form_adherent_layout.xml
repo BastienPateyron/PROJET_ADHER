@@ -32,24 +32,43 @@
 
     </android.support.design.widget.TextInputLayout>
 
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/line_telephone"
+        android:layout_below="@+id/line_responsable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Téléphone"
+        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+        <EditText
+            android:id="@+id/value_telephone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:gravity="" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
     <LinearLayout
         android:id="@+id/line_adresse1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/line_responsable">
+        android:layout_below="@id/line_telephone">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/line_numero_rue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".2"
-            android:hint="N°"
+            android:layout_weight=".1"
+            android:hint="N° "
             app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
 
             <EditText
                 android:id="@+id/value_numero_rue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:gravity="" />
 
         </android.support.design.widget.TextInputLayout>
@@ -103,7 +122,8 @@
             <EditText
                 android:id="@+id/value_cp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
 
         </android.support.design.widget.TextInputLayout>
 

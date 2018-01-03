@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -344,6 +345,7 @@ public class Contrat_service_modif_dialog extends DialogFragment {
 
                     // On gère plus les activités durant la mise à jour
                     Toast.makeText(getActivity(), "Contrat mis à jour", Toast.LENGTH_SHORT).show();
+
                     dismiss();
                 }
             }
@@ -437,6 +439,4 @@ public class Contrat_service_modif_dialog extends DialogFragment {
             date_fin_contrat.setText(sdf.format(myCalendar.getTime()));
         }
     }
-
-
 }

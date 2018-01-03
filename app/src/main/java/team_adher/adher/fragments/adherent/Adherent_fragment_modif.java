@@ -122,7 +122,6 @@ public class Adherent_fragment_modif extends Fragment {
         ListView listView = myView.findViewById(R.id.list_interventions);
         listView.setAdapter(adapter);
 
-//        TODO Set event on click item
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -161,11 +160,17 @@ public class Adherent_fragment_modif extends Fragment {
         return myView;
     }
 
-
     private void showEditDialog() {
 
     }
 
+    private void updateListe() {
+        ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
+        ArrayList<ContratService> list_contratService = contratServiceDAO.getAllContratServiceOfAdherent(getContext(), id_adherent);
 
+        final ArrayAdapter<ContratService> adapter = new ArrayAdapter<>(myView.getContext(),android.R.layout.simple_list_item_1, list_contratService);
 
+        ListView listView = myView.findViewById(R.id.list_interventions);
+        listView.setAdapter(adapter);
+    }
 }

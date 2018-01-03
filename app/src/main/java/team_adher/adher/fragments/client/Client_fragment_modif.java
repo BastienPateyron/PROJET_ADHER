@@ -1,6 +1,5 @@
 package team_adher.adher.fragments.client;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,7 +22,7 @@ public class Client_fragment_modif extends Fragment {
     View myView;
     private int id_client;
 
-    @SuppressLint("SetTextI18n")
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         myView = inflater.inflate(R.layout.client_layout_info, container, false);
@@ -75,7 +74,7 @@ public class Client_fragment_modif extends Fragment {
                 Client client_modify = new Client ();
 
 
-                //client_modify.setId(id_client);
+                client_modify.setId(id_client);
                 client_modify.setNom(value_nom.getText().toString());
                 client_modify.setPrenom(value_prenom.getText().toString());
                 client_modify.setPhone(Integer.valueOf(value_phone.getText().toString()));

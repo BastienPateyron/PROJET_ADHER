@@ -44,6 +44,7 @@ import team_adher.adher.classes.Concerner;
 import team_adher.adher.classes.ContratService;
 import team_adher.adher.classes.Secteur;
 import team_adher.adher.fragments.activité.ActivitéSpinnerCustom;
+import team_adher.adher.fragments.adherent.Adherent_fragment_modif;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static java.lang.String.valueOf;
@@ -388,9 +389,18 @@ public class Contrat_service_modif_dialog extends DialogFragment {
 
     // If dialog is cancelled: onCancel --> onDismiss
     // If dialog is dismissed: onDismiss
+    private DialogInterface.OnDismissListener onDismissListener;
+
+    public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
+        this.onDismissListener = onDismissListener;
+    }
+
     @Override
     public void onDismiss(DialogInterface dialog) {
-
+        super.onDismiss(dialog);
+        if (onDismissListener != null) {
+            onDismissListener.onDismiss(dialog);
+        }
     }
 
     private int getIndex(Spinner spinner, String myString){
@@ -407,7 +417,6 @@ public class Contrat_service_modif_dialog extends DialogFragment {
 
     private boolean champsRemplis(ContratService contratService){
         boolean isSet = true;
-        // TODO véfifier si les champs obligatoires sont remplis
         if (contratService.getSecteur().equals("")){
             Toast.makeText(getActivity(), "Secteur manquant", Toast.LENGTH_SHORT).show();
             isSet = false;
@@ -439,4 +448,7 @@ public class Contrat_service_modif_dialog extends DialogFragment {
             date_fin_contrat.setText(sdf.format(myCalendar.getTime()));
         }
     }
+
+
+
 }

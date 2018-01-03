@@ -1,5 +1,6 @@
 package team_adher.adher.fragments.adherent;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -103,7 +104,17 @@ public class Adherent_fragment_modif extends Fragment {
                 Bundle arg = new Bundle(); // On crée un nouveau bundle pour passer l'ID adhérent
                 arg.putString("id_adherent",String.valueOf(id_adherent)); // On lui donne la valeur de l'id ds id_adherent
                 Contrat_service_ajout_fragment dialogFrag = new Contrat_service_ajout_fragment(); // On crée un nouveau dialog
+                dialogFrag.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        System.out.println("Ajout réussi ? On update la liste");
+                        updateListe(); // On met à jour la liste à la fermeture du dialog
+                    }
+                });
+
                 dialogFrag.setArguments(arg); // On définit les arguments du dialog avec notre bundle
+                // TODO ici
+
                 FragmentManager fm = getFragmentManager();
 
                 dialogFrag.show(fm,"gr"); // On ouvre le dialogue
@@ -134,9 +145,18 @@ public class Adherent_fragment_modif extends Fragment {
 
 
                 Contrat_service_modif_dialog csfm = new Contrat_service_modif_dialog();
+                csfm.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        System.out.println("On update la liste");
+                        updateListe();
+                    }
+                });
+
                 csfm.setArguments(bundle);
                 FragmentManager fm = getFragmentManager();
                 csfm.show(fm,"gr"); // On ouvre le dialogue
+
             }
         });
         /*

@@ -311,9 +311,18 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
 
     // If dialog is cancelled: onCancel --> onDismiss
     // If dialog is dismissed: onDismiss
+    private DialogInterface.OnDismissListener onDismissListener;
+
+    public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
+        this.onDismissListener = onDismissListener;
+    }
+
     @Override
     public void onDismiss(DialogInterface dialog) {
-
+        super.onDismiss(dialog);
+        if (onDismissListener != null) {
+            onDismissListener.onDismiss(dialog);
+        }
     }
 
     private boolean champsRemplis(ContratService contratService){

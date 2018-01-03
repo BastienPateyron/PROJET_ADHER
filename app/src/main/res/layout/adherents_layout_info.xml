@@ -41,6 +41,7 @@
 
     </RelativeLayout>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,27 +49,37 @@
         android:layout_marginTop="15dp"
         >
 
-
-        <TextView
-            android:id="@+id/title_list"
+        <LinearLayout
+            android:id="@+id/adherent_cs_layout"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:padding="5dp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:background="@color/colorPrimary"
-            android:text="Liste des contrats"/>
-        <Button
-            android:id="@+id/button_add_contrat"
-            android:layout_alignRight="@+id/title_list"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:text="Add new"
-            android:background="@color/add_button"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:id="@+id/title_list"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="@color/colorPrimary"
+                android:text="Liste des contrats"
+                android:layout_weight="90"/>
+
+            <Button
+                android:id="@+id/button_add_contrat"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="Add new"
+                android:background="@color/add_button"
+                android:layout_weight="10"
+                />
+        </LinearLayout>
+
         <ListView
             android:id="@+id/list_interventions"
-            android:layout_below="@+id/title_list"
+            android:layout_below="@+id/adherent_cs_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </RelativeLayout>

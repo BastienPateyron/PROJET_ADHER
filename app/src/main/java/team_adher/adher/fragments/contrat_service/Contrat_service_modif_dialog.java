@@ -292,7 +292,7 @@ public class Contrat_service_modif_dialog extends DialogFragment {
 
         // TARIF_HT
         tarif_ht = (EditText) dialogView.findViewById(R.id.value_tarif_ht_cs);
-        System.out.println(contratService.getTarif_ht()); // TODO tarif pas bien valorisé
+        System.out.println(contratService.getTarif_ht());
         tarif_ht.setText(String.valueOf(contratService.getTarif_ht()));
 
         //BUTTON

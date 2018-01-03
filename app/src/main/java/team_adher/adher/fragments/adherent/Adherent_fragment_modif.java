@@ -79,7 +79,7 @@ public class Adherent_fragment_modif extends Fragment {
         button_modify_adherent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Adherent adherent_modify = new Adherent();
+                Adherent adherent_modify = new Adherent ();
 
                 adherent_modify.setId(id_adherent);
                 adherent_modify.setRaison_sociale(value_raison_sociale.getText().toString());
@@ -158,15 +158,6 @@ public class Adherent_fragment_modif extends Fragment {
             }
         });
         /*
-        *
-        * Creer un nouveau dialog avec le meme layout
-        *   Open dialog fragment en passant l'id contrat ou obj contrat
-        *   Set Edittext avec les valeurs recupd
-        *   Changer le text du button pour Modifier
-        *
-        * Ajouter un button Supprimer un contrat (dans le dialog en bas a gauche ?)
-        *
-        *
         * TODO Add editext Telephone dans l'ajout et la modif
         *
         * Tjs crash si setString in champ number (activite, adherent, secteur..) + set inputtype=number dans les layouts

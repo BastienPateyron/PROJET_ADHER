@@ -11,6 +11,7 @@ import android.widget.Button;
 import team_adher.adher.MainActivity;
 import team_adher.adher.R;
 import team_adher.adher.fragments.adherent.Adherent_fragment;
+import team_adher.adher.fragments.client.Client_fragment;
 
 /**
  * Created by R on 10/12/2017.
@@ -51,7 +52,8 @@ public class Home_Fragment extends Fragment{
         button_accueil_appels.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Create fragment appels
+                Client_fragment cf = new Client_fragment();
+                ((MainActivity) getActivity()).changeFragment(cf);
             }
         });
 

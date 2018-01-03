@@ -11,20 +11,27 @@ public class Client {
     private int phone;
     private int num_rue;
     private String nom_rue;
-    private int codepostal;
+    private int cp;
     private String ville;
 
 
-    public Client(int id, String nom, String prenom, int phone, int num_rue, String nom_rue, int codepostal, String ville) {
+
+
+    public Client(int id, String nom, String prenom, int phone, int num_rue, String nom_rue, int cp, String ville) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.phone = phone;
         this.num_rue = num_rue;
         this.nom_rue = nom_rue;
-        this.codepostal = codepostal;
+        this.cp = cp;
         this.ville = ville;
     }
+
+    public Client() {
+
+    }
+
 
     public int getId() {
         return id;
@@ -74,12 +81,12 @@ public class Client {
         this.nom_rue = nom_rue;
     }
 
-    public int getCodepostal() {
-        return codepostal;
+    public int getCp() {
+        return cp;
     }
 
-    public void setCodepostal(int codepostal) {
-        this.codepostal = codepostal;
+    public void setCp(int cp) {
+        this.cp = cp;
     }
 
     public String getVille() {
@@ -89,4 +96,15 @@ public class Client {
     public void setVille(String ville) {
         this.ville = ville;
     }
+
+    @Override
+    public String toString(){
+        return nom; /* Retourne uniquement le nom du secteur */
+    }
+
+    public String toString1(){
+        return prenom; /* Retourne uniquement le nom du secteur */
+    }
 }
+
+

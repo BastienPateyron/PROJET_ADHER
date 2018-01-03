@@ -177,9 +177,37 @@ public class Adherent_fragment_modif extends Fragment {
         ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
         ArrayList<ContratService> list_contratService = contratServiceDAO.getAllContratServiceOfAdherent(getContext(), id_adherent);
 
+
         final ArrayAdapter<ContratService> adapter = new ArrayAdapter<>(myView.getContext(),android.R.layout.simple_list_item_1, list_contratService);
 
+        // On redéfinit le listener avec la nouvelle liste
         ListView listView = myView.findViewById(R.id.list_interventions);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("ID Adhérent :", String.valueOf(id_adherent));
+                Log.i("ID Contrat :", String.valueOf(adapter.getItem(position).getId()));
+
+                Bundle bundle = new Bundle();
+                bundle.putString("id_adherent",String.valueOf(id_adherent));
+                bundle.putString("id_contrat",String.valueOf(adapter.getItem(position).getId()));
+
+
+                Contrat_service_modif_dialog csfm = new Contrat_service_modif_dialog();
+                csfm.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        System.out.println("On update la liste");
+                        updateListe();
+                    }
+                });
+
+                csfm.setArguments(bundle);
+                FragmentManager fm = getFragmentManager();
+                csfm.show(fm,"gr"); // On ouvre le dialogue
+
+            }
+        });
         listView.setAdapter(adapter);
     }
 }

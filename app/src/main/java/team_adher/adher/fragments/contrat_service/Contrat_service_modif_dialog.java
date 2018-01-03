@@ -11,6 +11,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ import team_adher.adher.classes.Secteur;
 import team_adher.adher.fragments.activité.ActivitéSpinnerCustom;
 import team_adher.adher.fragments.adherent.Adherent_fragment_modif;
 
+import static android.content.ContentValues.TAG;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static java.lang.String.valueOf;
 
@@ -132,18 +134,20 @@ public class Contrat_service_modif_dialog extends DialogFragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
                                 contratServiceDAO.deleteContratService(getContext(), idContrat);
+                                if (getShowsDialog()) getDialog().cancel();
+                                else dismiss();
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
+                                if (getShowsDialog()) getDialog().cancel();
+                                else dismiss();
                             }
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
 
-                if (getShowsDialog()) getDialog().cancel();
-                else dismiss();
+//
             }
         });
 
@@ -448,7 +452,4 @@ public class Contrat_service_modif_dialog extends DialogFragment {
             date_fin_contrat.setText(sdf.format(myCalendar.getTime()));
         }
     }
-
-
-
 }

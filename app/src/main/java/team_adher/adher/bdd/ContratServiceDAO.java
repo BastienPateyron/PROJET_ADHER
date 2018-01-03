@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,8 @@ import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Concerner;
 import team_adher.adher.classes.ContratService;
 import team_adher.adher.classes.Secteur;
+
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -177,11 +180,14 @@ public class ContratServiceDAO extends SQLiteDBHelper {
 
     public void deleteContratService(Context context, int id_contrat_service)
     {
+        System.out.println("Id Contrat à supprimer: " + id_contrat_service);
         SQLiteDatabase db = this.getWritableDatabase();
 
         // Récupérer les occurences de Concerner et les supprimer
         ConcernerDAO concernerDAO = new ConcernerDAO(context);
+        Log.d(TAG, "deleteContratService: On supprime les occurences de la table CONCERNER");
         ArrayList<Concerner> concernerArrayList = concernerDAO.getAllConcernerOfContratService(context, id_contrat_service);
+
         for(Concerner concerner:concernerArrayList) concernerDAO.deleteConcerner(concerner.getContratService().getId(), concerner.getActivite().getId());
 
         db.delete(TABLE_CONTRAT_SERVICE, COL_ID + "=" + id_contrat_service, null);

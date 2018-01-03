@@ -113,8 +113,6 @@ public class Adherent_fragment_modif extends Fragment {
                 });
 
                 dialogFrag.setArguments(arg); // On définit les arguments du dialog avec notre bundle
-                // TODO ici
-
                 FragmentManager fm = getFragmentManager();
 
                 dialogFrag.show(fm,"gr"); // On ouvre le dialogue

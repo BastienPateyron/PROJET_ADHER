@@ -1,18 +1,31 @@
 package team_adher.adher.fragments.client;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import team_adher.adher.MainActivity;
 import team_adher.adher.R;
 import team_adher.adher.bdd.ClientDAO;
+import team_adher.adher.bdd.InterventionDAO;
 import team_adher.adher.classes.Client;
+import team_adher.adher.classes.Intervention;
+import team_adher.adher.fragments.intervention.Intervention_fragment_modif;
+
+
 /**
  * Created by watson on 21/12/2017.
  */
@@ -93,10 +106,41 @@ public class Client_fragment_modif extends Fragment {
     }
 
 
-    private void showEditDialog() {
+    private void updateListe() {
+        InterventionDAO interventionDAO = new InterventionDAO(getContext());
+        ArrayList<Intervention> list_intervention = interventionDAO.getAllIntervention(getContext(), id_client);
 
+
+        final ArrayAdapter<Intervention> adapter = new ArrayAdapter<>(myView.getContext(),android.R.layout.simple_list_item_1, list_intervention);
+
+        // On redéfinit le listener avec la nouvelle liste
+        ListView listView = myView.findViewById(R.id.list_interventions);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("ID Client :", String.valueOf(id_client));
+                Log.i("ID Intervention :", String.valueOf(adapter.getItem(position).getId()));
+
+                Bundle bundle = new Bundle();
+                bundle.putString("id_client",String.valueOf(id_client));
+                bundle.putString("id_intervention",String.valueOf(adapter.getItem(position).getId()));
+
+
+                Intervention_fragment_modif csfm = new Intervention_fragment_modif();
+                csfm.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        System.out.println("On update la liste");
+                        updateListe();
+                    }
+                });
+
+                csfm.setArguments(bundle);
+                FragmentManager fm = getFragmentManager();
+                csfm.show(fm,"gr"); // On ouvre le dialogue
+
+            }
+        });
+        listView.setAdapter(adapter);
     }
-
-
-
 }

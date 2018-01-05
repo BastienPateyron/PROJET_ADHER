@@ -140,6 +140,7 @@ public class ActiviteDAO extends SQLiteDBHelper {
         // Supprimer l'activite
         db.delete(TABLE_ACTIVITE, COL_ID + "=" + id_activite, null);
         System.out.println("Activité Id " + id_activite + " supprimé");
+
         db.close();
     }
 

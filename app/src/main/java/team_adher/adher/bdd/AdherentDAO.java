@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.ContratService;
+import team_adher.adher.classes.Intervention;
 
 
 /**
@@ -147,9 +148,9 @@ public class AdherentDAO extends SQLiteDBHelper {
 
         // Supprimer les ContratsIntervention avec cet ID adhérent
         // TODO Décommenter et faire la méthode getAllInterventionOfAdherent + deleteIntervention
-//        InterventionDAO interventionDAO = new InterventionDAO(context);
-//        ArrayList<Intervention> interventionArrayList = interventionDAO.getAllInterventionOfAdherent(context, id_adherent);
-//        for(Intervention intervention : interventionArrayList) interventionDAO.deleteIntervention(context, intervention.getId());
+        InterventionDAO interventionDAO = new InterventionDAO(context);
+        ArrayList<Intervention> interventionArrayList = interventionDAO.getAllIntervention(context, id_adherent);
+        for(Intervention intervention : interventionArrayList) interventionDAO.deleteIntervention(intervention.getId());
 
 
         // Supprimer l'adhérent

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import team_adher.adher.classes.Activite;
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.ContratService;
+import team_adher.adher.classes.Intervention;
 
 /**
  * Created by basti on 12/5/2017.
@@ -84,6 +85,7 @@ public class ActiviteDAO extends SQLiteDBHelper {
     /* retrieveActivite */
     public Activite retrieveActivite(int id){
         SQLiteDatabase db = this.getReadableDatabase();
+        Activite activite = new Activite();
 
         /* Requete */
         Cursor cursor = db.query(TABLE_ACTIVITE, // Nom de table
@@ -91,8 +93,10 @@ public class ActiviteDAO extends SQLiteDBHelper {
                 COL_ID + "=?", // Colonne cible du WHERE
                 new String[] {String.valueOf(id)}, // Valeur cherchée par le WHERE
                 null, null, null, null); // Options
-        if(cursor != null) cursor.moveToFirst(); /* Si le curseur est pas null, on le place au début de la liste */
-        Activite activite = new Activite(cursor.getInt(0),cursor.getString(1)); /* Création d'une Activite vide pour le remplir */
+        if(cursor != null)
+            cursor.moveToFirst(); /* Si le curseur est pas null, on le place au début de la liste */
+                activite.setId(cursor.getInt(0));
+                activite.setNom(cursor.getString(1));
         /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
         db.close();
         return activite;
@@ -122,13 +126,18 @@ public class ActiviteDAO extends SQLiteDBHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Supprimer les ContratsService avec cet ID adhérent
+        // Supprimer les ContratsService avec cet ID activité
         ContratServiceDAO contratServiceDAO = new ContratServiceDAO(context);
         ArrayList<ContratService> list_contratServices = contratServiceDAO.getAllContratServiceOfAdherent(context, id_activite);
 
         for(ContratService cs: list_contratServices) contratServiceDAO.deleteContratService(context, cs.getId());
+        // Supprimer les interventions  liées à  l'activité
+        InterventionDAO interventionDAO = new InterventionDAO(context);
+        ArrayList<Intervention> list_intervention = interventionDAO.getAllIntervention(context, id_activite);
 
-        // Supprimer l'adhérent
+        for(Intervention cs: list_intervention) interventionDAO.deleteIntervention(cs.getId());
+
+        // Supprimer l'activite
         db.delete(TABLE_ACTIVITE, COL_ID + "=" + id_activite, null);
         System.out.println("Activité Id " + id_activite + " supprimé");
         db.close();

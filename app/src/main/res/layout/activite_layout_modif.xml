@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <!-- Manually imitate an entire AlertDialog layout -->
+    <!-- See dialog specs on: https://material.google.com/components/dialogs.html#dialogs-specs -->
+
+    <!-- Title and content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingTop="24dp"
+        android:paddingRight="24dp"
+        >
+
+
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/line_act1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom de l'activité :"
+            app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+            <EditText
+                android:id="@+id/value_activite_nom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_add_activite"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@color/colorPrim"
+        android:padding="20dp"
+        android:text="Modifier une activité"
+        android:textColor="@android:color/white"
+
+        />
+
+    <Button
+        android:id="@+id/button_delete_activite"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@color/color_button_add"
+        android:padding="20dp"
+        android:text="Supprimer une activité"
+        android:textColor="@android:color/white"
+
+        />
+</LinearLayout>

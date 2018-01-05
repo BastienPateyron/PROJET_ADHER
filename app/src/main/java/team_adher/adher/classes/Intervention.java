@@ -26,6 +26,10 @@ public class Intervention {
         this.date_debut = date_debut;
         this.date_fin = date_fin;
     }
+    public String toString(){
+        String str = client.getNom() + " " + secteur.getNumero() + " - " + date_debut + " - " + date_fin;
+        return str;
+    }
 
     public int getId() {
         return id;

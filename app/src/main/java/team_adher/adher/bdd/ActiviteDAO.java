@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import team_adher.adher.classes.Activite;
 import team_adher.adher.classes.Adherent;
+import team_adher.adher.classes.ContratService;
 
 /**
  * Created by basti on 12/5/2017.
@@ -107,16 +108,30 @@ public class ActiviteDAO extends SQLiteDBHelper {
         db.close();
     }
 
-    public void deleteActivite(int id_activite)
+   /* public void deleteActivite(int id_activite)
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.delete(TABLE_ACTIVITE, COL_ID + "=" + id_activite, null);
 
         db.close();
+    }*/
+
+
+    public  void deleteActivite(Context context, int id_activite) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Supprimer les ContratsService avec cet ID adhérent
+        ContratServiceDAO contratServiceDAO = new ContratServiceDAO(context);
+        ArrayList<ContratService> list_contratServices = contratServiceDAO.getAllContratServiceOfAdherent(context, id_activite);
+
+        for(ContratService cs: list_contratServices) contratServiceDAO.deleteContratService(context, cs.getId());
+
+        // Supprimer l'adhérent
+        db.delete(TABLE_ACTIVITE, COL_ID + "=" + id_activite, null);
+        System.out.println("Activité Id " + id_activite + " supprimé");
+        db.close();
     }
-
-
-
 
 }

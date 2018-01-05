@@ -110,7 +110,7 @@ public class InterventionDAO extends SQLiteDBHelper {
     }
 
 
-    public ArrayList<Intervention> getAllIntervention(Context context){
+    public ArrayList<Intervention> getAllIntervention(Context context, int id){
         SQLiteDatabase db = this.getReadableDatabase();
         SecteurDAO secteurDAO = new SecteurDAO(context);
         ActiviteDAO activiteDAO = new ActiviteDAO (context);
@@ -118,7 +118,7 @@ public class InterventionDAO extends SQLiteDBHelper {
         ClientDAO clientDAO = new ClientDAO (context);
 
         ArrayList<Intervention> listeIntervention = new ArrayList<>();
-        String query = "SELECT * FROM INTERVENTION;";
+        String query = "SELECT * FROM CONTRAT_INTERVENTION;";
         Cursor cursor = db.rawQuery(query, null);
 
         if(cursor.moveToFirst()){ /* Si le curseur est pas null, on le place au début de la liste */

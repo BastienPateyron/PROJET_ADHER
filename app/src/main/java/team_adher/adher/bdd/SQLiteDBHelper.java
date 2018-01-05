@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDBHelper extends SQLiteOpenHelper {
     protected static final String DATABASE_NAME = "ADHER";
-    private static final int DATABASE_VERSION = 26; /* A incrémenter quand on modifie la structure de la table */
+    private static final int DATABASE_VERSION = 27; /* A incrémenter quand on modifie la structure de la table */
 
 
     /* CREATE */
@@ -93,23 +93,23 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static final String INSERT_PUYDEDOME = "INSERT INTO SECTEUR VALUES (0, 63, 'PUY DE DOME');";
     private static final String INSERT_ALLIER = "INSERT INTO SECTEUR VALUES (1, 09, 'ALLIER');";
     private static final String INSERT_ADHERANT = "INSERT INTO ADHERENT VALUES " +
-            "(1, 'SARL', 15, 'Rue du marteau', 63000, 'Clermont Ferrand', 'Joe',0455855365);";
+            "(0, 'SARL', 15, 'Rue du marteau', 63000, 'Clermont Ferrand', 'Joe',0455855365);";
     private static final String INSERT_CLIENT = "INSERT INTO CLIENT VALUES" +
-            "(1, 'Bob', 'noBricolee', 0601020301, 33, 'rue du ravallement',63000,'Clermont Ferrand');";
+            "(0, 'Bob', 'noBricolee', 0601020301, 33, 'rue du ravallement',63000,'Clermont Ferrand');";
     private static final String INSERT_PLOMBIER = "INSERT INTO ACTIVITE VALUES " +
-            "(1, 'Plombier');";
+            "(0, 'Plombier');";
     private static final String INSERT_PEINTRE = "INSERT INTO ACTIVITE VALUES " +
-            "(2, 'Peintre');";
+            "(1, 'Peintre');";
     private static final String INSERT_MACON = "INSERT INTO ACTIVITE VALUES " +
-            "(3, 'Maçon');";
+            "(2, 'Maçon');";
     private static final String INSERT_ELECTRICIEN = "INSERT INTO ACTIVITE VALUES " +
-            "(4, 'Electricien');";
+            "(3, 'Electricien');";
     private static final String INSERT_CONTRAT_SERVICE ="INSERT INTO CONTRAT_SERVICE VALUES" +
-            "(1, 1, 1, '20/12/2017', '30/12/2017' , 25.00);";
+            "(0, 0, 0, '20/12/2017', '30/12/2017' , 25.00);";
     private static final String INSERT_CONTRAT_INTERVENTION = "INSERT INTO CONTRAT_INTERVENTION VALUES" +
-            "(1, 1, 1, 1, 1, '21/12/2017', '24/12/2017' );";
+            "(0, 0, 0, 0, 0, '21/12/2017', '24/12/2017' );";
     private static final String INSERT_CONCERNER = "INSERT INTO CONCERNER VALUES" +
-            "(1, 1);";
+            "(0, 0);";
     //private static final String INSERT_CLIENT = "INSERT INTO CLIENT VALUES (0,"
 
 

@@ -2,4 +2,5 @@
 <resources>
     <item name="value_phone" type="id" />
     <item name="value_num_rue" type="id" />
+    <item name="value_act2" type="id" />
 </resources>

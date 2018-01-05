@@ -26,6 +26,7 @@ import team_adher.adher.fragments.adherent.Adherent_fragment;
 import team_adher.adher.fragments.client.Client_fragment;
 import team_adher.adher.fragments.home.Home_Fragment;
 import team_adher.adher.fragments.intervention.Intervention_fragment;
+import team_adher.adher.fragments.intervention.Intervention_fragment_home;
 import team_adher.adher.fragments.secteur.Secteur_fragment;
 
 
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_appels) {
             changeFragment(new Client_fragment());
         } else if (id == R.id.nav_interventions){
-            changeFragment(new Intervention_fragment());
+            changeFragment(new Intervention_fragment_home());
         } else if (id == R.id.nav_activites){
             changeFragment(new Activite_fragment());
         } else if (id == R.id.nav_secteurs){

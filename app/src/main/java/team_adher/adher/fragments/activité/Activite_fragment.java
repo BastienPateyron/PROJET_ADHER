@@ -64,7 +64,7 @@ public class Activite_fragment extends Fragment {
 
                 Bundle bundle = new Bundle();
                 bundle.putString("id_activite",String.valueOf(adapter.getItem(position).getId()));
-                Activite_fragment_ajout acfm = new Activite_fragment_ajout();
+                Activite_fragment_modif acfm = new Activite_fragment_modif();
                 acfm.setArguments(bundle);
                 ((MainActivity)getContext()).changeFragment(acfm);
             }

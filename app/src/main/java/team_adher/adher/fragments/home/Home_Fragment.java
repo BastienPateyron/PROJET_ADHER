@@ -12,6 +12,7 @@ import team_adher.adher.MainActivity;
 import team_adher.adher.R;
 import team_adher.adher.fragments.adherent.Adherent_fragment;
 import team_adher.adher.fragments.client.Client_fragment;
+import team_adher.adher.fragments.intervention.Intervention_fragment_home;
 
 /**
  * Created by R on 10/12/2017.
@@ -63,8 +64,11 @@ public class Home_Fragment extends Fragment{
             @Override
             public void onClick(View v) {
                 //Create Interventions
+                    Intervention_fragment_home ifh = new Intervention_fragment_home();
+                    ((MainActivity) getActivity()).changeFragment(ifh);
+                }
 
-            }
+
         });
 
     }

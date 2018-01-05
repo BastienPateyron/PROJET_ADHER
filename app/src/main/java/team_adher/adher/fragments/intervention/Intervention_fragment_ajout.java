@@ -265,8 +265,12 @@ public class Intervention_fragment_ajout extends DialogFragment {
         buttonNeg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (getShowsDialog())
+                    getDialog().cancel();
+                else
+                    //dismiss();
                 ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
+
 
             }
         });

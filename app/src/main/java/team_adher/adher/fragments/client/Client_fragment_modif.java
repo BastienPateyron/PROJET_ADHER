@@ -100,20 +100,20 @@ public class Client_fragment_modif extends Fragment {
             }
 
         });
-        Button button_add_contrat = (Button) myView.findViewById(R.id.button_add_intervention);
+        Button button_add_intervention = (Button) myView.findViewById(R.id.button_add_intervention);
 
-        button_add_contrat.setOnClickListener(new View.OnClickListener() {
+        button_add_intervention.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Bundle arg = new Bundle(); // On crée un nouveau bundle pour passer l'ID adhérent
-                arg.putString("id_adherent",String.valueOf(id_client)); // On lui donne la valeur de l'id ds id_adherent
+                arg.putString("id_client",String.valueOf(id_client)); // On lui donne la valeur de l'id ds id_adherent
                 Intervention_fragment_ajout dialogFrag = new Intervention_fragment_ajout(); // On crée un nouveau dialog
                 dialogFrag.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
                         System.out.println("Ajout réussi ? On update la liste");
-                        updateListe(); // On met à jour la liste à la fermeture du dialog
+                        updateList(); // On met à jour la liste à la fermeture du dialog
                     }
                 });
 
@@ -132,6 +132,8 @@ public class Client_fragment_modif extends Fragment {
 
         // On redéfinit le listener avec la nouvelle liste
         ListView listView = myView.findViewById(R.id.list_interventions_client);
+        listView.setAdapter(adapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -148,7 +150,7 @@ public class Client_fragment_modif extends Fragment {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
                         System.out.println("On update la liste");
-                        updateListe();
+                        updateList();
                     }
                 });
 
@@ -163,7 +165,11 @@ public class Client_fragment_modif extends Fragment {
         return myView;
 
         }
-    private void updateListe() {
+
+    private void showEditDialog() {
+
+    }
+    private void updateList() {
         InterventionDAO interventionDAO = new InterventionDAO(getContext());
         ArrayList<Intervention> list_intervention = interventionDAO.getAllIntervention(getContext(), id_client);
 
@@ -188,7 +194,7 @@ public class Client_fragment_modif extends Fragment {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
                         System.out.println("On update la liste");
-                        updateListe();
+                        updateList();
                     }
                 });
 
@@ -200,9 +206,7 @@ public class Client_fragment_modif extends Fragment {
         });
         listView.setAdapter(adapter);
     }
-    private void showEditDialog() {
 
-    }
 }
 
 

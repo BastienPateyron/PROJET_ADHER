@@ -282,7 +282,7 @@ public class Intervention_fragment_modif extends DialogFragment {
 
                     //Récupérer Adherent
                     AdherentDAO adherentDAO = new AdherentDAO(getContext());
-                    Adherent adherent = adherentDAO.retrieveAdherent(0);
+                    Adherent adherent = adherentDAO.retrieveAdherent(id_Adherent);
 
                     // Recupérer les dates
                     System.out.println("Date Debut: " + date_debut_contrat.getText());
@@ -393,7 +393,6 @@ public class Intervention_fragment_modif extends DialogFragment {
             Toast.makeText(getActivity(), "Date de fin manquante", Toast.LENGTH_SHORT).show();
             isSet = false;
         }
-
         return isSet;
     }
 
@@ -407,5 +406,4 @@ public class Intervention_fragment_modif extends DialogFragment {
             date_fin_contrat.setText(sdf.format(myCalendar.getTime()));
         }
     }
-
 }

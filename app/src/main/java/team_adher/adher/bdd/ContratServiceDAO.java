@@ -142,8 +142,9 @@ public class ContratServiceDAO extends SQLiteDBHelper {
             do{
                 ContratService contratService = new ContratService(); /* Création d'un contratService vide pour le remplir */
 
-                System.out.println("Retreive_secteur( " + cursor.getInt(0) + " )");
-                Secteur secteur = secteurDAO.retrieveSecteur(cursor.getInt(0));
+                // TODO on a remplacé les cursor.getInt(0) par 1 !!
+                System.out.println("Retreive_secteur( " + cursor.getInt(1) + " )");
+                Secteur secteur = secteurDAO.retrieveSecteur(cursor.getInt(1));
 
 
                 System.out.println("Retrieve_adherent( " + id + " )");

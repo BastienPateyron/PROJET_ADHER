@@ -82,6 +82,7 @@ public class ActiviteDAO extends SQLiteDBHelper {
         db.close();
         return listeActivite;
     }
+
     /* retrieveActivite */
     public Activite retrieveActivite(int id){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -133,7 +134,8 @@ public class ActiviteDAO extends SQLiteDBHelper {
         for(ContratService cs: list_contratServices) contratServiceDAO.deleteContratService(context, cs.getId());
         // Supprimer les interventions  liées à  l'activité
         InterventionDAO interventionDAO = new InterventionDAO(context);
-        ArrayList<Intervention> list_intervention = interventionDAO.getAllIntervention(context, id_activite);
+        // TODO getAllIntervention récupère TOUTES LES INTERVENTIONS
+        ArrayList<Intervention> list_intervention = interventionDAO.getAllInterventionOf(context, "activite", id_activite);
 
         for(Intervention cs: list_intervention) interventionDAO.deleteIntervention(cs.getId());
 

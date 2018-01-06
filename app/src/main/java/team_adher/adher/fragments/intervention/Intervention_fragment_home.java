@@ -60,7 +60,7 @@ public class Intervention_fragment_home extends Fragment{
 //
         /* Création d'une liste d'intervention */
         InterventionDAO interventionDAO = new InterventionDAO(getContext());
-        ArrayList<Intervention> list_intervention = interventionDAO.getAllIntervention(getContext(), id_intervention);
+        ArrayList<Intervention> list_intervention = interventionDAO.getAllIntervention(getContext());
 
         /* Affichage de la liste */
         ListView listView = (ListView) myView.findViewById(R.id.list_generique);

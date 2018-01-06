@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,8 @@ import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Client;
 import team_adher.adher.classes.Intervention;
 import team_adher.adher.classes.Secteur;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by pezed on 20/12/17.
@@ -110,7 +113,7 @@ public class InterventionDAO extends SQLiteDBHelper {
     }
 
 
-    public ArrayList<Intervention> getAllIntervention(Context context, int id){
+    public ArrayList<Intervention> getAllIntervention(Context context){
         SQLiteDatabase db = this.getReadableDatabase();
         SecteurDAO secteurDAO = new SecteurDAO(context);
         ActiviteDAO activiteDAO = new ActiviteDAO (context);
@@ -125,6 +128,55 @@ public class InterventionDAO extends SQLiteDBHelper {
             do{
                 Intervention intervention = new Intervention(); /* Création d'une intervention vide pour le remplir */
 
+
+                Secteur secteur = secteurDAO.retrieveSecteur(cursor.getInt(1));
+                Activite activite = activiteDAO.retrieveActivite(cursor.getInt(2));
+                Adherent adherent = adherentDAO.retrieveAdherent(cursor.getInt(3));
+                Client client = clientDAO.retrieveClient (cursor.getInt(4));
+
+                /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
+                intervention.setId(cursor.getInt(0)); // Colonne numéro ??? (0 = id, 1 = secteur, 2 = activite)
+                intervention.setSecteur(secteur);
+                intervention.setActivite(activite);
+                intervention.setAdherent(adherent);
+                intervention.setClient(client);
+                intervention.setDate_debut(cursor.getString(5));
+                intervention.setDate_fin(cursor.getString(6));
+
+                listeIntervention.add(intervention);
+            }while(cursor.moveToNext()); /* Tant que l'élément suivant existe */
+        }
+        db.close();
+        return listeIntervention;
+    }
+
+    // Sélectionne toutes les interventions qui concernent l'id de la table renseignée
+    public ArrayList<Intervention> getAllInterventionOf(Context context, String nomTable, int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        SecteurDAO secteurDAO = new SecteurDAO(context);
+        ActiviteDAO activiteDAO = new ActiviteDAO (context);
+        AdherentDAO adherentDAO = new AdherentDAO(context);
+        ClientDAO clientDAO = new ClientDAO (context);
+        String nom_table_upper = nomTable.toUpperCase();
+        Log.d(TAG, "getAllInterventionOf: nom_table_upper = " + nom_table_upper);
+
+        // Vérification que la table saisie existe
+        boolean table_existe = false;
+        switch (nom_table_upper){
+            case("SECTEUR"): table_existe = true;break;
+            case("ACTIVITE"): table_existe = true;break;
+            case("ADHERENT"): table_existe = true;break;
+            case("CLIENT"): table_existe = true;break;
+            default: Log.d(TAG, "getAllInterventionOf: table_existe = false, nom_table invalide");break;
+        }
+
+        ArrayList<Intervention> listeIntervention = new ArrayList<>();
+        String query = "SELECT * FROM CONTRAT_INTERVENTION WHERE ID_" + nom_table_upper + " = " + id + ";";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){ /* Si le curseur est pas null, on le place au début de la liste */
+            do{
+                Intervention intervention = new Intervention(); /* Création d'une intervention vide pour le remplir */
 
                 Secteur secteur = secteurDAO.retrieveSecteur(cursor.getInt(1));
                 Activite activite = activiteDAO.retrieveActivite(cursor.getInt(2));

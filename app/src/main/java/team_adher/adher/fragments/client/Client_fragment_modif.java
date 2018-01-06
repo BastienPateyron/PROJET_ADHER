@@ -125,7 +125,7 @@ public class Client_fragment_modif extends Fragment {
         });
 
         InterventionDAO interventionDAO = new InterventionDAO(getContext());
-        ArrayList<Intervention> list_intervention = interventionDAO.getAllIntervention(getContext(), id_client);
+        ArrayList<Intervention> list_intervention = interventionDAO.getAllInterventionOf(getContext(), "CLIent",  id_client);
 
 
         final ArrayAdapter<Intervention> adapter = new ArrayAdapter<>(myView.getContext(), android.R.layout.simple_list_item_1, list_intervention);
@@ -171,7 +171,7 @@ public class Client_fragment_modif extends Fragment {
     }
     private void updateList() {
         InterventionDAO interventionDAO = new InterventionDAO(getContext());
-        ArrayList<Intervention> list_intervention = interventionDAO.getAllIntervention(getContext(), id_client);
+        ArrayList<Intervention> list_intervention = interventionDAO.getAllInterventionOf(getContext(), "CLIENT", id_client);
 
 
         final ArrayAdapter<Intervention> adapter = new ArrayAdapter<>(myView.getContext(), android.R.layout.simple_list_item_1, list_intervention);

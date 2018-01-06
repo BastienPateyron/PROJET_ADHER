@@ -150,6 +150,7 @@ public class InterventionDAO extends SQLiteDBHelper {
         return listeIntervention;
     }
 
+    // TODO cette méthode est importante
     // Sélectionne toutes les interventions qui concernent l'id de la table renseignée
     public ArrayList<Intervention> getAllInterventionOf(Context context, String nomTable, int id){
         SQLiteDatabase db = this.getReadableDatabase();

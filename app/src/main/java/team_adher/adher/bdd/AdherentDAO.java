@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.ContactsContract;
 import android.provider.SyncStateContract;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.ContratService;
 import team_adher.adher.classes.Intervention;
+
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -63,6 +66,7 @@ public class AdherentDAO extends SQLiteDBHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Adherent adherent = new Adherent();
         /* Requete */
+        Log.d(TAG, "retrieveAdherent: ID Adherent retrieve = " + id);
         Cursor cursor = db.query(TABLE_ADHERENT, // Nom table
                 new String[] { COL_ID, COL_RAISON_SOCIALE, COL_NUM_RUE, COL_NOM_RUE, COL_CP, COL_VILLE, COL_NOM_RESPONSABLE, COL_NUM_TELEPHONE }, // Liste des colonnes
                 COL_ID + "=?",  // Colonne cible du WHERE

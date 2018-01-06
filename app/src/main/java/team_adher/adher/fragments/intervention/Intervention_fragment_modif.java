@@ -97,8 +97,8 @@ public class Intervention_fragment_modif extends DialogFragment {
         Bundle bundle = this.getArguments();
 
             if (bundle != null) {
-                if(!(bundle.getString("id_adherent") == null)){
-                    id_Adherent = Integer.valueOf(bundle.get("id_adherent").toString());
+                if(!(bundle.getString("id_client") == null)){
+                    id_Client = Integer.valueOf(bundle.get("id_client").toString());
                 }
             }
 
@@ -107,6 +107,7 @@ public class Intervention_fragment_modif extends DialogFragment {
             id_Intervention = Integer.valueOf(bundle.get("id_intervention").toString());
             InterventionDAO interventionDAO = new InterventionDAO(getContext());
             intervention = interventionDAO.retrieveIntervention(id_Intervention, getContext());
+            id_Adherent = intervention.getAdherent().getId();
 
 
             // Delete button
@@ -142,7 +143,7 @@ public class Intervention_fragment_modif extends DialogFragment {
             final TextView adherent_value = (TextView) dialogView.findViewById(R.id.value_id_adherent);
 
             final AdherentDAO adherentDAO = new AdherentDAO(getContext());
-            final Adherent adherent = adherentDAO.retrieveAdherent(0);
+            final Adherent adherent = adherentDAO.retrieveAdherent(id_Adherent);
 
             adherent_value.setText(adherent.getNom_responsable());
 

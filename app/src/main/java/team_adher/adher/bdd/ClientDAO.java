@@ -127,6 +127,7 @@ public class ClientDAO extends SQLiteDBHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
+        // TODO Supprimer les interventions liées au Client
         db.delete(TABLE_CLIENT, COL_ID + "=" + id_client, null);
 
         db.close();

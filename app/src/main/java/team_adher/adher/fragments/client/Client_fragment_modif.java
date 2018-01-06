@@ -144,7 +144,6 @@ public class Client_fragment_modif extends Fragment {
                 bundle.putString("id_client", String.valueOf(id_client));
                 bundle.putString("id_intervention", String.valueOf(adapter.getItem(position).getId()));
 
-
                 Intervention_fragment_modif csfm = new Intervention_fragment_modif();
                 csfm.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override

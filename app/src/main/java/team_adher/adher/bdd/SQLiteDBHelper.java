@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDBHelper extends SQLiteOpenHelper {
     protected static final String DATABASE_NAME = "ADHER";
-    private static final int DATABASE_VERSION = 30; /* A incrémenter quand on modifie la structure de la table */
+    private static final int DATABASE_VERSION = 32; /* A incrémenter quand on modifie la structure de la table */
 
 
     /* CREATE */
@@ -105,9 +105,9 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static final String INSERT_ELECTRICIEN = "INSERT INTO ACTIVITE VALUES " +
             "(4, 'Electricien');";
     private static final String INSERT_CONTRAT_SERVICE ="INSERT INTO CONTRAT_SERVICE VALUES" +
-            "(1, 0, 0, '20/12/2017', '30/12/2017' , 25.00);";
+            "(1, 1, 1, '20/12/2017', '30/12/2017' , 25.00);";
     private static final String INSERT_CONTRAT_INTERVENTION = "INSERT INTO CONTRAT_INTERVENTION VALUES" +
-            "(1, 0, 0, 0, 0, '21/12/2017', '24/12/2017' );";
+            "(1, 1, 1, 1, 1, '21/12/2017', '24/12/2017' );";
     private static final String INSERT_CONCERNER = "INSERT INTO CONCERNER VALUES" +
             "(1, 1);";
     //private static final String INSERT_CLIENT = "INSERT INTO CLIENT VALUES (0,"

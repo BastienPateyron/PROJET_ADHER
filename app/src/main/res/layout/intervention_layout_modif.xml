@@ -31,7 +31,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_weight="80"
-                android:text="Contrat"
+                android:text="Intervention"
                 />
 
             <ImageButton

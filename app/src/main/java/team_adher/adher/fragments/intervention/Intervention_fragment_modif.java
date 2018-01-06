@@ -5,16 +5,12 @@ import android.app.AlertDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.Fragment;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +28,6 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -49,7 +44,6 @@ import team_adher.adher.classes.Client;
 import team_adher.adher.classes.Intervention;
 import team_adher.adher.classes.Secteur;
 
-import static android.widget.ListPopupWindow.WRAP_CONTENT;
 /**
  * Created by watson on 04/01/2018.
  */
@@ -89,7 +83,7 @@ public class Intervention_fragment_modif extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View dialogView = inflater.inflate(R.layout.intervention_layout_mofif, container, false);
+        View dialogView = inflater.inflate(R.layout.intervention_layout_modif, container, false);
         btn_delete = dialogView.findViewById(R.id.btn_delete);
         btn_delete.setVisibility(View.VISIBLE);
 

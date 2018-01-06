@@ -216,16 +216,16 @@ public class Intervention_fragment_ajout extends DialogFragment {
                 Client client = clientDAO.retrieveClient(id_client);
 
                 //Récupérer une activité
-                System.out.println("Id Activité" + id_activite);
+                System.out.println("Id Activité: " + id_activite);
                 Activite activite = activiteDAO.retrieveActivite(id_activite);
 
                 //Récupérer Secteur
-                System.out.println("Id Secteur = " + id_secteur);
+                System.out.println("Id Secteur: " + id_secteur);
                 Secteur secteur = secteurDAO.retrieveSecteur(id_secteur);
 
                 //Récupérer Adherent
                 AdherentDAO adherentDAO = new AdherentDAO(getContext());
-                Adherent adherent = adherentDAO.retrieveAdherent(0);
+                Adherent adherent = adherentDAO.retrieveAdherent( 0); // TODO passer id adherent fonction findAdherent( )
 
                 // Recupérer les dates
                 System.out.println("Date Debut: " + date_debut_contrat.getText());
@@ -349,10 +349,7 @@ public class Intervention_fragment_ajout extends DialogFragment {
         }
     }
 
-
-
-
-    }
+}
 
 
 

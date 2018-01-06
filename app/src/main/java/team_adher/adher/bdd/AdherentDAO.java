@@ -11,10 +11,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import team_adher.adher.classes.Activite;
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.ContratService;
 import team_adher.adher.classes.Intervention;
+import team_adher.adher.classes.Secteur;
 
 import static android.content.ContentValues.TAG;
 
@@ -161,6 +163,24 @@ public class AdherentDAO extends SQLiteDBHelper {
         System.out.println("Adhérent Id " + id_adherent + " supprimé");
         db.close();
     }
+
+
+
+
+    public Adherent findAdherent(Secteur secteur, Activite activite){
+
+
+        // TODO implémenter findAdherent() -- Fait une requete SQL en fonction des valeurs passées en paramètre, adapte le retour de la requete, et instancie un nouvel adhérent avec les valeurs l'adhérent sélectionné
+
+        Adherent adherent = new Adherent();
+
+        return adherent;
+    }
+
+
+
+
+
     /*
     public void addAdherent(Adherent adherent)
     {

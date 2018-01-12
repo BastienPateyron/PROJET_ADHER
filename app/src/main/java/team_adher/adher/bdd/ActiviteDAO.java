@@ -85,23 +85,23 @@ public class ActiviteDAO extends SQLiteDBHelper {
 
     /* retrieveActivite */
     public Activite retrieveActivite(int id){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Activite activite = new Activite();
+
+            SQLiteDatabase db = this.getReadableDatabase();
 
         /* Requete */
-        Cursor cursor = db.query(TABLE_ACTIVITE, // Nom de table
-                new String[] {COL_ID, COL_NOM}, // Liste des Colonnes
-                COL_ID + "=?", // Colonne cible du WHERE
-                new String[] {String.valueOf(id)}, // Valeur cherchée par le WHERE
-                null, null, null, null); // Options
-        if(cursor != null)
-            cursor.moveToFirst(); /* Si le curseur est pas null, on le place au début de la liste */
-                activite.setId(cursor.getInt(0));
-                activite.setNom(cursor.getString(1));
-        /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
-        db.close();
-        return activite;
-    }
+            Cursor cursor = db.query(TABLE_ACTIVITE, // Nom table
+                    new String[] { COL_ID, COL_NOM}, // Liste des colonnes
+                    COL_ID + "=?",  // Colonne cible du WHERE
+                    new String[] { String.valueOf(id) }, // Valeure cible du WHERE
+                    null, null, null, null); // Options
+            if (cursor != null) cursor.moveToFirst();
+
+        /* On récupère chaque élément dans l'ordre de la table (Haut en bas) */
+            Activite activite = new Activite(cursor.getInt(0),cursor.getString(1));
+            db.close();
+            return activite;
+        }
+
 
     public void updateActivite(Activite activite){
 

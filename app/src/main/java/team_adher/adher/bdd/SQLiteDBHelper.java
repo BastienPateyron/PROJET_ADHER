@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDBHelper extends SQLiteOpenHelper {
     protected static final String DATABASE_NAME = "ADHER";
-    private static final int DATABASE_VERSION = 32; /* A incrémenter quand on modifie la structure de la table */
+    private static final int DATABASE_VERSION = 36; /* A incrémenter quand on modifie la structure de la table */
 
 
     /* CREATE */
@@ -90,26 +90,28 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     /* INSERTS  → Si on veut mettre des valeurs par défaut */
     /*private static final String INSERT_TABLE_ADHERANT */
-    private static final String INSERT_PUYDEDOME = "INSERT INTO SECTEUR VALUES (1, 63, 'PUY DE DOME');";
-    private static final String INSERT_ALLIER = "INSERT INTO SECTEUR VALUES (2, 09, 'ALLIER');";
+    private static final String INSERT_PUYDEDOME = "INSERT INTO SECTEUR VALUES (0, 63, 'PUY DE DOME');";
+    private static final String INSERT_ALLIER = "INSERT INTO SECTEUR VALUES (1, 09, 'ALLIER');";
     private static final String INSERT_ADHERANT = "INSERT INTO ADHERENT VALUES " +
-            "(1, 'SARL', 15, 'Rue du marteau', 63000, 'Clermont Ferrand', 'Ledoux',0455855365);";
+            "(0, 'SARL', 15, 'Rue du marteau', 63000, 'Clermont Ferrand', 'Ledoux',0455855365);";
+    private static final String INSERT_CLIENT1 = "INSERT INTO CLIENT VALUES" +
+            "(0, 'Leger', 'Paul', 0601020301, 33, 'rue du ravallement',63000,'Clermont Ferrand');";
     private static final String INSERT_CLIENT = "INSERT INTO CLIENT VALUES" +
-            "(1, 'Leger', 'Paul', 0601020301, 33, 'rue du ravallement',63000,'Clermont Ferrand');";
+            "(1, 'Ricard', 'Bob', 0601020301, 29, 'rue de la Fuite',09000,'Vichy');";
     private static final String INSERT_PLOMBIER = "INSERT INTO ACTIVITE VALUES " +
-            "(1, 'Plombier');";
+            "(0, 'Plombier');";
     private static final String INSERT_PEINTRE = "INSERT INTO ACTIVITE VALUES " +
-            "(2, 'Peintre');";
+            "(1, 'Peintre');";
     private static final String INSERT_MACON = "INSERT INTO ACTIVITE VALUES " +
-            "(3, 'Maçon');";
+            "(2, 'Maçon');";
     private static final String INSERT_ELECTRICIEN = "INSERT INTO ACTIVITE VALUES " +
-            "(4, 'Electricien');";
+            "(3, 'Electricien');";
     private static final String INSERT_CONTRAT_SERVICE ="INSERT INTO CONTRAT_SERVICE VALUES" +
-            "(1, 1, 1, '20/12/2017', '30/12/2017' , 25.00);";
+            "(0, 0, 0, '20/12/2017', '30/02/2018' , 25.00);";
     private static final String INSERT_CONTRAT_INTERVENTION = "INSERT INTO CONTRAT_INTERVENTION VALUES" +
-            "(1, 1, 1, 1, 1, '21/12/2017', '24/12/2017' );";
+            "(0, 0, 0, 0, 0, '21/12/2017', '24/02/2018' );";
     private static final String INSERT_CONCERNER = "INSERT INTO CONCERNER VALUES" +
-            "(1, 1);";
+            "(0, 0);";
     //private static final String INSERT_CLIENT = "INSERT INTO CLIENT VALUES (0,"
 
 
@@ -137,6 +139,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         db.execSQL(INSERT_PEINTRE);
         db.execSQL(INSERT_MACON);
         db.execSQL(INSERT_CLIENT);
+        db.execSQL(INSERT_CLIENT1);
         db.execSQL(INSERT_ADHERANT);
         db.execSQL(INSERT_CONTRAT_SERVICE);
         db.execSQL(INSERT_CONTRAT_INTERVENTION);

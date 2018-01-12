@@ -167,12 +167,41 @@ public class AdherentDAO extends SQLiteDBHelper {
 
 
 
-    public Adherent findAdherent(Secteur secteur, Activite activite){
+    public Adherent findAdherent(Secteur secteur, Activite activite, String dateDebut, String dateFin){
 
 
         // TODO implémenter findAdherent() -- Fait une requete SQL en fonction des valeurs passées en paramètre, adapte le retour de la requete, et instancie un nouvel adhérent avec les valeurs l'adhérent sélectionné
 
+        SQLiteDatabase db = this.getReadableDatabase();
         Adherent adherent = new Adherent();
+        /* Requete */
+//        Log.d(TAG, "retrieveAdherent: ID Adherent retrieve = ");
+//        Cursor cursor = db.query(TABLE_ADHERENT, // Nom table
+//                new String[] { COL_ID, COL_RAISON_SOCIALE, COL_NUM_RUE, COL_NOM_RUE, COL_CP, COL_VILLE, COL_NOM_RESPONSABLE, COL_NUM_TELEPHONE }, // Liste des colonnes
+//                COL_ID + "=?",  // Colonne cible du WHERE
+//                new String[] { String.valueOf(id) }, // Valeure cible du WHERE
+//                null, null, null, null); // Options
+//        if (cursor != null){
+//            cursor.moveToFirst();
+////            System.out.println("retrieve_adherent(): Cursor = " + cursor.getPosition());
+//            /* On récupère chaque élément dans l'ordre de la table (Haut en bas) */
+//            adherent.setId(cursor.getInt(0));
+//            adherent.setRaison_sociale(cursor.getString(1));
+//            adherent.setNum_rue(cursor.getInt(2));
+//            adherent.setNom_rue(cursor.getString(3));
+//            adherent.setCp(cursor.getInt(4));
+//            adherent.setVille(cursor.getString(5));
+//            adherent.setNom_responsable(cursor.getString(6));
+//            adherent.setTelephone(cursor.getInt(7));
+//
+//            db.close();
+//            return adherent;
+//
+//        }else{ // Si le curseur == null alors le retrieve a échoué donc l'adhérent n'est pas la. Donc on retourne null
+//            System.out.println("Aucun Adhérent pour faire l'Intervention");
+//            db.close();
+//            return null;
+//        }
 
         return adherent;
     }

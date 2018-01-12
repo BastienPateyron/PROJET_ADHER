@@ -98,7 +98,7 @@ public class Intervention_fragment_ajout extends DialogFragment {
         adapter_client.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Définition du style de l'adapter
         spinner_client_cs.setAdapter(adapter_client); // Affectation de l'adapter au spinner
 
-        // Récupération de l'ID secteur sélectionné
+        // Récupération de l'ID Client sélectionné
         spinner_client_cs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (adapter_client.getItem(position).getId() == -1) { // Si l'item est l'item par défaut on fait rien
@@ -122,12 +122,12 @@ public class Intervention_fragment_ajout extends DialogFragment {
         adapter_activite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Définition du style de l'adapter
         spinner_activite_cs.setAdapter(adapter_activite); // Affectation de l'adapter au spinner
 
-        // Récupération de l'ID secteur sélectionné
+        // Récupération de l'ID Activité sélectionné
         spinner_activite_cs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (adapter_activite.getItem(position).getId() == -1) { // Si l'item est l'item par défaut on fait rien
 
-                } else id_secteur = adapter_activite.getItem(position).getId(); // On récupère l'ID du secteur selectionné
+                } else id_activite = adapter_activite.getItem(position).getId(); // On récupère l'ID du secteur selectionné
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -225,7 +225,7 @@ public class Intervention_fragment_ajout extends DialogFragment {
 
                 //Récupérer Adherent
                 AdherentDAO adherentDAO = new AdherentDAO(getContext());
-                Adherent adherent = adherentDAO.retrieveAdherent( 0); // TODO passer id adherent fonction findAdherent( )
+                Adherent adherent = adherentDAO.retrieveAdherent( 1); // TODO passer id adherent fonction findAdherent( )
 
                 // Recupérer les dates
                 System.out.println("Date Debut: " + date_debut_contrat.getText());
@@ -348,7 +348,6 @@ public class Intervention_fragment_ajout extends DialogFragment {
             date_fin_contrat.setText(sdf.format(myCalendar.getTime()));
         }
     }
-
 }
 
 

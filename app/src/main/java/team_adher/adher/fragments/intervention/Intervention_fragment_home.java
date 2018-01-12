@@ -13,7 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import team_adher.adher.MainActivity;
 import team_adher.adher.R;
@@ -32,6 +36,7 @@ public class Intervention_fragment_home extends Fragment{
     private int id_intervention;
     private ArrayList<String> list_nom = new ArrayList<String>();
     private ArrayList<Intervention> list_intervention = new ArrayList<Intervention>();
+    private Intervention intervention;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -57,10 +62,34 @@ public class Intervention_fragment_home extends Fragment{
                 ((MainActivity)getActivity()).changeFragment(ifa);
             }
         });
-//
+
         /* Création d'une liste d'intervention */
         InterventionDAO interventionDAO = new InterventionDAO(getContext());
+
         ArrayList<Intervention> list_intervention = interventionDAO.getAllIntervention(getContext());
+
+        int i;
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        Date date_du_jour = new Date();
+        for(i = 0; i < list_intervention.size();i++ ) {
+            intervention = interventionDAO.retrieveIntervention(i, getContext());
+            String date_f = intervention.getDate_fin();
+
+
+            try {
+                Date date_fin = sdf.parse(date_f);
+                System.out.println("Date_fin : " + date_fin);
+                if (date_du_jour.after(date_fin)) {
+
+                    interventionDAO.deleteIntervention(i);
+                } else {
+                    System.out.println("La date est à jour");
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
         /* Affichage de la liste */
         ListView listView = (ListView) myView.findViewById(R.id.list_generique);

@@ -127,7 +127,7 @@ public class Intervention_fragment_ajout extends DialogFragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (adapter_activite.getItem(position).getId() == -1) { // Si l'item est l'item par défaut on fait rien
 
-                } else id_secteur = adapter_activite.getItem(position).getId(); // On récupère l'ID du secteur selectionné
+                } else id_activite = adapter_activite.getItem(position).getId(); // On récupère l'ID du secteur selectionné
             }
 
             public void onNothingSelected(AdapterView<?> parent) {

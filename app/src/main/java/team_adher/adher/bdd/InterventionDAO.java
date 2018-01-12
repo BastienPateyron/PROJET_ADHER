@@ -216,6 +216,7 @@ public class InterventionDAO extends SQLiteDBHelper {
 
     public void deleteIntervention(int id_intervention)
     {
+        System.out.println("Id intervention à supprimer: " + id_intervention);
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.delete(TABLE_INTERVENTION, COL_ID + "=" + id_intervention, null);

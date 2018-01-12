@@ -25,9 +25,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -119,7 +121,7 @@ public class Intervention_fragment_modif extends DialogFragment {
                             InterventionDAO interventionDAO = new InterventionDAO(getContext());
                             interventionDAO.deleteIntervention(id_Intervention);
                             if (getShowsDialog()) getDialog().cancel();
-                            else dismiss();
+                            else ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());;
                         }
                     }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -253,13 +255,15 @@ public class Intervention_fragment_modif extends DialogFragment {
             });
 
 
+
+
             //BUTTON
             Button buttonPos = (Button) dialogView.findViewById(R.id.pos_button);
             buttonPos.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    // -- CREATION DU  CONTRAT_SERVICE --
+                    // -- Modification de l'intervention --
 
                     // Récupérer un client
                     System.out.println("Id Client: " + id_Client);
@@ -399,5 +403,10 @@ public class Intervention_fragment_modif extends DialogFragment {
         if (editext_state.equals("FIN_CONTRAT")) {
             date_fin_contrat.setText(sdf.format(myCalendar.getTime()));
         }
+    }
+    private void compare_date()
+    {
+
+
     }
 }

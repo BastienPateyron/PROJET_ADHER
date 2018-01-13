@@ -15,7 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import team_adher.adher.MainActivity;
 import team_adher.adher.R;
@@ -34,7 +38,12 @@ public class Client_fragment_modif extends Fragment {
 
     View myView;
     private int id_client;
-
+    int i;
+    private Intervention intervention;
+    private int id_Intervention;
+    String myFormat = "dd/MM/yyyy"; //In which you need put here
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+    Date date_du_jour = new Date();
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
@@ -159,7 +168,31 @@ public class Client_fragment_modif extends Fragment {
 
             }
         });
+        for (i = 0; i < list_intervention.size(); i++) {
+            // id_Intervention = list_intervention;
+            id_Intervention = adapter.getItem(i).getId();
+            intervention = interventionDAO.retrieveIntervention(id_Intervention, getContext());
 
+
+           /* id_Intervention = list_intervention.getItem( i ).getId( );
+            InterventionDAO.retrieve( idIntervention);*/
+            String date_f = intervention.getDate_fin();
+
+
+            try {
+                Date date_fin = sdf.parse(date_f);
+                System.out.println("Date_fin : " + date_fin);
+                if (date_du_jour.after(date_fin)) {
+
+                    interventionDAO.deleteIntervention(id_Intervention);
+                    updateList();
+                } else {
+                    System.out.println("La date est à jour");
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
         return myView;
 

@@ -13,6 +13,7 @@ public class Adherent {
     private String ville;
     private String nom_responsable;
     private int telephone;
+    private int nbInterventions;
 
     public Adherent(){
 
@@ -91,6 +92,14 @@ public class Adherent {
 
     public void setTelephone(int telephone) {
         this.telephone = telephone;
+    }
+
+    public int getNbInterventions() {
+        return nbInterventions;
+    }
+
+    public void setNbInterventions(int nbInterventions) {
+        this.nbInterventions = nbInterventions;
     }
 
     @Override

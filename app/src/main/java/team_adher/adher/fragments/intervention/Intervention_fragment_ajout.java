@@ -225,7 +225,8 @@ public class Intervention_fragment_ajout extends DialogFragment {
 
                 //Récupérer Adherent
                 AdherentDAO adherentDAO = new AdherentDAO(getContext());
-                Adherent adherent = adherentDAO.retrieveAdherent( 1); // TODO passer id adherent fonction findAdherent( )
+                Adherent adherent = adherentDAO.findAdherent(id_secteur, id_activite, date_debut_contrat.getText().toString(), date_fin_contrat.getText().toString()); // TODO passer id adherent fonction findAdherent( )
+                AdherentDAO.dateDepassee(myCalendar); // TODO test log
 
                 // Recupérer les dates
                 System.out.println("Date Debut: " + date_debut_contrat.getText());

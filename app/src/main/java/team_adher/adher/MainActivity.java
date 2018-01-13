@@ -69,13 +69,17 @@ public class MainActivity extends AppCompatActivity
     }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout); /* cast en (DrawerLayout) */
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
 
-        } else {
-            super.onBackPressed();
-        }
+        Home_Fragment home = new Home_Fragment();
+        changeFragment(home);
+
+//        DrawerLayout drawer = findViewById(R.id.drawer_layout); /* cast en (DrawerLayout) */
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//
+//        } else {
+//            super.onBackPressed();
+//        }
     }
 
     @Override

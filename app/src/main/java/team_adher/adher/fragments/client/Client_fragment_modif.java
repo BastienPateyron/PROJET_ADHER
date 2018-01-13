@@ -173,11 +173,7 @@ public class Client_fragment_modif extends Fragment {
             id_Intervention = adapter.getItem(i).getId();
             intervention = interventionDAO.retrieveIntervention(id_Intervention, getContext());
 
-
-           /* id_Intervention = list_intervention.getItem( i ).getId( );
-            InterventionDAO.retrieve( idIntervention);*/
             String date_f = intervention.getDate_fin();
-
 
             try {
                 Date date_fin = sdf.parse(date_f);

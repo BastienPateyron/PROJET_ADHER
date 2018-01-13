@@ -75,7 +75,7 @@ public class Adherent_fragment_ajout extends Fragment {
                     Toast.makeText(getContext(), "Ville manquante", Toast.LENGTH_SHORT).show();
                     validate = false;
                 }
-                if (TextUtils.isEmpty(cp)) {
+                if (TextUtils.isEmpty(cp) ) {
                     Toast.makeText(getContext(), "Code postal manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
                 }

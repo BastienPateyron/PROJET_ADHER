@@ -286,25 +286,37 @@ public class Intervention_fragment_modif extends DialogFragment {
                     System.out.println("Date Debut: " + date_debut_contrat.getText());
                     System.out.println("Date Fin: " + date_fin_contrat.getText());
 
-                    if (champsRemplis(intervention)) { // Si tout les champs sont bien remplis on réalise l'insertion
-                        intervention.setClient(client);
-                        intervention.setActivite(activite);
-                        intervention.setSecteur(secteur);
-                        intervention.setAdherent(adherent);
-                        intervention.setDate_debut(date_debut_contrat.getText().toString());
-                        intervention.setDate_fin(date_fin_contrat.getText().toString());
+                    try {
+                        if (champsRemplis(intervention)) { // Si tout les champs sont bien remplis on réalise l'insertion
+                            intervention.setClient(client);
+                            intervention.setActivite(activite);
+                            intervention.setSecteur(secteur);
+                            intervention.setAdherent(adherent);
+                            intervention.setDate_debut(date_debut_contrat.getText().toString());
+                            intervention.setDate_fin(date_fin_contrat.getText().toString());
 
-                        // Update
-                        InterventionDAO interventionDAO = new InterventionDAO(getContext());
-                        interventionDAO.updateIntervention(intervention);
+                            // Update
+                            InterventionDAO interventionDAO = new InterventionDAO(getContext());
+                            interventionDAO.updateIntervention(intervention);
 
 
 
 
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        if(champsRemplis(intervention)){
+                            ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
                     Toast.makeText(getActivity(), "Intervention modifié", Toast.LENGTH_SHORT).show();
-                    ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
-                    dismiss();
+                     dismiss();
+
+
                 }
 
             });
@@ -317,7 +329,7 @@ public class Intervention_fragment_modif extends DialogFragment {
                 if (getShowsDialog())
                     getDialog().cancel();
                 else
-                    //dismiss();
+                    dismiss();
                 ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
             }
         });
@@ -372,8 +384,19 @@ public class Intervention_fragment_modif extends DialogFragment {
         return index;
     }
 
-    private boolean champsRemplis(Intervention intervention) {
+    private boolean champsRemplis(Intervention intervention) throws ParseException {
         boolean isSet = true;
+        String date_d = intervention.getDate_debut();
+        String date_f = intervention.getDate_fin();
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        Date date_du_Jour = new Date();
+        String du_jour = sdf.format(date_du_Jour);
+        date_du_Jour = sdf.parse(du_jour);
+        System.out.println("Date du jour :" + date_du_Jour);
+        Date date_fin = sdf.parse(date_f);
+        Date date_debut = sdf.parse(date_d);
+        System.out.println("date debut" + date_debut);
         if (intervention.getClient().equals("")) {
             Toast.makeText(getActivity(), "Client manquant", Toast.LENGTH_SHORT).show();
             isSet = false;
@@ -386,6 +409,9 @@ public class Intervention_fragment_modif extends DialogFragment {
 
         } else if (intervention.getDate_debut().equals("")) {
             Toast.makeText(getActivity(), "Date de début manquante", Toast.LENGTH_SHORT).show();
+            isSet = false;
+        } else if (date_debut.after(date_fin) == true){
+            Toast.makeText(getActivity(), "Date de début après la date de fin", Toast.LENGTH_SHORT).show();
             isSet = false;
         } else if (intervention.getDate_fin().equals("")) {
             Toast.makeText(getActivity(), "Date de fin manquante", Toast.LENGTH_SHORT).show();

@@ -181,8 +181,6 @@ public class Adherent_fragment_modif extends Fragment {
             contrat_Service = contratServiceDAO.retrieveContratService(id_contrat_service, getContext());
 
 
-           /* id_Intervention = list_intervention.getItem( i ).getId( );
-            InterventionDAO.retrieve( idIntervention);*/
             String date_f = contrat_Service.getDate_fin();
 
 

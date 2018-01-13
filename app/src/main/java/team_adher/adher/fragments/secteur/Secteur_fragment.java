@@ -24,6 +24,7 @@ public class Secteur_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         myView = inflater.inflate(R.layout.general_layout_consultation, container, false);
+        getActivity().setTitle("Secteurs");
         //Set button text
         TextView add_part_textview = (TextView) myView.findViewById(R.id.add_part_textview);
         add_part_textview.setText("Ajout Secteur");

@@ -23,9 +23,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -63,6 +65,7 @@ public class Intervention_fragment_ajout extends DialogFragment {
     private static FragmentManager fragmentManager;
     private boolean state_for_spinner = false;
     private Intervention intervention;
+
 
     private int id_secteur;
     private int id_client;
@@ -243,19 +246,23 @@ public class Intervention_fragment_ajout extends DialogFragment {
                         date_fin_contrat.getText().toString()
                 );
 
-                if(champsRemplis(intervention)){ // Si tout les champs sont bien remplis on réalise l'insertion
-                    InterventionDAO interventionDAO = new InterventionDAO(getContext());
-                    interventionDAO.insertIntervention(intervention);
+                try {
+                    if(champsRemplis(intervention)){ // Si tout les champs sont bien remplis on réalise l'insertion
+                        InterventionDAO interventionDAO = new InterventionDAO(getContext());
+                        interventionDAO.insertIntervention(intervention);
 
-                    // Récupérer l'ID de intervention
-                    int id_intervention= interventionDAO.retrieveLastInterventionID(getContext());
-                    intervention = interventionDAO.retrieveIntervention(id_intervention, getContext());
+                        // Récupérer l'ID de intervention
+                        int id_intervention= interventionDAO.retrieveLastInterventionID(getContext());
+                        intervention = interventionDAO.retrieveIntervention(id_intervention, getContext());
 
 
-                    }
-                    Toast.makeText(getActivity(), "Contrat ajouté", Toast.LENGTH_SHORT).show();
+                        }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(getActivity(), "Contrat ajouté", Toast.LENGTH_SHORT).show();
                 ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
-                    dismiss();
+                dismiss();
                 }
 
         });
@@ -314,8 +321,22 @@ public class Intervention_fragment_ajout extends DialogFragment {
         }
     }
 
-    private boolean champsRemplis(Intervention intervention){
+    private boolean champsRemplis(Intervention intervention) throws ParseException {
         boolean isSet = true;
+        String date_d = intervention.getDate_debut();
+        String date_f = intervention.getDate_fin();
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        Date date_du_Jour = new Date();
+        String du_jour = sdf.format(date_du_Jour);
+        date_du_Jour = sdf.parse(du_jour);
+        System.out.println("Date du jour :" + date_du_Jour);
+        Date date_fin = sdf.parse(date_f);
+        Date date_debut = sdf.parse(date_d);
+        System.out.println("date debut" + date_debut);
+
+
+
         // TODO véfifier si les champs obligatoires sont remplis
         if (intervention.getClient().equals("")){
             Toast.makeText(getActivity(), "Client manquant", Toast.LENGTH_SHORT).show();
@@ -326,7 +347,12 @@ public class Intervention_fragment_ajout extends DialogFragment {
         } else if(intervention.getActivite().equals("")) {
             Toast.makeText(getActivity(), "Secteur manquant", Toast.LENGTH_SHORT).show();
             isSet = false;
-
+        } else if (date_debut.compareTo(date_fin) > 0){
+            Toast.makeText(getActivity(), "Date de début après la date de fin", Toast.LENGTH_SHORT).show();
+            isSet = false;
+        } else if (date_du_Jour.compareTo(date_debut) > 0){
+            Toast.makeText(getActivity(), "Date de début est après la date du jour", Toast.LENGTH_SHORT).show();
+            isSet = false;
         } else if (intervention.getDate_debut().equals("")){
             Toast.makeText(getActivity(), "Date de début manquante", Toast.LENGTH_SHORT).show();
             isSet = false;

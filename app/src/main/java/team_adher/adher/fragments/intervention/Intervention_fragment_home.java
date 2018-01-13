@@ -112,7 +112,7 @@ public class Intervention_fragment_home extends Fragment {
             try {
                 Date date_fin = sdf.parse(date_f);
                 System.out.println("Date_fin : " + date_fin);
-                if (date_du_jour.after(date_fin)) {
+                if (date_du_jour.compareTo(date_fin) > -1) {
 
                     interventionDAO.deleteIntervention(id_Intervention);
                     updateList_intervention();

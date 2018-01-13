@@ -7,7 +7,7 @@
         android:id="@+id/line_raison_sociale"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Raison Sociale"
+        android:hint="Nom de l'entreprise"
         app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
 
         <EditText

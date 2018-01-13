@@ -36,6 +36,7 @@ public class Activite_fragment extends Fragment {
         myView = inflater.inflate(R.layout.general_layout_consultation,container,false);
 
 
+        getActivity().setTitle("Activités");
         TextView add_part_textview = (TextView) myView.findViewById(R.id.add_part_textview);
         add_part_textview.setText("Ajout Activité");
 

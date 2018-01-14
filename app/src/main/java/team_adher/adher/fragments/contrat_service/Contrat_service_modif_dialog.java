@@ -377,8 +377,6 @@ public class Contrat_service_modif_dialog extends DialogFragment {
         return dialogView;
     }
 
-    // If shown as dialog, set the width of the dialog window
-    // onCreateView --> onActivityCreated -->  onViewStateRestored --> onStart --> onResume
     @Override
     public void onResume() {
         super.onResume();
@@ -390,15 +388,11 @@ public class Contrat_service_modif_dialog extends DialogFragment {
         }
     }
 
-
-    // If dialog is cancelled: onCancel --> onDismiss
     @Override
     public void onCancel(DialogInterface dialog) {
 
     }
 
-    // If dialog is cancelled: onCancel --> onDismiss
-    // If dialog is dismissed: onDismiss
     private DialogInterface.OnDismissListener onDismissListener;
 
     public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {

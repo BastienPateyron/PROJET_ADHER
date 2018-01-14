@@ -9,6 +9,7 @@ import android.provider.SyncStateContract;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -155,12 +156,10 @@ public class AdherentDAO extends SQLiteDBHelper {
 
         for(ContratService cs: list_contratServices) contratServiceDAO.deleteContratService(context, cs.getId());
 
-
         // Supprimer les ContratsIntervention avec cet ID adhérent
         InterventionDAO interventionDAO = new InterventionDAO(context);
         ArrayList<Intervention> interventionArrayList = interventionDAO.getAllInterventionOf(context, "ADHERENT",  id_adherent);
         for(Intervention intervention : interventionArrayList) interventionDAO.deleteIntervention(intervention.getId());
-
 
         // Supprimer l'adhérent
         db.delete(TABLE_ADHERENT, COL_ID + "=" + id_adherent, null);
@@ -168,16 +167,13 @@ public class AdherentDAO extends SQLiteDBHelper {
         db.close();
     }
 
-
-
-
-    public Adherent findAdherent(int idSecteur, int idActivite, String dateDebut, String dateFin){
+    public ArrayList<Adherent> findAdherent(int idSecteur, int idActivite, String dateDebut, String dateFin){
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         String fieldAdherent = "ADHERENT.ID_ADHERENT, ADHERENT.RAISON_SOCIALE_ADHERENT, ADHERENT.NUM_RUE_ADHERENT, ADHERENT.NOM_RUE_ADHERENT, ADHERENT.CP_ADHERENT, ADHERENT.VILLE_ADHERENT, ADHERENT.NOM_RESPONSABLE_ADHERENT, ADHERENT.NUM_TELEPHONE";
 
-         // SELECTION SOUHAITEE AVEC UNE SEULE ACTIVITE POUR LE COUNT
+         // Sélection des adhérents correspondants (Secteur + Activité) et COUNT du nombre de leurs interventions
         String query = "SELECT " + fieldAdherent + ", COUNT(CONTRAT_INTERVENTION.ID_ADHERENT) AS 'NB_INTERV' " +
             "FROM ADHERENT, CONTRAT_SERVICE, CONCERNER, ACTIVITE, SECTEUR " +
             "LEFT JOIN CONTRAT_INTERVENTION ON ADHERENT.ID_ADHERENT = CONTRAT_INTERVENTION.ID_ADHERENT " +
@@ -222,10 +218,7 @@ public class AdherentDAO extends SQLiteDBHelper {
         db.close();
         System.out.println("Taille listeAdherent Find: " + listeAdherents.size());
 
-
-        // TODO Que faire si aucun adhérent ne correspond ?
-
-        return listeAdherents.get(minIntervention(listeAdherents));
+        return listeAdherents;
     }
 
     /* Compare la date en paramètre avec la date actuelle.
@@ -233,12 +226,9 @@ public class AdherentDAO extends SQLiteDBHelper {
      sinon retourne vrai */
     public static boolean dateDepassee(Calendar dateCalendar){
 
-//        Convert the 2 Strings to Date objects using the SimpleDateFormat. For more details on the conversion, you can refer this post.
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateFormatee = sdf.format(dateCalendar.getTime());
         Log.d(TAG, "dateDepassee: dateFormatée = [ " + dateFormatee + " ]");
-//          Example: Date date = new SimpleDateFormat(yourFormat).parse(dateString);
-//        Now compare the 2 Date objects using the Date#after() method.
 
         return true;
     }
@@ -257,36 +247,4 @@ public class AdherentDAO extends SQLiteDBHelper {
         Log.d(TAG, "minIntervention == " + min);
         return min;
     }
-
-
-
-
-    /*
-    public void addAdherent(Adherent adherent)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-    ContentValues valuesA = new ContentValues();
-    valuesA.put(AdherentDAO.COL_RAISON_SOCIALE, "SARL");
-    valuesA.put(AdherentDAO.COL_NOM_RESPONSABLE, "Bob Bricole");
-    valuesA.put(AdherentDAO.COL_NUM_RUE, 1);
-    valuesA.put(AdherentDAO.COL_NOM_RUE,"Rue du Marteau");
-    valuesA.put(AdherentDAO.COL_CP, 63000);
-    valuesA.put(AdherentDAO.COL_VILLE, "Clermont Ferrand");
-
-    db.insert(AdherentDAO.TABLE_ADHERENT,null,valuesA);
-
-
-    }*/
-    /* Curseur propre
-
-     Cursor cursor = db.query(
-                TABLE_ADHERENT, // Nom table
-                new String[]{COL_ID, COL_RAISON_SOCIALE, COL_NUM_RUE, COL_NOM_RUE, COL_CP, COL_NOM_RESPONSABLE}, // Liste des colonnes
-                // Colonne du WHERE
-                // Valeur du WHERE
-                // Options
-        );
-
-
-     */
 }

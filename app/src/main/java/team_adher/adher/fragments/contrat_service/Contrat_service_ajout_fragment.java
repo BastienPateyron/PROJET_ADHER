@@ -315,8 +315,6 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
 
     }
 
-    // If dialog is cancelled: onCancel --> onDismiss
-    // If dialog is dismissed: onDismiss
     private DialogInterface.OnDismissListener onDismissListener;
 
     public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {

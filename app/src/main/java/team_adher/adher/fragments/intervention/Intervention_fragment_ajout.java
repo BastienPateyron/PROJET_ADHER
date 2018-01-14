@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ import team_adher.adher.classes.Client;
 import team_adher.adher.classes.Intervention;
 import team_adher.adher.classes.Secteur;
 
+import static android.content.ContentValues.TAG;
 import static android.widget.ListPopupWindow.WRAP_CONTENT;
 
 /**
@@ -65,11 +67,14 @@ public class Intervention_fragment_ajout extends DialogFragment {
     private static FragmentManager fragmentManager;
     private boolean state_for_spinner = false;
     private Intervention intervention;
+    private Adherent adherent;
+
 
 
     private int id_secteur;
     private int id_client;
     private int id_activite;
+    private  boolean adherent_trouve = false;
 
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
@@ -221,41 +226,53 @@ public class Intervention_fragment_ajout extends DialogFragment {
 
                 //Récupérer Adherent
                 AdherentDAO adherentDAO = new AdherentDAO(getContext());
-                Adherent adherent = adherentDAO.findAdherent(id_secteur, id_activite, date_debut_contrat.getText().toString(), date_fin_contrat.getText().toString()); // TODO passer id adherent fonction findAdherent( )
+
+
+                //Récupération des adhérents éligibles
+                ArrayList<Adherent> listeAdherent = adherentDAO.findAdherent(id_secteur, id_activite, date_debut_contrat.getText().toString(), date_fin_contrat.getText().toString()); // TODO passer id adherent fonction findAdherent( )
+                // Vérifier que la liste des Adhérents potentiels n'est pas vide
+                if(listeAdherent.size() == 0) {
+                    Toast.makeText(getActivity(), "Aucun Adhérent qualifié", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Ajout Intervention: Aucun adhérent qualifié");
+                    adherent_trouve = false;
+                } else {
+                    adherent = listeAdherent.get(adherentDAO.minIntervention(listeAdherent));
+                    Log.d(TAG, "Ajout Intervention: Adherent [ " + adherent.getId() + " ] choisi");
+                    adherent_trouve = true;
+                }
+
 //                AdherentDAO.dateDepassee(myCalendar); // TODO test log
 
                 // Recupérer les dates
                 System.out.println("Date Debut: " + date_debut_contrat.getText());
                 System.out.println("Date Fin: " + date_fin_contrat.getText());
 
+                // Insertion du nouveau contrat
+                if(adherent_trouve) {
+                    Intervention intervention = new Intervention(
+                            0,
+                            secteur,
+                            activite,
+                            adherent,
+                            client,
+                            date_debut_contrat.getText().toString(),
+                            date_fin_contrat.getText().toString()
 
-                // Insert un nouveau contrat
-                Intervention intervention = new Intervention(
-                        0,
-                        secteur,
-                        activite,
-                        adherent,
-                        client,
-                        date_debut_contrat.getText().toString(),
-                        date_fin_contrat.getText().toString()
+                    );
 
-                );
-
-                try {
-                    if(champsRemplis(intervention)){ // Si tout les champs sont bien remplis on réalise l'insertion
-                        InterventionDAO interventionDAO = new InterventionDAO(getContext());
-                        interventionDAO.insertIntervention(intervention);
-
-                        // Récupérer l'ID de intervention
-                        int id_intervention= interventionDAO.retrieveLastInterventionID(getContext());
-                        intervention = interventionDAO.retrieveIntervention(id_intervention, getContext());
-
-                        ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
-                        Toast.makeText(getActivity(), "Contrat ajouté", Toast.LENGTH_SHORT).show();
+                    try {
+                        if(champsRemplis(intervention)){ // Si tout les champs sont bien remplis on réalise l'insertion
+                            InterventionDAO interventionDAO = new InterventionDAO(getContext());
+                            interventionDAO.insertIntervention(intervention);
+                            Log.d(TAG, "Ajout Intervention: Intervention ajoutée");
+                            ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
+                            Toast.makeText(getActivity(), "Intervention ajoutée", Toast.LENGTH_SHORT).show();
                         }
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
+
 
 
                 //dismiss();

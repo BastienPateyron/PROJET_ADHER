@@ -67,10 +67,10 @@ public class ClientDAO extends SQLiteDBHelper {
                 client.setId(cursor.getInt(0));
                 client.setNom(cursor.getString(1));
                 client.setPrenom(cursor.getString(2));
-                client.setPhone(cursor.getInt(3));
-                client.setNum_rue(cursor.getInt(4));
+                client.setPhone(cursor.getString(3));
+                client.setNum_rue(cursor.getString(4));
                 client.setNom_rue(cursor.getString(5));
-                client.setCp(cursor.getInt(6));
+                client.setCp(cursor.getString(6));
                 client.setVille(cursor.getString(7));
          /* Création d'un Client vide pour le remplir */
         /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
@@ -93,10 +93,10 @@ public class ClientDAO extends SQLiteDBHelper {
                         cursor.getInt(0),
                         cursor.getString(1),
                         cursor.getString(2),
-                        cursor.getInt(3),
-                        cursor.getInt(4),
+                        cursor.getString(3),
+                        cursor.getString(4),
                         cursor.getString(5),
-                        cursor.getInt(6),
+                        cursor.getString(6),
                         cursor.getString(7));
                 /* Création d'un Client vide pour le remplir */
 

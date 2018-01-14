@@ -91,10 +91,10 @@ public class Client_fragment_ajout extends Fragment {
                                     0,
                                     nom,
                                     prenom,
-                                    Integer.parseInt(phone),
-                                    Integer.parseInt(num_rue),
+                                    phone,
+                                    num_rue,
                                     nom_rue,
-                                    Integer.parseInt(codepostal),
+                                    codepostal,
                                     ville
                             );
 

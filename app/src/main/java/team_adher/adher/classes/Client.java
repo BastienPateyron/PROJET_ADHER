@@ -8,16 +8,16 @@ public class Client {
     private int id;
     private String nom;
     private String prenom;
-    private int phone;
-    private int num_rue;
+    private String phone;
+    private String num_rue;
     private String nom_rue;
-    private int cp;
+    private String cp;
     private String ville;
 
 
 
 
-    public Client(int id, String nom, String prenom, int phone, int num_rue, String nom_rue, int cp, String ville) {
+    public Client(int id, String nom, String prenom, String phone, String num_rue, String nom_rue, String cp, String ville) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -57,19 +57,19 @@ public class Client {
         this.prenom = prenom;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public int getNum_rue() {
+    public String getNum_rue() {
         return num_rue;
     }
 
-    public void setNum_rue(int num_rue) {
+    public void setNum_rue(String num_rue) {
         this.num_rue = num_rue;
     }
 
@@ -81,11 +81,11 @@ public class Client {
         this.nom_rue = nom_rue;
     }
 
-    public int getCp() {
+    public String getCp() {
         return cp;
     }
 
-    public void setCp(int cp) {
+    public void setCp(String cp) {
         this.cp = cp;
     }
 

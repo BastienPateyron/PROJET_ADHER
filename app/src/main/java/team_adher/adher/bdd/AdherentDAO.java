@@ -82,10 +82,10 @@ public class AdherentDAO extends SQLiteDBHelper {
             adherent.setRaison_sociale(cursor.getString(1));
             adherent.setNum_rue(cursor.getInt(2));
             adherent.setNom_rue(cursor.getString(3));
-            adherent.setCp(cursor.getInt(4));
+            adherent.setCp(cursor.getString(4));
             adherent.setVille(cursor.getString(5));
             adherent.setNom_responsable(cursor.getString(6));
-            adherent.setTelephone(cursor.getInt(7));
+            adherent.setTelephone(cursor.getString(7));
 
             db.close();
             return adherent;
@@ -111,10 +111,10 @@ public class AdherentDAO extends SQLiteDBHelper {
                         cursor.getString(1),
                         cursor.getInt(2),
                         cursor.getString(3),
-                        cursor.getInt(4),
+                        cursor.getString(4),
                         cursor.getString(5),
                         cursor.getString(6),
-                        cursor.getInt(7)
+                        cursor.getString(7)
                 );
 
                 listeAdherents.add(adherent);

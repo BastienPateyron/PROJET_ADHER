@@ -20,7 +20,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/button_accueil_background"
                 android:textColor="@android:color/white"
-                android:text="@string/contrats_adherents"
+                android:text="@string/adherent"
                 android:textSize="25sp"
                 android:textAllCaps="false"
                 />
@@ -35,7 +35,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/button_accueil_background"
                 android:textColor="@android:color/white"
-                android:text="@string/appels"
+                android:text="@string/client"
                 android:textSize="25sp"
                 android:textAllCaps="false"
                 />

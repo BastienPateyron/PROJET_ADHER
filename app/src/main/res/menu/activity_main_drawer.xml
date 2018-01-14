@@ -7,11 +7,11 @@
         <item
             android:id="@+id/nav_adherents"
             android:icon="@drawable/ic_menu_send"
-            android:title="Contrats Adherents" />
+            android:title="@string/adherent" />
         <item
             android:id="@+id/nav_appels"
             android:icon="@drawable/ic_menu_send"
-            android:title="Appels" />
+            android:title="@string/client" />
         <item
             android:id="@+id/nav_interventions"
             android:icon="@drawable/ic_menu_send"

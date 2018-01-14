@@ -173,12 +173,8 @@ public class AdherentDAO extends SQLiteDBHelper {
 
     public Adherent findAdherent(int idSecteur, int idActivite, String dateDebut, String dateFin){
 
-
-        // TODO implémenter findAdherent() -- Fait une requete SQL en fonction des valeurs passées en paramètre, adapte le retour de la requete, et instancie un nouvel adhérent avec les valeurs l'adhérent sélectionné
-
         SQLiteDatabase db = this.getReadableDatabase();
 
-        // TODO Ajouter tout les autres champs de l'adherent
         String fieldAdherent = "ADHERENT.ID_ADHERENT, ADHERENT.RAISON_SOCIALE_ADHERENT, ADHERENT.NUM_RUE_ADHERENT, ADHERENT.NOM_RUE_ADHERENT, ADHERENT.CP_ADHERENT, ADHERENT.VILLE_ADHERENT, ADHERENT.NOM_RESPONSABLE_ADHERENT, ADHERENT.NUM_TELEPHONE";
 
          // SELECTION SOUHAITEE AVEC UNE SEULE ACTIVITE POUR LE COUNT
@@ -205,10 +201,10 @@ public class AdherentDAO extends SQLiteDBHelper {
                         cursor.getString(1),
                         cursor.getInt(2),
                         cursor.getString(3),
-                        cursor.getInt(4),
+                        cursor.getString(4),
                         cursor.getString(5),
                         cursor.getString(6),
-                        cursor.getInt(7)
+                        cursor.getString(7)
                 );
 
                 System.out.println("Adherent " + adherent.getId() + " / nom: " + adherent.getRaison_sociale() + " / Nb Intervention: " + cursor.getInt(8));

@@ -427,8 +427,8 @@ public class Contrat_service_modif_dialog extends DialogFragment {
 
     private boolean champsRemplis(ContratService contratService) throws ParseException {
         boolean isSet = true;
-        String date_d = contratService.getDate_debut();
-        String date_f = contratService.getDate_fin();
+        String date_d = date_debut_contrat.getText().toString();
+        String date_f = date_fin_contrat.getText().toString();
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
         Date date_du_Jour = new Date();
@@ -453,7 +453,7 @@ public class Contrat_service_modif_dialog extends DialogFragment {
         } else if (contratService.getDate_fin().equals("")){
             Toast.makeText(getActivity(), "Date de fin manquante", Toast.LENGTH_SHORT).show();
             isSet = false;
-        } else if (date_debut.after(date_fin) == true){
+        } else if (date_debut.compareTo(date_fin) >0){
             Toast.makeText(getActivity(), "Date de début après la date de fin", Toast.LENGTH_SHORT).show();
             isSet = false;
         } else if (tarif_ht.getText().toString().equals("")){

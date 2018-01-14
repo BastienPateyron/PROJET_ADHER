@@ -71,7 +71,7 @@
                 android:id="@+id/button_add_contrat"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
-                android:text="Add new"
+                android:text="Nouveau"
                 android:background="@color/add_button"
                 android:layout_weight="10"
                 />

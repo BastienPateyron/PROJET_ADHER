@@ -31,7 +31,7 @@ import team_adher.adher.fragments.intervention.Intervention_fragment_ajout;
 import team_adher.adher.fragments.intervention.Intervention_fragment_modif;
 
 /**
- * Created by watson on 21/12/2017.
+ * Created by François on 21/12/2017.
  */
 
 public class Client_fragment_modif extends Fragment {
@@ -172,10 +172,12 @@ public class Client_fragment_modif extends Fragment {
             // id_Intervention = list_intervention;
             id_Intervention = adapter.getItem(i).getId();
             intervention = interventionDAO.retrieveIntervention(id_Intervention, getContext());
+            String du_jour = sdf.format(date_du_jour);
 
             String date_f = intervention.getDate_fin();
 
             try {
+                date_du_jour = sdf.parse(du_jour);
                 Date date_fin = sdf.parse(date_f);
                 System.out.println("Date_fin : " + date_fin);
                 if (date_du_jour.after(date_fin)) {

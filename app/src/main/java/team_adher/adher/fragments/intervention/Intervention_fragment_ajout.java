@@ -48,7 +48,7 @@ import team_adher.adher.classes.Secteur;
 import static android.widget.ListPopupWindow.WRAP_CONTENT;
 
 /**
- * Created by watson on 04/01/2018.
+ * Created by François on 04/01/2018.
  */
 
 public class Intervention_fragment_ajout extends DialogFragment {
@@ -80,18 +80,11 @@ public class Intervention_fragment_ajout extends DialogFragment {
         // Récupération de l'ID Adherent et de l'ID Contrat
         Bundle bundle = this.getArguments();
 
-       /*if (bundle != null) {
-            if(!(bundle.getString("id_adherent") == null)){
-                idAdherent = Integer.valueOf(bundle.get("id_adherent").toString());
-            }
-        }*/
 
 
 
 
-
-
-        // activite SPINNER 2
+        // Spinner client
         final Spinner spinner_client_cs = dialogView.findViewById(R.id.spinner_client_cs); // Création du spinner
         final ArrayList<Client> array_client; // Création de la liste de secteurs
         final ClientDAO clientDAO = new ClientDAO(getContext()); // Creation de l'object secteur DAO
@@ -115,22 +108,22 @@ public class Intervention_fragment_ajout extends DialogFragment {
         });
 
 
-        // activite SPINNER 2
-        final Spinner spinner_activite_cs = dialogView.findViewById(R.id.spinner_activite_cs); // Création du spinner
-        final ArrayList<Activite> array_activite; // Création de la liste de secteurs
-        final ActiviteDAO activiteDAO = new ActiviteDAO(getContext()); // Creation de l'object secteur DAO
-        array_activite = activiteDAO.getAllActivite(); // Remplissage de la liste des secteurs
+        // Spinner Activité
+        final Spinner spinner_activite_cs = dialogView.findViewById(R.id.spinner_activite_cs);
+        final ArrayList<Activite> array_activite;
+        final ActiviteDAO activiteDAO = new ActiviteDAO(getContext());
+        array_activite = activiteDAO.getAllActivite();
 
-        final ArrayAdapter<Activite> adapter_activite = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, array_activite); // Création de l'adapter
-        adapter_activite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Définition du style de l'adapter
-        spinner_activite_cs.setAdapter(adapter_activite); // Affectation de l'adapter au spinner
+        final ArrayAdapter<Activite> adapter_activite = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, array_activite);
+        adapter_activite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_activite_cs.setAdapter(adapter_activite);
 
         // Récupération de l'ID secteur sélectionné
         spinner_activite_cs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (adapter_activite.getItem(position).getId() == -1) { // Si l'item est l'item par défaut on fait rien
+                if (adapter_activite.getItem(position).getId() == -1) {
 
-                } else id_activite = adapter_activite.getItem(position).getId(); // On récupère l'ID du secteur selectionné
+                } else id_activite = adapter_activite.getItem(position).getId(); // é
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -244,6 +237,7 @@ public class Intervention_fragment_ajout extends DialogFragment {
                         client,
                         date_debut_contrat.getText().toString(),
                         date_fin_contrat.getText().toString()
+
                 );
 
                 try {
@@ -255,14 +249,15 @@ public class Intervention_fragment_ajout extends DialogFragment {
                         int id_intervention= interventionDAO.retrieveLastInterventionID(getContext());
                         intervention = interventionDAO.retrieveIntervention(id_intervention, getContext());
 
-
+                        ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
+                        Toast.makeText(getActivity(), "Contrat ajouté", Toast.LENGTH_SHORT).show();
                         }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(getActivity(), "Contrat ajouté", Toast.LENGTH_SHORT).show();
-                ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
-                dismiss();
+
+
+                //dismiss();
                 }
 
         });
@@ -334,8 +329,8 @@ public class Intervention_fragment_ajout extends DialogFragment {
         Date date_fin = sdf.parse(date_f);
         Date date_debut = sdf.parse(date_d);
         System.out.println("date debut" + date_debut);
-
-
+        System.out.println("date différence debut fin  = " + date_debut.compareTo(date_fin));
+        System.out.println("date différence jour debut  = " + date_du_Jour.compareTo(date_debut));
 
         // TODO véfifier si les champs obligatoires sont remplis
         if (intervention.getClient().equals("")){

@@ -28,7 +28,7 @@ import team_adher.adher.classes.Intervention;
 
 
 /**
- * Created by watson on 04/01/2018.
+ * Created by François on 04/01/2018.
  */
 
 public class Intervention_fragment_home extends Fragment {
@@ -107,12 +107,15 @@ public class Intervention_fragment_home extends Fragment {
            /* id_Intervention = list_intervention.getItem( i ).getId( );
             InterventionDAO.retrieve( idIntervention);*/
             String date_f = intervention.getDate_fin();
+            String du_jour = sdf.format(date_du_jour);
+
 
 
             try {
                 Date date_fin = sdf.parse(date_f);
+                date_du_jour = sdf.parse(du_jour);
                 System.out.println("Date_fin : " + date_fin);
-                if (date_du_jour.compareTo(date_fin) > -1) {
+                if (date_du_jour.compareTo(date_fin) > 0) {
 
                     interventionDAO.deleteIntervention(id_Intervention);
                     updateList_intervention();

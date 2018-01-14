@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDBHelper extends SQLiteOpenHelper {
     protected static final String DATABASE_NAME = "ADHER";
-    private static final int DATABASE_VERSION = 36; /* A incrémenter quand on modifie la structure de la table */
+    private static final int DATABASE_VERSION = 38; /* A incrémenter quand on modifie la structure de la table */
 
 
     /* CREATE */
@@ -90,29 +90,57 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     /* INSERTS  → Si on veut mettre des valeurs par défaut */
     /*private static final String INSERT_TABLE_ADHERANT */
-    private static final String INSERT_PUYDEDOME = "INSERT INTO SECTEUR VALUES (0, 63, 'PUY DE DOME');";
-    private static final String INSERT_ALLIER = "INSERT INTO SECTEUR VALUES (1, 09, 'ALLIER');";
+
+    // Secteur
+    private static final String INSERT_PUYDEDOME = "INSERT INTO SECTEUR VALUES (1, 63, 'PUY DE DOME');";
+    private static final String INSERT_ALLIER = "INSERT INTO SECTEUR VALUES (2, 09, 'ALLIER');";
+    private static final String INSERT_HAUTE_LOIRE = "INSERT INTO SECTEUR VALUES (3, 43, 'HAUTE-LOIRE');";
+    private static final String INSERT_CANTAL = "INSERT INTO SECTEUR VALUES (4, 15, 'HAUTE-LOIRE');";
+
+    // Adhérents
     private static final String INSERT_ADHERANT = "INSERT INTO ADHERENT VALUES " +
-            "(0, 'SARL', 15, 'Rue du marteau', 63000, 'Clermont Ferrand', 'Ledoux',0455855365);";
-    private static final String INSERT_CLIENT1 = "INSERT INTO CLIENT VALUES" +
-            "(0, 'Leger', 'Paul', 0601020301, 33, 'rue du ravallement',63000,'Clermont Ferrand');";
+            "(1, 'SARL Ledoux', 15, 'Rue du marteau', 63000, 'Clermont Ferrand', 'Ledoux Fred',0658545421);";
+    private static final String INSERT_ADHERANT1 = "INSERT INTO ADHERENT VALUES " +
+            "(2, 'EARL Frère & co', 78, 'Rue du marteau', 63000, 'Clermont Ferrand', 'Tapis Benoit',0473685236);";
+    private static final String INSERT_ADHERANT2 = "INSERT INTO ADHERENT VALUES " +
+            "(3, 'SARL La Pinède', 98, 'Rue du marteau', 63000, 'Clermont Ferrand', 'Lehollandais Francis',0473855365);";
+    private static final String INSERT_ADHERANT3 = "INSERT INTO ADHERENT VALUES " +
+            "(4, 'EARL Des Briques', 23, 'Boulevard de la Brique', 09000, 'Vichy', 'Pompadour George',0636325417);";
+
+    //Client
+
     private static final String INSERT_CLIENT = "INSERT INTO CLIENT VALUES" +
-            "(1, 'Ricard', 'Bob', 0601020301, 29, 'rue de la Fuite',09000,'Vichy');";
+            "(1, 'Leger', 'Paul', 0601020301, 33, 'rue du ravallement',63000,'Clermont Ferrand');";
+    private static final String INSERT_CLIENT1 = "INSERT INTO CLIENT VALUES" +
+            "(2, 'Ricard', 'Bob', 0658742698, 29, 'rue de la Fuite',09000,'Vichy');";
+    private static final String INSERT_CLIENT2 = "INSERT INTO CLIENT VALUES" +
+            "(3, 'Dupont', 'Henri', 0605455345, 89, 'rue de la panne',43000,'Puy en Velay');";
+    private static final String INSERT_CLIENT3 = "INSERT INTO CLIENT VALUES" +
+            "(4, 'Macaron', 'Manuel', 0473568978, 3, 'Avenue du débouchage',15000,'Aurillac');";
+
+    //Activité
+
     private static final String INSERT_PLOMBIER = "INSERT INTO ACTIVITE VALUES " +
-            "(0, 'Plombier');";
+            "(1, 'Plombier');";
     private static final String INSERT_PEINTRE = "INSERT INTO ACTIVITE VALUES " +
-            "(1, 'Peintre');";
+            "(2, 'Peintre');";
     private static final String INSERT_MACON = "INSERT INTO ACTIVITE VALUES " +
-            "(2, 'Maçon');";
+            "(3, 'Maçon');";
     private static final String INSERT_ELECTRICIEN = "INSERT INTO ACTIVITE VALUES " +
-            "(3, 'Electricien');";
+            "(4, 'Electricien');";
+
+    //Contrat Service
     private static final String INSERT_CONTRAT_SERVICE ="INSERT INTO CONTRAT_SERVICE VALUES" +
-            "(0, 0, 0, '20/12/2017', '30/02/2018' , 25.00);";
+            "(1, 1, 1, '20/12/2017', '30/02/2018' , 25.00);";
+
+    // Intervention
     private static final String INSERT_CONTRAT_INTERVENTION = "INSERT INTO CONTRAT_INTERVENTION VALUES" +
-            "(0, 0, 0, 0, 0, '21/12/2017', '24/02/2018' );";
+            "(1, 1, 1, 1, 1, '21/12/2017', '24/03/2018' );";
+
+    //Concerner
     private static final String INSERT_CONCERNER = "INSERT INTO CONCERNER VALUES" +
-            "(0, 0);";
-    //private static final String INSERT_CLIENT = "INSERT INTO CLIENT VALUES (0,"
+            "(1, 1);";
+
 
 
 
@@ -132,17 +160,35 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_CONTRAT_INTERVENTION);
 
         /* Inserts  Jeu d'essai*/
+        //Secteur :
         db.execSQL(INSERT_PUYDEDOME);
         db.execSQL(INSERT_ALLIER);
+        db.execSQL(INSERT_HAUTE_LOIRE);
+        db.execSQL(INSERT_CANTAL);
+
+        //ACtivités :
         db.execSQL(INSERT_PLOMBIER);
         db.execSQL(INSERT_ELECTRICIEN);
         db.execSQL(INSERT_PEINTRE);
         db.execSQL(INSERT_MACON);
+
+        //Clients :
         db.execSQL(INSERT_CLIENT);
         db.execSQL(INSERT_CLIENT1);
+        db.execSQL(INSERT_CLIENT2);
+        db.execSQL(INSERT_CLIENT3);
+        //Adhérents
         db.execSQL(INSERT_ADHERANT);
+        db.execSQL(INSERT_ADHERANT1);
+        db.execSQL(INSERT_ADHERANT2);
+        db.execSQL(INSERT_ADHERANT3);
+        //Contrat Service :
         db.execSQL(INSERT_CONTRAT_SERVICE);
+
+        //Intervention :
         db.execSQL(INSERT_CONTRAT_INTERVENTION);
+
+        //Concerner :
         db.execSQL(INSERT_CONCERNER);
 
     }

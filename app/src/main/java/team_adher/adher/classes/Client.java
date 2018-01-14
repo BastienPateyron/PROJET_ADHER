@@ -1,7 +1,7 @@
 package team_adher.adher.classes;
 
 /**
- * Created by pezed on 19/12/17. hihi
+ * Created by bastien on 19/12/17.
  */
 
 public class Client {
@@ -99,12 +99,12 @@ public class Client {
 
     @Override
     public String toString(){
-        return nom; /* Retourne uniquement le nom du secteur */
+        String stc = nom + " " + prenom ;
+        return stc;
     }
 
-    public String toString1(){
-        return prenom; /* Retourne uniquement le nom du secteur */
+
     }
-}
+
 
 

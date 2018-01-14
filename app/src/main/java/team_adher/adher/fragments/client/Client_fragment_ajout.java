@@ -17,7 +17,7 @@ import team_adher.adher.bdd.ClientDAO;
 import team_adher.adher.classes.Client;
 
 /**
- * Created by watson on 21/12/2017.
+ * Created by François on 21/12/2017.
  */
 
 public class Client_fragment_ajout extends Fragment {

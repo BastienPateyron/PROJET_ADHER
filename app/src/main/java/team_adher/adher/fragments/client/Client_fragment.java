@@ -25,7 +25,7 @@ import team_adher.adher.classes.Client;
 
 
 /**
- * Created by basti on 11/29/2017.
+ * Created by François on 11/29/2017.
  */
 
 public class Client_fragment extends Fragment {

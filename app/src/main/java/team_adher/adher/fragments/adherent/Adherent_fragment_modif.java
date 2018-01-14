@@ -182,9 +182,10 @@ public class Adherent_fragment_modif extends Fragment {
 
 
             String date_f = contrat_Service.getDate_fin();
-
+            String du_jour = sdf.format(date_du_jour);
 
             try {
+                date_du_jour = sdf.parse(du_jour);
                 Date date_fin = sdf.parse(date_f);
                 System.out.println("Date_fin : " + date_fin);
                 if (date_du_jour.after(date_fin)) {

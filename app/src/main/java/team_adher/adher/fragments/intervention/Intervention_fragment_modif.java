@@ -47,7 +47,7 @@ import team_adher.adher.classes.Intervention;
 import team_adher.adher.classes.Secteur;
 
 /**
- * Created by watson on 04/01/2018.
+ * Created by François on 04/01/2018.
  */
 
 public class Intervention_fragment_modif extends DialogFragment {
@@ -300,7 +300,17 @@ public class Intervention_fragment_modif extends DialogFragment {
                             interventionDAO.updateIntervention(intervention);
 
 
-
+                            if (getShowsDialog())
+                                getDialog().cancel();
+                            else
+                                dismiss();
+                            ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
+                            Toast.makeText(getActivity(), "Intervention modifié", Toast.LENGTH_SHORT).show();
+                            dismiss();
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(),"Erreur : intervention non modifié",Toast.LENGTH_SHORT).show();
 
                         }
                     } catch (ParseException e) {
@@ -308,13 +318,13 @@ public class Intervention_fragment_modif extends DialogFragment {
                     }
                     try {
                         if(champsRemplis(intervention)){
-                            ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
+
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    Toast.makeText(getActivity(), "Intervention modifié", Toast.LENGTH_SHORT).show();
-                     dismiss();
+
+                    // dismiss();
 
 
                 }
@@ -386,8 +396,8 @@ public class Intervention_fragment_modif extends DialogFragment {
 
     private boolean champsRemplis(Intervention intervention) throws ParseException {
         boolean isSet = true;
-        String date_d = intervention.getDate_debut();
-        String date_f = intervention.getDate_fin();
+        String date_d = date_debut_contrat.getText().toString();
+        String date_f = date_fin_contrat.getText().toString();
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
         Date date_du_Jour = new Date();
@@ -396,7 +406,7 @@ public class Intervention_fragment_modif extends DialogFragment {
         System.out.println("Date du jour :" + date_du_Jour);
         Date date_fin = sdf.parse(date_f);
         Date date_debut = sdf.parse(date_d);
-        System.out.println("date debut" + date_debut);
+        System.out.println("date " + date_debut.compareTo(date_fin));
         if (intervention.getClient().equals("")) {
             Toast.makeText(getActivity(), "Client manquant", Toast.LENGTH_SHORT).show();
             isSet = false;
@@ -410,11 +420,13 @@ public class Intervention_fragment_modif extends DialogFragment {
         } else if (intervention.getDate_debut().equals("")) {
             Toast.makeText(getActivity(), "Date de début manquante", Toast.LENGTH_SHORT).show();
             isSet = false;
-        } else if (date_debut.after(date_fin) == true){
-            Toast.makeText(getActivity(), "Date de début après la date de fin", Toast.LENGTH_SHORT).show();
-            isSet = false;
+
         } else if (intervention.getDate_fin().equals("")) {
             Toast.makeText(getActivity(), "Date de fin manquante", Toast.LENGTH_SHORT).show();
+            isSet = false;
+
+    } else if (date_debut.compareTo(date_fin) > 0) {
+            Toast.makeText(getActivity(), "Date de début après la date de fin", Toast.LENGTH_SHORT).show();
             isSet = false;
         }
         return isSet;

@@ -92,10 +92,10 @@ public class Adherent_fragment_ajout extends Fragment {
                                     raison_sociale,
                                     Integer.parseInt(num_rue),
                                     nom_rue,
-                                    Integer.parseInt(cp),
+                                    cp,
                                     ville,
                                     responsable,
-                                    Integer.parseInt(tel) //
+                                    tel//
                             );
 
                     adherentDAO.insertAdherent(adherent);

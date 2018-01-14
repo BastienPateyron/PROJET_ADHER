@@ -9,17 +9,17 @@ public class Adherent {
     private String raison_sociale;
     private int num_rue;
     private String nom_rue;
-    private int cp;
+    private String cp;
     private String ville;
     private String nom_responsable;
-    private int telephone;
+    private String telephone;
     private int nbInterventions;
 
     public Adherent(){
 
     }
 
-    public Adherent(int id, String raison_sociale, int num_rue, String nom_rue, int cp, String ville, String nom_responsable, int telephone) {
+    public Adherent(int id, String raison_sociale, int num_rue, String nom_rue, String cp, String ville, String nom_responsable, String telephone) {
         this.id = id;
         this.raison_sociale = raison_sociale;
         this.num_rue = num_rue;
@@ -62,11 +62,11 @@ public class Adherent {
         this.nom_rue = nom_rue;
     }
 
-    public int getCp() {
+    public String getCp() {
         return cp;
     }
 
-    public void setCp(int cp) {
+    public void setCp(String cp) {
         this.cp = cp;
     }
 
@@ -86,11 +86,11 @@ public class Adherent {
         this.nom_responsable = nom_responsable;
     }
 
-    public int getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 

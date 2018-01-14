@@ -98,8 +98,8 @@ public class Adherent_fragment_modif extends Fragment {
                 adherent_modify.setNum_rue(Integer.valueOf(value_num_rue.getText().toString()));
                 adherent_modify.setNom_rue(value_nom_rue.getText().toString());
                 adherent_modify.setVille(value_ville.getText().toString());
-                adherent_modify.setCp(Integer.valueOf(value_cp.getText().toString()));
-                adherent_modify.setTelephone(Integer.valueOf(value_tel.getText().toString()));
+                adherent_modify.setCp(value_cp.getText().toString());
+                adherent_modify.setTelephone(value_tel.getText().toString());
 
                 adherentDAO.updateAdherent(adherent_modify);
                 MainActivity.closekeyboard(getContext(), myView);

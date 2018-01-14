@@ -97,10 +97,10 @@ public class Client_fragment_modif extends Fragment {
                 client_modify.setId(id_client);
                 client_modify.setNom(value_nom.getText().toString());
                 client_modify.setPrenom(value_prenom.getText().toString());
-                client_modify.setPhone(Integer.valueOf(value_phone.getText().toString()));
-                client_modify.setNum_rue(Integer.valueOf(value_num_rue.getText().toString()));
+                client_modify.setPhone(value_phone.getText().toString());
+                client_modify.setNum_rue(value_num_rue.getText().toString());
                 client_modify.setNom_rue(value_nom_rue.getText().toString());
-                client_modify.setCp(Integer.valueOf(value_cp.getText().toString()));
+                client_modify.setCp(value_cp.getText().toString());
                 client_modify.setVille(value_ville.getText().toString());
 
                 clientDAO.updateClient(client_modify);

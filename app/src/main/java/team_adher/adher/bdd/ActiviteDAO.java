@@ -113,16 +113,6 @@ public class ActiviteDAO extends SQLiteDBHelper {
         db.close();
     }
 
-   /* public void deleteActivite(int id_activite)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        db.delete(TABLE_ACTIVITE, COL_ID + "=" + id_activite, null);
-
-        db.close();
-    }*/
-
-
     public  void deleteActivite(Context context, int id_activite) {
 
         SQLiteDatabase db = this.getWritableDatabase();

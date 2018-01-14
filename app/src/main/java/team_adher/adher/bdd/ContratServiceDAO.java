@@ -165,6 +165,42 @@ public class ContratServiceDAO extends SQLiteDBHelper {
         return listeContratServices;
     }
 
+    //  Lister les  ContratService ID Secteur
+    public ArrayList<ContratService> getAllContratServiceOfSecteur(Context context, int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        SecteurDAO secteurDAO = new SecteurDAO(context);
+        AdherentDAO adherentDAO = new AdherentDAO(context);
+
+        ArrayList<ContratService> listeContratServices = new ArrayList<ContratService>();
+        String query = "SELECT * FROM CONTRAT_SERVICE WHERE ID_SECTEUR = " + id + ";";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){ /* Si le curseur est pas null, on le place au début de la liste */
+            do{
+                ContratService contratService = new ContratService(); /* Création d'un contratService vide pour le remplir */
+
+                System.out.println("Retreive_secteur( " + cursor.getInt(1) + " )");
+                Secteur secteur = secteurDAO.retrieveSecteur(cursor.getInt(1));
+
+
+                System.out.println("Retrieve_adherent( " + id + " )");
+                Adherent adherent = adherentDAO.retrieveAdherent(id);
+
+                /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
+                contratService.setId(cursor.getInt(0)); // Colonne numéro ??? (0 = id, 1 = numero, 2 = nom)
+                contratService.setSecteur(secteur);
+                contratService.setAdherent(adherent);
+                contratService.setDate_debut(cursor.getString(3));
+                contratService.setDate_fin(cursor.getString(4));
+                contratService.setTarif_ht(cursor.getDouble(5));
+
+                listeContratServices.add(contratService);
+            }while(cursor.moveToNext()); /* Tant que l'élément suivant existe */
+        }
+        db.close();
+        return listeContratServices;
+    }
+
     public void updateContratService(ContratService contratService){
 
         SQLiteDatabase db = this.getWritableDatabase();

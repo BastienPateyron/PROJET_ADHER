@@ -104,6 +104,7 @@ public class SecteurDAO extends SQLiteDBHelper{
         for(ContratService cs: list_contratServices) contratServiceDAO.deleteContratService(context, cs.getId());
         // Supprimer les interventions  liées à  l'activité
         InterventionDAO interventionDAO = new InterventionDAO(context);
+
         // TODO getAllIntervention récupère TOUTES LES INTERVENTIONS
         ArrayList<Intervention> list_intervention = interventionDAO.getAllInterventionOf(context, "secteur", id_secteur);
 

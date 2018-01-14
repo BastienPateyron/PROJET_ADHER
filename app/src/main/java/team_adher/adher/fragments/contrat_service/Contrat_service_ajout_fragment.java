@@ -63,6 +63,7 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
     private static FragmentManager fragmentManager;
     private boolean state_for_spinner = false;
     private ContratService contratService;
+    final HashMap<Integer, Integer> id_activite = new HashMap<Integer, Integer>(); //Retiens les id des activites deja ajoutés
 
     // Elements pour l'instanciation du contrat
     private int idSecteur;
@@ -138,7 +139,7 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
         final TextView value_act2 = (TextView) dialogView.findViewById(R.id.value_act2);
         final TextView value_act3 = (TextView) dialogView.findViewById(R.id.value_act3);
 
-        final HashMap<Integer, Integer> id_activite = new HashMap<Integer, Integer>(); //Retiens les id des activites deja ajoutés
+
 
         spinner_activite_cs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -176,7 +177,6 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
                     }
                 }
             } // to close the onItemSelected
-
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
@@ -341,12 +341,15 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
         String du_jour = sdf.format(date_du_Jour);
         date_du_Jour = sdf.parse(du_jour);
 
-        System.out.println("Date du jour :" + date_du_Jour);
+        System.out.println("Date du jour: " + date_du_Jour);
         Date date_fin = sdf.parse(date_f);
         Date date_debut = sdf.parse(date_d);
-        System.out.println("date debut" + date_debut);
+        System.out.println("Date debut: " + date_debut);
         if (contratService.getSecteur().equals("")){
             Toast.makeText(getActivity(), "Secteur manquant", Toast.LENGTH_SHORT).show();
+            isSet = false;
+        } if (id_activite.size() == 0){
+            Toast.makeText(getActivity(), "Activité manquante", Toast.LENGTH_SHORT).show();
             isSet = false;
         } else if(contratService.getAdherent().equals("")){
             Toast.makeText(getActivity(), "Adhérent manquant", Toast.LENGTH_SHORT).show();
@@ -355,10 +358,10 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
             Toast.makeText(getActivity(), "Date de début manquante", Toast.LENGTH_SHORT).show();
             isSet = false;
         } else if (date_debut.after(date_fin) == true){
-            Toast.makeText(getActivity(), "Date de début après la date de fin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Date de Fin antérieure à la Date de Début", Toast.LENGTH_SHORT).show();
             isSet = false;
         } else if (date_du_Jour.compareTo(date_debut) > 0){
-            Toast.makeText(getActivity(), "Date de début est après la date du jour", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Date de début dépassée", Toast.LENGTH_SHORT).show();
             isSet = false;
         } else if (contratService.getDate_fin().equals("")){
             Toast.makeText(getActivity(), "Date de fin manquante", Toast.LENGTH_SHORT).show();

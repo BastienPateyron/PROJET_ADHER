@@ -15,7 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import team_adher.adher.MainActivity;
 import team_adher.adher.R;
@@ -27,14 +31,19 @@ import team_adher.adher.fragments.intervention.Intervention_fragment_ajout;
 import team_adher.adher.fragments.intervention.Intervention_fragment_modif;
 
 /**
- * Created by watson on 21/12/2017.
+ * Created by François on 21/12/2017.
  */
 
 public class Client_fragment_modif extends Fragment {
 
     View myView;
     private int id_client;
-
+    int i;
+    private Intervention intervention;
+    private int id_Intervention;
+    String myFormat = "dd/MM/yyyy"; //In which you need put here
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+    Date date_du_jour = new Date();
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
@@ -125,7 +134,7 @@ public class Client_fragment_modif extends Fragment {
         });
 
         InterventionDAO interventionDAO = new InterventionDAO(getContext());
-        ArrayList<Intervention> list_intervention = interventionDAO.getAllInterventionOf(getContext(), "CLIent",  id_client);
+        ArrayList<Intervention> list_intervention = interventionDAO.getAllInterventionOf(getContext(), "client",  id_client);
 
 
         final ArrayAdapter<Intervention> adapter = new ArrayAdapter<>(myView.getContext(), android.R.layout.simple_list_item_1, list_intervention);
@@ -159,7 +168,29 @@ public class Client_fragment_modif extends Fragment {
 
             }
         });
+        for (i = 0; i < list_intervention.size(); i++) {
+            // id_Intervention = list_intervention;
+            id_Intervention = adapter.getItem(i).getId();
+            intervention = interventionDAO.retrieveIntervention(id_Intervention, getContext());
+            String du_jour = sdf.format(date_du_jour);
 
+            String date_f = intervention.getDate_fin();
+
+            try {
+                date_du_jour = sdf.parse(du_jour);
+                Date date_fin = sdf.parse(date_f);
+                System.out.println("Date_fin : " + date_fin);
+                if (date_du_jour.after(date_fin)) {
+
+                    interventionDAO.deleteIntervention(id_Intervention);
+                    updateList();
+                } else {
+                    System.out.println("La date est à jour");
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
         return myView;
 

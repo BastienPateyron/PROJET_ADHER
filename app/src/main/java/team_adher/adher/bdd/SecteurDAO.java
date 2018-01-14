@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import team_adher.adher.classes.ContratService;
+import team_adher.adher.classes.Intervention;
 import team_adher.adher.classes.Secteur;
 
 /**
@@ -20,6 +22,7 @@ public class SecteurDAO extends SQLiteDBHelper{
     private static final String COL_ID = "ID_SECTEUR";
     private static final String COL_NUM = "NUM_SECTEUR";
     private static final String COL_NOM = "NOM_SECTEUR";
+
 
     public SecteurDAO(Context context) {
         super(context);
@@ -90,9 +93,22 @@ public class SecteurDAO extends SQLiteDBHelper{
         db.close();
     }
 
-    public void deleteSecteur(int id_secteur)
+    public void deleteSecteur(int id_secteur, Context context)
     {
         SQLiteDatabase db = this.getWritableDatabase();
+
+        // Supprimer les ContratsService avec cet ID activité
+        ContratServiceDAO contratServiceDAO = new ContratServiceDAO(context);
+        ArrayList<ContratService> list_contratServices = contratServiceDAO.getAllContratServiceOfAdherent(context, id_secteur);
+
+        for(ContratService cs: list_contratServices) contratServiceDAO.deleteContratService(context, cs.getId());
+        // Supprimer les interventions  liées à  l'activité
+        InterventionDAO interventionDAO = new InterventionDAO(context);
+        // TODO getAllIntervention récupère TOUTES LES INTERVENTIONS
+        ArrayList<Intervention> list_intervention = interventionDAO.getAllInterventionOf(context, "secteur", id_secteur);
+
+        for(Intervention cs: list_intervention) interventionDAO.deleteIntervention(cs.getId());
+
 
         db.delete(TABLE_SECTEUR, COL_ID + "=" + id_secteur, null);
 

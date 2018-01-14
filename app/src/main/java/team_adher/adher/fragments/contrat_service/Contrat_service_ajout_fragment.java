@@ -21,9 +21,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -246,30 +248,34 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
                 ContratService contratService = new ContratService(0, secteur, adherent, date_debut_contrat.getText().toString(), date_fin_contrat.getText().toString(), Double.valueOf(tarif_ht.getText().toString()));
 
                 System.out.println("Tarif HT: " + tarif_ht.getText().toString());
-                if(champsRemplis(contratService)){ // Si tout les champs sont bien remplis on réalise l'insertion
-                    ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
-                    contratServiceDAO.insertContratService(contratService);
+                try {
+                    if(champsRemplis(contratService)){ // Si tout les champs sont bien remplis on réalise l'insertion
+                        ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
+                        contratServiceDAO.insertContratService(contratService);
 
-                    // Récupérer l'ID du contrat ajouté
-                    int idContratService = contratServiceDAO.retrieveLastContratServiceID(getContext());
-                    contratService = contratServiceDAO.retrieveContratService(idContratService, getContext());
+                        // Récupérer l'ID du contrat ajouté
+                        int idContratService = contratServiceDAO.retrieveLastContratServiceID(getContext());
+                        contratService = contratServiceDAO.retrieveContratService(idContratService, getContext());
 
-                    // Faire une boucle qui Insert les activites dans la table avec cet IDContratService
-                    ConcernerDAO concernerDAO = new ConcernerDAO(getContext());
-                    Concerner concerner = new Concerner();
+                        // Faire une boucle qui Insert les activites dans la table avec cet IDContratService
+                        ConcernerDAO concernerDAO = new ConcernerDAO(getContext());
+                        Concerner concerner = new Concerner();
 
-                    for (Integer i : id_activite.keySet()) { // On va lister la liste des clés "id_activite.keySet()"
-                        System.out.println("idActivite ajoutée " + i + ": " +id_activite.get(i));
+                        for (Integer i : id_activite.keySet()) { // On va lister la liste des clés "id_activite.keySet()"
+                            System.out.println("idActivite ajoutée " + i + ": " +id_activite.get(i));
 
-                        concerner.setContratService(contratService);
+                            concerner.setContratService(contratService);
 
-                        Activite activite = activiteDAO.retrieveActivite(id_activite.get(i));
-                        concerner.setActivite(activite);
+                            Activite activite = activiteDAO.retrieveActivite(id_activite.get(i));
+                            concerner.setActivite(activite);
 
-                        concernerDAO.insertConcerner(concerner);
+                            concernerDAO.insertConcerner(concerner);
+                        }
+                        Toast.makeText(getActivity(), "Contrat ajouté", Toast.LENGTH_SHORT).show();
+                        dismiss();
                     }
-                    Toast.makeText(getActivity(), "Contrat ajouté", Toast.LENGTH_SHORT).show();
-                    dismiss();
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -325,9 +331,20 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
         }
     }
 
-    private boolean champsRemplis(ContratService contratService){
+    private boolean champsRemplis(ContratService contratService) throws ParseException {
         boolean isSet = true;
-        // TODO véfifier si les champs obligatoires sont remplis
+        String date_d = contratService.getDate_debut();
+        String date_f = contratService.getDate_fin();
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        Date date_du_Jour = new Date();
+        String du_jour = sdf.format(date_du_Jour);
+        date_du_Jour = sdf.parse(du_jour);
+
+        System.out.println("Date du jour :" + date_du_Jour);
+        Date date_fin = sdf.parse(date_f);
+        Date date_debut = sdf.parse(date_d);
+        System.out.println("date debut" + date_debut);
         if (contratService.getSecteur().equals("")){
             Toast.makeText(getActivity(), "Secteur manquant", Toast.LENGTH_SHORT).show();
             isSet = false;
@@ -337,9 +354,16 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
         } else if (contratService.getDate_debut().equals("")){
             Toast.makeText(getActivity(), "Date de début manquante", Toast.LENGTH_SHORT).show();
             isSet = false;
+        } else if (date_debut.after(date_fin) == true){
+            Toast.makeText(getActivity(), "Date de début après la date de fin", Toast.LENGTH_SHORT).show();
+            isSet = false;
+        } else if (date_du_Jour.compareTo(date_debut) > 0){
+            Toast.makeText(getActivity(), "Date de début est après la date du jour", Toast.LENGTH_SHORT).show();
+            isSet = false;
         } else if (contratService.getDate_fin().equals("")){
             Toast.makeText(getActivity(), "Date de fin manquante", Toast.LENGTH_SHORT).show();
             isSet = false;
+
         } else if (tarif_ht.getText().toString().equals("")){
             tarif_ht.setText(0); // On met le tarif à 0
             Toast.makeText(getActivity(), "Date de fin manquante", Toast.LENGTH_SHORT).show();

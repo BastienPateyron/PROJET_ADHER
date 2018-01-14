@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity
     }
     @Override
     public void onBackPressed() {
-
         Home_Fragment home = new Home_Fragment();
         changeFragment(home);
 
@@ -80,6 +79,19 @@ public class MainActivity extends AppCompatActivity
 //        } else {
 //            super.onBackPressed();
 //        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout); /* cast en (DrawerLayout) */
+
+        Intervention_fragment_home ifh = new Intervention_fragment_home();
+
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+
+        } else {
+
+            super.onBackPressed();
+
+        }
     }
 
     @Override

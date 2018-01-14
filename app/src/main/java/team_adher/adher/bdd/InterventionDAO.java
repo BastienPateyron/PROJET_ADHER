@@ -150,7 +150,6 @@ public class InterventionDAO extends SQLiteDBHelper {
         return listeIntervention;
     }
 
-    // TODO cette méthode est importante
     // Sélectionne toutes les interventions qui concernent l'id de la table renseignée
     public ArrayList<Intervention> getAllInterventionOf(Context context, String nomTable, int id){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -217,6 +216,7 @@ public class InterventionDAO extends SQLiteDBHelper {
 
     public void deleteIntervention(int id_intervention)
     {
+        System.out.println("Id intervention à supprimer: " + id_intervention);
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.delete(TABLE_INTERVENTION, COL_ID + "=" + id_intervention, null);

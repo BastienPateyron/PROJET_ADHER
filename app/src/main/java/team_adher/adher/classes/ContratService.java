@@ -8,6 +8,7 @@ public class ContratService {
     private int id;
     private Secteur secteur;
     private Adherent adherent;
+    private Concerner concerner;
     private String date_debut;
     private String date_fin;
     private double tarif_ht;

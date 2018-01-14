@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Concerner;
 import team_adher.adher.classes.ContratService;
+import team_adher.adher.classes.Intervention;
 import team_adher.adher.classes.Secteur;
 
 import static android.content.ContentValues.TAG;
@@ -189,6 +190,7 @@ public class ContratServiceDAO extends SQLiteDBHelper {
         ArrayList<Concerner> concernerArrayList = concernerDAO.getAllConcernerOfContratService(context, id_contrat_service);
 
         for(Concerner concerner:concernerArrayList) concernerDAO.deleteConcerner(concerner.getContratService().getId(), concerner.getActivite().getId());
+
 
         db.delete(TABLE_CONTRAT_SERVICE, COL_ID + "=" + id_contrat_service, null);
         System.out.println("Contrat de Service Supprimé");

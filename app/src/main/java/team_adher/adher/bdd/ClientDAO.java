@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import team_adher.adher.classes.Client;
+import team_adher.adher.classes.Intervention;
 
 /**
  * Created by pezed on 19/12/17.
@@ -125,6 +126,13 @@ public class ClientDAO extends SQLiteDBHelper {
     /*DELETE Client*/
     public void deleteClient(Context context, int id_client)
     {
+
+        InterventionDAO interventionDAO = new InterventionDAO(context);
+        // TODO getAllIntervention récupère TOUTES LES INTERVENTIONS
+        ArrayList<Intervention> list_intervention = interventionDAO.getAllInterventionOf(context, "client", id_client);
+
+        for(Intervention cs: list_intervention) interventionDAO.deleteIntervention(cs.getId());
+
         SQLiteDatabase db = this.getWritableDatabase();
 
         // TODO Supprimer les interventions liées au Client

@@ -29,6 +29,9 @@ public class Activite_fragment_modif extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         myView = inflater.inflate(R.layout.activite_layout_modif, container, false);
+
+        getActivity().setTitle("Modifier Activité");
+
         Bundle bundle = this.getArguments();
 
         if(bundle != null){

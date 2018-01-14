@@ -25,9 +25,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,7 +47,7 @@ import team_adher.adher.classes.Intervention;
 import team_adher.adher.classes.Secteur;
 
 /**
- * Created by watson on 04/01/2018.
+ * Created by François on 04/01/2018.
  */
 
 public class Intervention_fragment_modif extends DialogFragment {
@@ -119,7 +121,7 @@ public class Intervention_fragment_modif extends DialogFragment {
                             InterventionDAO interventionDAO = new InterventionDAO(getContext());
                             interventionDAO.deleteIntervention(id_Intervention);
                             if (getShowsDialog()) getDialog().cancel();
-                            else dismiss();
+                            else ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());;
                         }
                     }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -253,13 +255,15 @@ public class Intervention_fragment_modif extends DialogFragment {
             });
 
 
+
+
             //BUTTON
             Button buttonPos = (Button) dialogView.findViewById(R.id.pos_button);
             buttonPos.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    // -- CREATION DU  CONTRAT_SERVICE --
+                    // -- Modification de l'intervention --
 
                     // Récupérer un client
                     System.out.println("Id Client: " + id_Client);
@@ -282,25 +286,47 @@ public class Intervention_fragment_modif extends DialogFragment {
                     System.out.println("Date Debut: " + date_debut_contrat.getText());
                     System.out.println("Date Fin: " + date_fin_contrat.getText());
 
-                    if (champsRemplis(intervention)) { // Si tout les champs sont bien remplis on réalise l'insertion
-                        intervention.setClient(client);
-                        intervention.setActivite(activite);
-                        intervention.setSecteur(secteur);
-                        intervention.setAdherent(adherent);
-                        intervention.setDate_debut(date_debut_contrat.getText().toString());
-                        intervention.setDate_fin(date_fin_contrat.getText().toString());
+                    try {
+                        if (champsRemplis(intervention)) { // Si tout les champs sont bien remplis on réalise l'insertion
+                            intervention.setClient(client);
+                            intervention.setActivite(activite);
+                            intervention.setSecteur(secteur);
+                            intervention.setAdherent(adherent);
+                            intervention.setDate_debut(date_debut_contrat.getText().toString());
+                            intervention.setDate_fin(date_fin_contrat.getText().toString());
 
-                        // Update
-                        InterventionDAO interventionDAO = new InterventionDAO(getContext());
-                        interventionDAO.updateIntervention(intervention);
+                            // Update
+                            InterventionDAO interventionDAO = new InterventionDAO(getContext());
+                            interventionDAO.updateIntervention(intervention);
 
 
+                            if (getShowsDialog())
+                                getDialog().cancel();
+                            else
+                                dismiss();
+                            ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
+                            Toast.makeText(getActivity(), "Intervention modifié", Toast.LENGTH_SHORT).show();
+                            dismiss();
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(),"Erreur : intervention non modifié",Toast.LENGTH_SHORT).show();
 
-
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                    Toast.makeText(getActivity(), "Intervention modifié", Toast.LENGTH_SHORT).show();
-                    ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
-                    dismiss();
+                    try {
+                        if(champsRemplis(intervention)){
+
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    // dismiss();
+
+
                 }
 
             });
@@ -313,7 +339,7 @@ public class Intervention_fragment_modif extends DialogFragment {
                 if (getShowsDialog())
                     getDialog().cancel();
                 else
-                    //dismiss();
+                    dismiss();
                 ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
             }
         });
@@ -368,8 +394,19 @@ public class Intervention_fragment_modif extends DialogFragment {
         return index;
     }
 
-    private boolean champsRemplis(Intervention intervention) {
+    private boolean champsRemplis(Intervention intervention) throws ParseException {
         boolean isSet = true;
+        String date_d = date_debut_contrat.getText().toString();
+        String date_f = date_fin_contrat.getText().toString();
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        Date date_du_Jour = new Date();
+        String du_jour = sdf.format(date_du_Jour);
+        date_du_Jour = sdf.parse(du_jour);
+        System.out.println("Date du jour :" + date_du_Jour);
+        Date date_fin = sdf.parse(date_f);
+        Date date_debut = sdf.parse(date_d);
+        System.out.println("date " + date_debut.compareTo(date_fin));
         if (intervention.getClient().equals("")) {
             Toast.makeText(getActivity(), "Client manquant", Toast.LENGTH_SHORT).show();
             isSet = false;
@@ -383,8 +420,13 @@ public class Intervention_fragment_modif extends DialogFragment {
         } else if (intervention.getDate_debut().equals("")) {
             Toast.makeText(getActivity(), "Date de début manquante", Toast.LENGTH_SHORT).show();
             isSet = false;
+
         } else if (intervention.getDate_fin().equals("")) {
             Toast.makeText(getActivity(), "Date de fin manquante", Toast.LENGTH_SHORT).show();
+            isSet = false;
+
+    } else if (date_debut.compareTo(date_fin) > 0) {
+            Toast.makeText(getActivity(), "Date de début après la date de fin", Toast.LENGTH_SHORT).show();
             isSet = false;
         }
         return isSet;
@@ -399,5 +441,10 @@ public class Intervention_fragment_modif extends DialogFragment {
         if (editext_state.equals("FIN_CONTRAT")) {
             date_fin_contrat.setText(sdf.format(myCalendar.getTime()));
         }
+    }
+    private void compare_date()
+    {
+
+
     }
 }

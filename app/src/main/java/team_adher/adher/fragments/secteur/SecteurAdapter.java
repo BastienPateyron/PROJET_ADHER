@@ -81,7 +81,7 @@ public class SecteurAdapter extends ArrayAdapter<Secteur>{
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 SecteurDAO secteurDAO = new SecteurDAO(getContext());
-                                secteurDAO.deleteSecteur(secteur.getId());
+                                secteurDAO.deleteSecteur(secteur.getId(), getContext());
                                 secteurs.remove(position);
                                 notifyDataSetChanged();
                             }

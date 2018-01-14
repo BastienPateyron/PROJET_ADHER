@@ -27,7 +27,7 @@ public class Intervention {
         this.date_fin = date_fin;
     }
     public String toString(){
-        String str = client.getNom() + " " + secteur.getNumero() + " - " + date_debut + " - " + date_fin;
+        String str = adherent.getRaison_sociale() + " : " + client.getNom() + " " + client.getPrenom() + " - " + secteur.getNumero() +" - " + activite.getNom() + " \n " + date_debut + " - " + date_fin;
         return str;
     }
 
@@ -86,4 +86,6 @@ public class Intervention {
     public void setDate_fin(String date_fin) {
         this.date_fin = date_fin;
     }
+
+
 }

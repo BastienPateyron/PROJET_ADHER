@@ -26,9 +26,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -322,36 +324,40 @@ public class Contrat_service_modif_dialog extends DialogFragment {
                 // Insert un nouveau contrat
 
                 System.out.println("Tarif HT: " + tarif_ht.getText().toString());
-                if(champsRemplis(contratService)){ // Si tout les champs sont bien remplis on récupère les champs
-                    contratService.setSecteur(secteur);
-                    contratService.setAdherent(adherent);
-                    contratService.setDate_debut(date_debut_contrat.getText().toString());
-                    contratService.setDate_fin(date_fin_contrat.getText().toString());
-                    contratService.setTarif_ht(Double.valueOf(tarif_ht.getText().toString()));
+                try {
+                    if(champsRemplis(contratService)){ // Si tout les champs sont bien remplis on récupère les champs
+                        contratService.setSecteur(secteur);
+                        contratService.setAdherent(adherent);
+                        contratService.setDate_debut(date_debut_contrat.getText().toString());
+                        contratService.setDate_fin(date_fin_contrat.getText().toString());
+                        contratService.setTarif_ht(Double.valueOf(tarif_ht.getText().toString()));
 
-                    // On lance l'UPDATE
-                    ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
-                    contratServiceDAO.updateContratService(contratService);
+                        // On lance l'UPDATE
+                        ContratServiceDAO contratServiceDAO = new ContratServiceDAO(getContext());
+                        contratServiceDAO.updateContratService(contratService);
 
-                    // Faire une boucle qui Update les activites dans la table avec cet IDContratService
-                    ConcernerDAO concernerDAO = new ConcernerDAO(getContext());
-                    ArrayList<Concerner> list_concernerOld = new ArrayList<>();
+                        // Faire une boucle qui Update les activites dans la table avec cet IDContratService
+                        ConcernerDAO concernerDAO = new ConcernerDAO(getContext());
+                        ArrayList<Concerner> list_concernerOld = new ArrayList<>();
 
-                    // Récupération de la liste des acivités de ce contrat
-                    list_concernerOld = concernerDAO.getAllConcernerOfContratService(getContext(), idContrat);
-                    System.out.println("Current list size = " + id_activite.size());
-                    for (Integer act : id_activite.keySet()) { // On va lister la liste des clés "id_activite.keySet()"
-                        System.out.println("idActivite ajoutée " + act + ": " +id_activite.get(act));
-                        Activite activite = activiteDAO.retrieveActivite(id_activite.get(act));
-                        Concerner concerner = new Concerner(contratService, activite);
+                        // Récupération de la liste des acivités de ce contrat
+                        list_concernerOld = concernerDAO.getAllConcernerOfContratService(getContext(), idContrat);
+                        System.out.println("Current list size = " + id_activite.size());
+                        for (Integer act : id_activite.keySet()) { // On va lister la liste des clés "id_activite.keySet()"
+                            System.out.println("idActivite ajoutée " + act + ": " +id_activite.get(act));
+                            Activite activite = activiteDAO.retrieveActivite(id_activite.get(act));
+                            Concerner concerner = new Concerner(contratService, activite);
 
-                        concernerDAO.insertConcerner(concerner);
+                            concernerDAO.insertConcerner(concerner);
+                        }
+
+                        // On gère plus les activités durant la mise à jour
+                        Toast.makeText(getActivity(), "Contrat mis à jour", Toast.LENGTH_SHORT).show();
+
+                        dismiss();
                     }
-
-                    // On gère plus les activités durant la mise à jour
-                    Toast.makeText(getActivity(), "Contrat mis à jour", Toast.LENGTH_SHORT).show();
-
-                    dismiss();
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -419,8 +425,21 @@ public class Contrat_service_modif_dialog extends DialogFragment {
         return index;
     }
 
-    private boolean champsRemplis(ContratService contratService){
+    private boolean champsRemplis(ContratService contratService) throws ParseException {
         boolean isSet = true;
+        String date_d = date_debut_contrat.getText().toString();
+        String date_f = date_fin_contrat.getText().toString();
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+        Date date_du_Jour = new Date();
+        String du_jour = sdf.format(date_du_Jour);
+        date_du_Jour = sdf.parse(du_jour);
+        System.out.println("Date du jour :" + date_du_Jour);
+        Date date_fin = sdf.parse(date_f);
+        Date date_debut = sdf.parse(date_d);
+        System.out.println("date debut" + date_debut);
+
+
         if (contratService.getSecteur().equals("")){
             Toast.makeText(getActivity(), "Secteur manquant", Toast.LENGTH_SHORT).show();
             isSet = false;
@@ -430,8 +449,12 @@ public class Contrat_service_modif_dialog extends DialogFragment {
         } else if (contratService.getDate_debut().equals("")){
             Toast.makeText(getActivity(), "Date de début manquante", Toast.LENGTH_SHORT).show();
             isSet = false;
+
         } else if (contratService.getDate_fin().equals("")){
             Toast.makeText(getActivity(), "Date de fin manquante", Toast.LENGTH_SHORT).show();
+            isSet = false;
+        } else if (date_debut.compareTo(date_fin) >0){
+            Toast.makeText(getActivity(), "Date de début après la date de fin", Toast.LENGTH_SHORT).show();
             isSet = false;
         } else if (tarif_ht.getText().toString().equals("")){
             tarif_ht.setText(0); // On met le tarif à 0

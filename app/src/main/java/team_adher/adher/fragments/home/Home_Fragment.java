@@ -30,7 +30,7 @@ public class Home_Fragment extends Fragment{
         button_manage();
         return myView;
     }
-    /* FONCTION DE REMI */
+
     Button button_accueil_contrats_adherents;
     Button button_accueil_appels;
     Button button_accueil_interventions;

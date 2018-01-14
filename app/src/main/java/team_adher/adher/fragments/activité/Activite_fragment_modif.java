@@ -3,17 +3,19 @@ package team_adher.adher.fragments.activité;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import team_adher.adher.MainActivity;
 import team_adher.adher.R;
 import team_adher.adher.bdd.ActiviteDAO;
 import team_adher.adher.classes.Activite;
-import team_adher.adher.fragments.activité.Activite_fragment;
+
 
 
 /**
@@ -53,15 +55,21 @@ public class Activite_fragment_modif extends Fragment {
             @Override
             public void onClick(View v) {
                 Activite activite_modify = new Activite();
-
                 activite_modify.setId(id_activite);
                 activite_modify.setNom(value_activite_nom.getText().toString());
+                String nom_activite = value_activite_nom.getText().toString();
+                if ( TextUtils.isEmpty(nom_activite)) {
+                    Toast.makeText(getContext(), "Nom activité manquant", Toast.LENGTH_SHORT).show();
+                    validate = false;
+                }
+
+                if (validate)
+                {
 
                 activiteDAO.updateActivite(activite_modify);
                 MainActivity.closekeyboard(getContext(),myView);
-                ((MainActivity)getActivity()).changeFragment(new Activite_fragment());            }
+                ((MainActivity)getActivity()).changeFragment(new Activite_fragment());           } }
         });
-
         Button button_delete_activite = (Button) myView.findViewById(R.id.button_delete_activite);
 
         button_delete_activite.setOnClickListener(new View.OnClickListener() {

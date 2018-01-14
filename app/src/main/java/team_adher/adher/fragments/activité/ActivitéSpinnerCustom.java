@@ -6,7 +6,7 @@ import android.widget.ArrayAdapter;
 import team_adher.adher.classes.Activite;
 
 /**
- * Created by R on 18/12/2017.
+ * Created by Bastien on 18/12/2017.
  */
 
 public class ActivitéSpinnerCustom extends ArrayAdapter<Activite> {

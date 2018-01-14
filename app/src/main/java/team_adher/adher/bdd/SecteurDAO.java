@@ -33,7 +33,7 @@ public class SecteurDAO extends SQLiteDBHelper{
 
         values.put(COL_NOM, secteur.getNom());
         values.put(COL_NUM, secteur.getNumero());
-        // values.put(COL_IMAGE_PATH, categorie.getImage_path());
+
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -70,8 +70,8 @@ public class SecteurDAO extends SQLiteDBHelper{
         if(cursor.moveToFirst()){ /* Si le curseur est pas null, on le place au début de la liste */
             do{
                 Secteur secteur = new Secteur(); /* Création d'un secteur vide pour le remplir */
-                /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
-                secteur.setId(cursor.getInt(0)); // Colonne numéro ??? (0 = id, 1 = numero, 2 = nom)
+
+                secteur.setId(cursor.getInt(0));
                 secteur.setNumero(cursor.getInt(1));
                 secteur.setNom(cursor.getString(2));
                 listeSecteurs.add(secteur);
@@ -97,12 +97,12 @@ public class SecteurDAO extends SQLiteDBHelper{
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Supprimer les ContratsService avec cet ID activité
+        // Supprimer les ContratsService avec cet ID secteur
         ContratServiceDAO contratServiceDAO = new ContratServiceDAO(context);
         ArrayList<ContratService> list_contratServices = contratServiceDAO.getAllContratServiceOfSecteur(context, id_secteur);
         for(ContratService cs: list_contratServices) contratServiceDAO.deleteContratService(context, cs.getId());
 
-        // Supprimer les interventions  liées à  l'activité
+        // Supprimer les interventions  avec cet id secteur
         InterventionDAO interventionDAO = new InterventionDAO(context);
         ArrayList<Intervention> list_intervention = interventionDAO.getAllInterventionOf(context, "secteur", id_secteur);
 

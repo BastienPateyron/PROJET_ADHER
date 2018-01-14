@@ -41,7 +41,7 @@ public class Client_fragment_modif extends Fragment {
     int i;
     private Intervention intervention;
     private int id_Intervention;
-    String myFormat = "dd/MM/yyyy"; //In which you need put here
+    String myFormat = "dd/MM/yyyy";
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
     Date date_du_jour = new Date();
 
@@ -115,8 +115,8 @@ public class Client_fragment_modif extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Bundle arg = new Bundle(); // On crée un nouveau bundle pour passer l'ID adhérent
-                arg.putString("id_client",String.valueOf(id_client)); // On lui donne la valeur de l'id ds id_adherent
+                Bundle arg = new Bundle(); // On crée un nouveau bundle pour passer l'ID client
+                arg.putString("id_client",String.valueOf(id_client)); // On lui donne la valeur de l'id client
                 Intervention_fragment_ajout dialogFrag = new Intervention_fragment_ajout(); // On crée un nouveau dialog
                 dialogFrag.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
@@ -129,7 +129,7 @@ public class Client_fragment_modif extends Fragment {
                 dialogFrag.setArguments(arg); // On définit les arguments du dialog avec notre bundle
                 FragmentManager fm = getFragmentManager();
 
-                dialogFrag.show(fm,"gr"); // On ouvre le dialogue
+                dialogFrag.show(fm,"gr");
             }
         });
 
@@ -169,7 +169,7 @@ public class Client_fragment_modif extends Fragment {
             }
         });
         for (i = 0; i < list_intervention.size(); i++) {
-            // id_Intervention = list_intervention;
+
             id_Intervention = adapter.getItem(i).getId();
             intervention = interventionDAO.retrieveIntervention(id_Intervention, getContext());
             String du_jour = sdf.format(date_du_jour);

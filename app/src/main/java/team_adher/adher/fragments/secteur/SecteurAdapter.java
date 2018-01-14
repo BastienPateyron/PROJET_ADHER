@@ -57,11 +57,11 @@ public class SecteurAdapter extends ArrayAdapter<Secteur>{
             viewHolder.delete_item = (ImageButton) convertView.findViewById(R.id.secteur_item_trash);
 
 
-            // Cache the viewHolder object inside the fresh view
+
             convertView.setTag(viewHolder);
         }
         else {
-            // View is being recycled, retrieve the viewHolder object from tag
+
             viewHolder = (SecteurHolder) convertView.getTag();
         }
         // setText avec notre object

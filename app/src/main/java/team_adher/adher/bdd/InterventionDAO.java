@@ -134,8 +134,8 @@ public class InterventionDAO extends SQLiteDBHelper {
                 Adherent adherent = adherentDAO.retrieveAdherent(cursor.getInt(3));
                 Client client = clientDAO.retrieveClient (cursor.getInt(4));
 
-                /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
-                intervention.setId(cursor.getInt(0)); // Colonne numéro ??? (0 = id, 1 = secteur, 2 = activite)
+
+                intervention.setId(cursor.getInt(0));
                 intervention.setSecteur(secteur);
                 intervention.setActivite(activite);
                 intervention.setAdherent(adherent);
@@ -183,8 +183,8 @@ public class InterventionDAO extends SQLiteDBHelper {
                 Adherent adherent = adherentDAO.retrieveAdherent(cursor.getInt(3));
                 Client client = clientDAO.retrieveClient (cursor.getInt(4));
 
-                /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
-                intervention.setId(cursor.getInt(0)); // Colonne numéro ??? (0 = id, 1 = secteur, 2 = activite)
+
+                intervention.setId(cursor.getInt(0));
                 intervention.setSecteur(secteur);
                 intervention.setActivite(activite);
                 intervention.setAdherent(adherent);

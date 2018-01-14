@@ -4,24 +4,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
-import android.provider.SyncStateContract;
-import android.util.Log;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-
-import team_adher.adher.classes.Activite;
-import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.ContratService;
 import team_adher.adher.classes.Intervention;
-import team_adher.adher.classes.Secteur;
 
 import static android.content.ContentValues.TAG;
 
@@ -81,7 +72,7 @@ public class AdherentDAO extends SQLiteDBHelper {
                 null, null, null, null); // Options
         if (cursor != null){
             cursor.moveToFirst();
-//            System.out.println("retrieve_adherent(): Cursor = " + cursor.getPosition());
+
             /* On récupère chaque élément dans l'ordre de la table (Haut en bas) */
             adherent.setId(cursor.getInt(0));
             adherent.setRaison_sociale(cursor.getString(1));
@@ -221,9 +212,7 @@ public class AdherentDAO extends SQLiteDBHelper {
         return listeAdherents;
     }
 
-    /* Compare la date en paramètre avec la date actuelle.
-     Si date.now( ) < date retourne faux
-     sinon retourne vrai */
+
     public static boolean dateDepassee(Calendar dateCalendar){
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

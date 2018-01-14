@@ -57,7 +57,7 @@ public class Activite_fragment_ajout extends Fragment {
 
                     activiteDAO.insertActivite(activite);
 
-                    //Return to the consultation adherent
+
                     ((MainActivity) getActivity()).changeFragment(new Activite_fragment());
                 }
             }

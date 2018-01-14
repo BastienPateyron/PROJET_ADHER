@@ -51,8 +51,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class Contrat_service_ajout_fragment extends DialogFragment {
 
-    private List<String> arrayList_secteur = new ArrayList<>();
-    private List<String> arrayList_activite = new ArrayList<>();
+
     private ImageButton btn_delete;
     private EditText date_debut_contrat;
     private EditText date_fin_contrat;
@@ -295,8 +294,7 @@ public class Contrat_service_ajout_fragment extends DialogFragment {
         return dialogView;
     }
 
-    // If shown as dialog, set the width of the dialog window
-    // onCreateView --> onActivityCreated -->  onViewStateRestored --> onStart --> onResume
+
     @Override
     public void onResume() {
         super.onResume();

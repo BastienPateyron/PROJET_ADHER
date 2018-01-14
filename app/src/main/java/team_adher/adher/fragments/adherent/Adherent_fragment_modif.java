@@ -170,10 +170,8 @@ public class Adherent_fragment_modif extends Fragment {
             }
         });
         /*
-        *
-        * Tjs crash si setString in champ number (activite, adherent, secteur..) + set inputtype=number dans les layouts
-        *
-        * */
+
+        */
 
         for (i = 0; i < list_contratService.size(); i++) {
             // id_Intervention = list_intervention;

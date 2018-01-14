@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Concerner;
 import team_adher.adher.classes.ContratService;
-import team_adher.adher.classes.Intervention;
 import team_adher.adher.classes.Secteur;
 
 import static android.content.ContentValues.TAG;
@@ -114,8 +113,8 @@ public class ContratServiceDAO extends SQLiteDBHelper {
                 Adherent adherent = adherentDAO.retrieveAdherent(cursor.getInt(2));
 
 
-                /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
-                contratService.setId(cursor.getInt(0)); // Colonne numéro ??? (0 = id, 1 = numero, 2 = nom)
+
+                contratService.setId(cursor.getInt(0));
                 contratService.setSecteur(secteur);
                 contratService.setAdherent(adherent);
                 contratService.setDate_debut(cursor.getString(3));
@@ -150,8 +149,8 @@ public class ContratServiceDAO extends SQLiteDBHelper {
                 System.out.println("Retrieve_adherent( " + id + " )");
                 Adherent adherent = adherentDAO.retrieveAdherent(id);
 
-                /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
-                contratService.setId(cursor.getInt(0)); // Colonne numéro ??? (0 = id, 1 = numero, 2 = nom)
+
+                contratService.setId(cursor.getInt(0));
                 contratService.setSecteur(secteur);
                 contratService.setAdherent(adherent);
                 contratService.setDate_debut(cursor.getString(3));
@@ -186,8 +185,8 @@ public class ContratServiceDAO extends SQLiteDBHelper {
                 System.out.println("Retrieve_adherent( " + id + " )");
                 Adherent adherent = adherentDAO.retrieveAdherent(id);
 
-                /* On peut mettre le cursor.getInt etc ... dans le constructeur directe */
-                contratService.setId(cursor.getInt(0)); // Colonne numéro ??? (0 = id, 1 = numero, 2 = nom)
+
+                contratService.setId(cursor.getInt(0));
                 contratService.setSecteur(secteur);
                 contratService.setAdherent(adherent);
                 contratService.setDate_debut(cursor.getString(3));

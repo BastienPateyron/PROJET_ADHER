@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import team_adher.adher.classes.Activite;
 import team_adher.adher.classes.Adherent;
-import team_adher.adher.classes.Concerner;
 import team_adher.adher.classes.ContratService;
 import team_adher.adher.classes.Intervention;
 
@@ -118,16 +117,16 @@ public class ActiviteDAO extends SQLiteDBHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Supprimer les CONCERNER avec cet ID activité
-        ConcernerDAO concernerDAO = new ConcernerDAO(context);
-        ArrayList<Concerner> concernerArrayList = new ArrayList<>();
-        concernerArrayList = concernerDAO.getAllConcernerOfActivite(context, id_activite);
+        // Supprimer les ContratsService avec cet ID activité
+        ContratServiceDAO contratServiceDAO = new ContratServiceDAO(context);
+        ArrayList<ContratService> list_contratServices = contratServiceDAO.getAllContratServiceOfAdherent(context, id_activite);
 
-        for(Concerner concerner: concernerArrayList) concernerDAO.deleteConcerner(concerner.getContratService().getId(), concerner.getActivite().getId());
-
+        for(ContratService cs: list_contratServices) contratServiceDAO.deleteContratService(context, cs.getId());
         // Supprimer les interventions  liées à  l'activité
         InterventionDAO interventionDAO = new InterventionDAO(context);
+        // TODO getAllIntervention récupère TOUTES LES INTERVENTIONS
         ArrayList<Intervention> list_intervention = interventionDAO.getAllInterventionOf(context, "activite", id_activite);
+
         for(Intervention cs: list_intervention) interventionDAO.deleteIntervention(cs.getId());
 
         // Supprimer l'activite

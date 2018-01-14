@@ -28,7 +28,7 @@ public class Adherent_fragment_ajout extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.adherents_layout_add, container, false);
 
-        // getActivity().setTitle("Nouvel Adhérent");
+
 
         Button button_add_adherent = (Button) myView.findViewById(R.id.button_add_adherent);
 
@@ -100,7 +100,7 @@ public class Adherent_fragment_ajout extends Fragment {
 
                     adherentDAO.insertAdherent(adherent);
 
-                    //Return to the consultation adherent
+
                     ((MainActivity) getActivity()).changeFragment(new Adherent_fragment());
                 }
             }

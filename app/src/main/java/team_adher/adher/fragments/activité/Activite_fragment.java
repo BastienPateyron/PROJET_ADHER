@@ -20,7 +20,7 @@ import team_adher.adher.MainActivity;
 import team_adher.adher.R;
 import team_adher.adher.bdd.ActiviteDAO;
 import team_adher.adher.classes.Activite;
-import team_adher.adher.fragments.adherent.Adherent_fragment_modif;
+
 
 /**
  * Created by basti on 12/5/2017.
@@ -49,7 +49,7 @@ public class Activite_fragment extends Fragment {
             }
         });
 //
-        /* Création d'une liste de raisons sociales */
+        /* Création d'une liste de Activité */
         ActiviteDAO activiteDAO = new ActiviteDAO(getContext());
         listeActivite = activiteDAO.getAllActivite();
 

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -14,8 +13,6 @@ import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Concerner;
 import team_adher.adher.classes.ContratService;
 import team_adher.adher.classes.Secteur;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by R on 16/12/2017.
@@ -26,13 +23,10 @@ public class ConcernerDAO extends SQLiteDBHelper {
     private static final String TABLE_CONCERNER = "CONCERNER";
     private static final String COL_ID_CONTRAT = "ID_CONTRAT";
     private static final String COL_ID_ACTIVITE = "ID_ACTIVITE";
-    private Context context;
 
     public ConcernerDAO(Context context) {
         super(context);
-        this.context = context;
     }
-
 
     /* INSERT CONCERNER */
     public boolean insertConcerner(Concerner concerner){
@@ -52,7 +46,7 @@ public class ConcernerDAO extends SQLiteDBHelper {
     /*RETRIEVE CONCERNER*/
     public Concerner retrieveConcernerByContrat(int id, Context context){
         SQLiteDatabase db = this.getReadableDatabase();
-
+// TODO COmprendre comme ça marche ici
 
         Cursor cursor = db.query(TABLE_CONCERNER,
                 new String[] { COL_ID_ACTIVITE,  COL_ID_CONTRAT},
@@ -124,31 +118,7 @@ public class ConcernerDAO extends SQLiteDBHelper {
         }
         db.close();
         return listeConcerner;
-    }
 
-    public ArrayList<Concerner> getAllConcernerOfActivite(Context context, int id){
-        SQLiteDatabase db = this.getReadableDatabase();
-        ActiviteDAO activiteDAO = new ActiviteDAO(context);
-        ContratServiceDAO contratServiceDAO = new ContratServiceDAO(context);
-
-        ArrayList<Concerner> listeConcerner= new ArrayList<>();
-        String query = "SELECT * FROM CONCERNER WHERE ID_ACTIVITE = " + id + ";";
-        Cursor cursor = db.rawQuery(query,null);
-
-        if (cursor.moveToFirst()){
-            do {
-                Concerner concerner = new Concerner();
-                ContratService contratService = contratServiceDAO.retrieveContratService(cursor.getInt(0), context);
-                Activite activite = activiteDAO.retrieveActivite(cursor.getInt(1));
-
-                concerner.setContratService(contratService);
-                concerner.setActivite(activite);
-
-                listeConcerner.add(concerner);
-            } while(cursor.moveToNext());
-        }
-        db.close();
-        return listeConcerner;
     }
 
     public void updateConcerner(Concerner concerner){
@@ -170,12 +140,6 @@ public class ConcernerDAO extends SQLiteDBHelper {
     public void deleteConcerner(int id_contrat, int id_activite)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        // Supprimer le contrat de service associé
-
-        ContratServiceDAO contratServiceDAO = new ContratServiceDAO(context);
-        contratServiceDAO.deleteContratService(context, id_contrat);
-        Log.d(TAG, "deleteConcerner: Contrat associé supprimé");
 
         db.delete(TABLE_CONCERNER, COL_ID_CONTRAT + " = ? AND " + COL_ID_ACTIVITE + "= ?", new String[]{
                 Integer.toString(id_contrat),

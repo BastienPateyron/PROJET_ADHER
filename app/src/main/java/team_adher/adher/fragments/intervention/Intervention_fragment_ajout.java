@@ -265,12 +265,13 @@ public class Intervention_fragment_ajout extends DialogFragment {
                             InterventionDAO interventionDAO = new InterventionDAO(getContext());
                             interventionDAO.insertIntervention(intervention);
                             Log.d(TAG, "Ajout Intervention: Intervention ajoutée");
+
                             if (getShowsDialog())
                                 getDialog().cancel();
                             else
                                 dismiss();
                             ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
-                            Toast.makeText(getActivity(), "Intervention modifié", Toast.LENGTH_SHORT).show();
+
 
                             Toast.makeText(getActivity(), "Intervention ajoutée", Toast.LENGTH_SHORT).show();
                         }

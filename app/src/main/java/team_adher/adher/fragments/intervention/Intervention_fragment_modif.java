@@ -299,19 +299,19 @@ public class Intervention_fragment_modif extends DialogFragment {
                             InterventionDAO interventionDAO = new InterventionDAO(getContext());
                             interventionDAO.updateIntervention(intervention);
 
+                            if (getShowsDialog())
+                                getDialog().cancel();
+                            else
+                                dismiss();
+                            ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
 
+
+                            Toast.makeText(getActivity(), "Intervention mofifié", Toast.LENGTH_SHORT).show();
 
                         }
                         else
                         {
                             Toast.makeText(getActivity(),"Erreur : intervention non modifié",Toast.LENGTH_SHORT).show();
-
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        if(champsRemplis(intervention)){
 
                         }
                     } catch (ParseException e) {

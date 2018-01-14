@@ -171,12 +171,6 @@ public class ConcernerDAO extends SQLiteDBHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Supprimer le contrat de service associé
-
-        ContratServiceDAO contratServiceDAO = new ContratServiceDAO(context);
-        contratServiceDAO.deleteContratService(context, id_contrat);
-        Log.d(TAG, "deleteConcerner: Contrat associé supprimé");
-
         db.delete(TABLE_CONCERNER, COL_ID_CONTRAT + " = ? AND " + COL_ID_ACTIVITE + "= ?", new String[]{
                 Integer.toString(id_contrat),
                 Integer.toString(id_activite)

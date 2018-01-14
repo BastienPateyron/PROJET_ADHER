@@ -37,14 +37,12 @@ public class Activite_fragment_ajout extends Fragment {
             public void onClick(View v) {
                 EditText value_nom_activite = (EditText) myView.findViewById(R.id.value_activite_nom);
 
-
                 String nom_activite = value_nom_activite.getText().toString();
-
 
                 if ( TextUtils.isEmpty(nom_activite)) {
                     Toast.makeText(getContext(), "Nom activité manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
-                }
+                } else validate = true;
 
                 if (validate)
                 {

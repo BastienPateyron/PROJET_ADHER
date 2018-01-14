@@ -120,9 +120,8 @@ public class ActiviteDAO extends SQLiteDBHelper {
 
         // Supprimer les CONCERNER avec cet ID activité
         ConcernerDAO concernerDAO = new ConcernerDAO(context);
-        ArrayList<Concerner> concernerArrayList = new ArrayList<>();
+        ArrayList<Concerner> concernerArrayList;
         concernerArrayList = concernerDAO.getAllConcernerOfActivite(context, id_activite);
-
         for(Concerner concerner: concernerArrayList) concernerDAO.deleteConcerner(concerner.getContratService().getId(), concerner.getActivite().getId());
 
         // Supprimer les interventions  liées à  l'activité

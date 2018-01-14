@@ -54,31 +54,25 @@ public class Adherent_fragment_ajout extends Fragment {
                 if ( TextUtils.isEmpty(raison_sociale)) {
                     Toast.makeText(getContext(), "Raison sociale manquante", Toast.LENGTH_SHORT).show();
                     validate = false;
-                }
-                if (TextUtils.isEmpty(responsable)) {
+                } else if (TextUtils.isEmpty(responsable)) {
                     Toast.makeText(getContext(), "Nom responsable manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
-                }
-                if (TextUtils.isEmpty(tel)) {
+                } else if (TextUtils.isEmpty(tel)) {
                     Toast.makeText(getContext(), "Numéro de téléphone manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
-                }
-                if (TextUtils.isEmpty(num_rue)) {
+                } else if (TextUtils.isEmpty(num_rue)) {
                     Toast.makeText(getContext(), "Numero de rue manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
-                }
-                if (TextUtils.isEmpty(nom_rue)) {
+                } else if (TextUtils.isEmpty(nom_rue)) {
                     Toast.makeText(getContext(), "Nom de rue manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
-                }
-                if (TextUtils.isEmpty(ville)) {
+                } else if (TextUtils.isEmpty(ville)) {
                     Toast.makeText(getContext(), "Ville manquante", Toast.LENGTH_SHORT).show();
                     validate = false;
-                }
-                if (TextUtils.isEmpty(cp) ) {
+                } else if (TextUtils.isEmpty(cp) ) {
                     Toast.makeText(getContext(), "Code postal manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
-                }
+                } else validate = true;
 
 
                 if (validate)

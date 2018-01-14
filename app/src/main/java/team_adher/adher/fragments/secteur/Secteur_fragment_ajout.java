@@ -42,11 +42,10 @@ public class Secteur_fragment_ajout extends Fragment {
                 if ( TextUtils.isEmpty(numero_secteur)) {
                     Toast.makeText(getContext(), "Numero secteur manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
-                }
-                if (TextUtils.isEmpty(nom_secteur)) {
+                } else if (TextUtils.isEmpty(nom_secteur)) {
                     Toast.makeText(getContext(), "Nom secteur manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
-                }
+                } else validate = true;
 
                 if (validate)
                 {

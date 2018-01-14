@@ -300,13 +300,7 @@ public class Intervention_fragment_modif extends DialogFragment {
                             interventionDAO.updateIntervention(intervention);
 
 
-                            if (getShowsDialog())
-                                getDialog().cancel();
-                            else
-                                dismiss();
-                            ((MainActivity) getActivity()).changeFragment(new Intervention_fragment_home());
-                            Toast.makeText(getActivity(), "Intervention modifié", Toast.LENGTH_SHORT).show();
-                            dismiss();
+
                         }
                         else
                         {

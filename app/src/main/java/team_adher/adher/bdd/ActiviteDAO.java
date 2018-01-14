@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import team_adher.adher.classes.Activite;
 import team_adher.adher.classes.Adherent;
 import team_adher.adher.classes.Concerner;
-import team_adher.adher.classes.ContratService;
 import team_adher.adher.classes.Intervention;
 
 /**

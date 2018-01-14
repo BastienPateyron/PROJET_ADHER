@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDBHelper extends SQLiteOpenHelper {
     protected static final String DATABASE_NAME = "ADHER";
-    private static final int DATABASE_VERSION = 32; /* A incrémenter quand on modifie la structure de la table */
+    private static final int DATABASE_VERSION = 33; /* A incrémenter quand on modifie la structure de la table */
 
 
     /* CREATE */

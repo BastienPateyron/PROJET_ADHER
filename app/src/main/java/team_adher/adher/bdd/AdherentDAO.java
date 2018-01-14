@@ -182,16 +182,17 @@ public class AdherentDAO extends SQLiteDBHelper {
         // TODO Ajouter tout les autres champs de l'adherent
         String fieldAdherent = "ADHERENT.ID_ADHERENT, ADHERENT.RAISON_SOCIALE_ADHERENT, ADHERENT.NUM_RUE_ADHERENT, ADHERENT.NOM_RUE_ADHERENT, ADHERENT.CP_ADHERENT, ADHERENT.VILLE_ADHERENT, ADHERENT.NOM_RESPONSABLE_ADHERENT, ADHERENT.NUM_TELEPHONE";
 
-        // CONTRAT_INTERVENTION.ID_ADHERENT
-        String query = "SELECT " + fieldAdherent + " , COUNT(*) AS 'interventionCount'" +
-                "FROM ADHERENT, CONTRAT_INTERVENTION, CONTRAT_SERVICE, CONCERNER, ACTIVITE, SECTEUR " +
-                "WHERE ADHERENT.ID_ADHERENT = CONTRAT_SERVICE.ID_ADHERENT " +
-                "AND CONTRAT_SERVICE.ID_SECTEUR = SECTEUR.ID_SECTEUR " +
-                "AND CONTRAT_SERVICE.ID_CONTRAT_SERVICE = CONCERNER.ID_CONTRAT " +
-                "AND CONCERNER.ID_ACTIVITE = ACTIVITE.ID_ACTIVITE " +
-                "AND SECTEUR.ID_SECTEUR = " + idSecteur + " " +
-                "AND ACTIVITE.ID_ACTIVITE = " + idActivite + " " +
-                "GROUP BY ADHERENT.ID_ADHERENT;";
+         // SELECTION SOUHAITEE AVEC UNE SEULE ACTIVITE POUR LE COUNT
+        String query = "SELECT " + fieldAdherent + ", COUNT(CONTRAT_INTERVENTION.ID_ADHERENT) AS 'NB_INTERV' " +
+            "FROM ADHERENT, CONTRAT_SERVICE, CONCERNER, ACTIVITE, SECTEUR " +
+            "LEFT JOIN CONTRAT_INTERVENTION ON ADHERENT.ID_ADHERENT = CONTRAT_INTERVENTION.ID_ADHERENT " +
+            "WHERE ADHERENT.ID_ADHERENT = CONTRAT_SERVICE.ID_ADHERENT " +
+            "AND CONTRAT_SERVICE.ID_SECTEUR = SECTEUR.ID_SECTEUR " +
+            "AND CONTRAT_SERVICE.ID_CONTRAT_SERVICE = CONCERNER.ID_CONTRAT " +
+            "AND CONCERNER.ID_ACTIVITE = ACTIVITE.ID_ACTIVITE " +
+            "AND SECTEUR.ID_SECTEUR = " + idSecteur + " " +
+            "AND ACTIVITE.ID_ACTIVITE = " + idActivite + " " +
+            "GROUP BY ADHERENT.ID_ADHERENT;";
 
         /* Requete */
 
@@ -210,9 +211,12 @@ public class AdherentDAO extends SQLiteDBHelper {
                         cursor.getString(6),
                         cursor.getInt(7)
                 );
+
                 System.out.println("Adherent " + adherent.getId() + " / nom: " + adherent.getRaison_sociale() + " / Nb Intervention: " + cursor.getInt(8));
 
                 adherent.setNbInterventions(cursor.getInt(8));
+
+
                 listeAdherents.add(adherent);
             }while(cursor.moveToNext()); /* Tant que l'élément suivant existe */
 

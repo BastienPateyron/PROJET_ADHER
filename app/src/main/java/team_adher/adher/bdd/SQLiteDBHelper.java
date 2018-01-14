@@ -95,7 +95,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static final String INSERT_PUYDEDOME = "INSERT INTO SECTEUR VALUES (1, 63, 'PUY DE DOME');";
     private static final String INSERT_ALLIER = "INSERT INTO SECTEUR VALUES (2, 09, 'ALLIER');";
     private static final String INSERT_HAUTE_LOIRE = "INSERT INTO SECTEUR VALUES (3, 43, 'HAUTE-LOIRE');";
-    private static final String INSERT_CANTAL = "INSERT INTO SECTEUR VALUES (4, 15, 'HAUTE-LOIRE');";
+    private static final String INSERT_CANTAL = "INSERT INTO SECTEUR VALUES (4, 15, 'CANTAL');";
 
     // Adhérents
     private static final String INSERT_ADHERANT = "INSERT INTO ADHERENT VALUES " +

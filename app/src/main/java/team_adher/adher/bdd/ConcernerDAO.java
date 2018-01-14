@@ -118,7 +118,31 @@ public class ConcernerDAO extends SQLiteDBHelper {
         }
         db.close();
         return listeConcerner;
+    }
 
+    public ArrayList<Concerner> getAllConcernerOfActivite(Context context, int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ActiviteDAO activiteDAO = new ActiviteDAO(context);
+        ContratServiceDAO contratServiceDAO = new ContratServiceDAO(context);
+
+        ArrayList<Concerner> listeConcerner= new ArrayList<>();
+        String query = "SELECT * FROM CONCERNER WHERE ID_ACTIVITE = " + id + ";";
+        Cursor cursor = db.rawQuery(query,null);
+
+        if (cursor.moveToFirst()){
+            do {
+                Concerner concerner = new Concerner();
+                ContratService contratService = contratServiceDAO.retrieveContratService(cursor.getInt(0), context);
+                Activite activite = activiteDAO.retrieveActivite(cursor.getInt(1));
+
+                concerner.setContratService(contratService);
+                concerner.setActivite(activite);
+
+                listeConcerner.add(concerner);
+            } while(cursor.moveToNext());
+        }
+        db.close();
+        return listeConcerner;
     }
 
     public void updateConcerner(Concerner concerner){

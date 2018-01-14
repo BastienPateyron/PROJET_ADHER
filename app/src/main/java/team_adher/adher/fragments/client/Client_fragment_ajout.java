@@ -56,10 +56,10 @@ public class Client_fragment_ajout extends Fragment {
                     Toast.makeText(getContext(), "Nom manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
                 } else if (TextUtils.isEmpty(prenom)) {
-                    Toast.makeText(getContext(), "Prènom manquant", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Prénom manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
                 } else if (TextUtils.isEmpty(phone)) {
-                    Toast.makeText(getContext(), "Numero dd téléphone manquant", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Numero de téléphone manquant", Toast.LENGTH_SHORT).show();
                     validate = false;
                 } else if (TextUtils.isEmpty(num_rue)) {
                     Toast.makeText(getContext(), "Numero de rue manquant", Toast.LENGTH_SHORT).show();

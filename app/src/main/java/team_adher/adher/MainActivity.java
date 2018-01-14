@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         Home_Fragment home = new Home_Fragment();
         changeFragment(home);
+    }
+
+
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
